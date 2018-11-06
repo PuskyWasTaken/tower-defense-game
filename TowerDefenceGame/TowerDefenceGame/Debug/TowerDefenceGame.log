@@ -1,2 +1,11 @@
-﻿  Main.cpp
+﻿  ManagedWindow.cpp
+c:\users\pusky\dropbox\tower defence game\towerdefencegame\towerdefencegame\managedwindow.cpp(25): warning C4244: 'initializing': conversion from 'float' to 'int32_t', possible loss of data
+c:\users\pusky\dropbox\tower defence game\towerdefencegame\towerdefencegame\managedwindow.cpp(26): warning C4244: 'initializing': conversion from 'float' to 'int32_t', possible loss of data
+c:\users\pusky\dropbox\tower defence game\towerdefencegame\towerdefencegame\managedwindow.cpp(38): warning C4244: '=': conversion from 'float' to 'int32_t', possible loss of data
+c:\users\pusky\dropbox\tower defence game\towerdefencegame\towerdefencegame\managedwindow.cpp(40): warning C4244: '=': conversion from 'float' to 'int32_t', possible loss of data
+c:\users\pusky\dropbox\tower defence game\towerdefencegame\towerdefencegame\managedwindow.cpp(42): warning C4244: 'argument': conversion from 'int32_t' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   TowerDefenceGame.vcxproj -> C:\Users\Pusky\Dropbox\Tower Defence Game\TowerDefenceGame\Debug\TowerDefenceGame.exe

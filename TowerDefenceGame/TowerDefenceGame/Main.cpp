@@ -1,12 +1,16 @@
 #include <iostream>
 #include <conio.h>
 
-#include "SFML_tests.h"
+#include "ManagedWindow.h"
 
-int main()
+
+int main(int argc, char**argv)
 {
-	
-	sfmlWorks();
+	/* Create our window */
+	ManagedWindow window("New Window", 400, 400);
+
+	/* Run it */
+	window();
 
 	_getch();
 	return 0;

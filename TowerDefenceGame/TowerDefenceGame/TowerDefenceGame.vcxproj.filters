@@ -24,10 +24,16 @@
     <ClCompile Include="SFML_tests.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="ManagedWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
       <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagedWindow.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
