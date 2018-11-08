@@ -8,6 +8,7 @@ int main(int argc, char**argv)
 {
 	/* Create our window */
 	ManagedWindow window("New Window", 400, 400);
+	std::cout << "stuff";
 
 	/* Run it */
 	window();

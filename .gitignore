@@ -1,0 +1,9 @@
+/TowerDefenceGame/Debug/*.exe
+/TowerDefenceGame/Debug/*.ilk
+/TowerDefenceGame/Debug/*.pdb
+/TowerDefenceGame/TowerDefenceGame/Debug/*.obj
+/TowerDefenceGame/TowerDefenceGame/Debug/*.log
+/TowerDefenceGame/TowerDefenceGame/Debug/TowerDefenceGame.tlog/*.tlog
+/TowerDefenceGame/TowerDefenceGame/Debug/TowerDefenceGame.tlog/*.lastbuildstate
+/TowerDefenceGame/TowerDefenceGame/Debug/*.idb
+/TowerDefenceGame/TowerDefenceGame/Debug/*.pdb
