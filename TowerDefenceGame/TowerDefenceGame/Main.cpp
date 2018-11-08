@@ -8,7 +8,7 @@ int main(int argc, char**argv)
 {
 	/* Create our window */
 	ManagedWindow window("New Window", 400, 400);
-	std::cout << "stuff";
+	std::cout << "stuff and binary files ";
 
 	/* Run it */
 	window();
