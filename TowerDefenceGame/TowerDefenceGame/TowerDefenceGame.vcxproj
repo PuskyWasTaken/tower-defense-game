@@ -125,11 +125,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ManagedWindow.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="SFML_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ManagedWindow.h" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="SFML_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
