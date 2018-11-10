@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-
-
+#include "IStateClass.h"
 
 class Application
 {
@@ -13,14 +12,20 @@ public:
 	void operator () ();
 
 private:
+	
+	/* Can only have one instance of the application at the same time */
+	static Application* instance;
+
+	/* https://tinyurl.com/yapf2wpe - to understand why we use std::unique_ptr */
+	std::unique_ptr<IStateClass> stateController;
+	
 	sf::RenderWindow window;
 	sf::Event event;
 
 	bool isRunning;
 
 	/* Time to render a frame - Unties the game from the graphics card */
-	const sf::Time frameTime = sf::seconds(1.0f / 120.f);
-
+	const sf::Time frameTime = sf::seconds(1.0f / 60.f);
 
 public:
 	/* Event handling */
@@ -30,20 +35,12 @@ public:
 public:
 
 	/* Getters */
-	sf::Vector2u getSize()
-	{
-		return window.getSize();
-	}
+	static Application* getInstance();
+	sf::Vector2u getSize();
 
 	/* Setters */
-	void setTitle(const std::string& newTitle)
-	{
-		window.setTitle(newTitle);
-	}
-	void setSize(const int32_t x, const int32_t y)
-	{
-		window.setSize(sf::Vector2u(x, y));
-	}
+	void setTitle(const std::string& newTitle);
+	void setSize(const int32_t x, const int32_t y);
 
 };
 

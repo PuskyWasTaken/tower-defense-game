@@ -1,15 +1,25 @@
 #include "Application.h"
 
+/* I don't know if this is right or not - could have trouble with multiplayer later on. */
+Application *Application::instance = nullptr;
+
 Application::Application(const std::string& name, const int32_t x, const int32_t y)
 	: window(sf::VideoMode(x, y), name)
 {
+	/* Point towards the application */
+	if (instance == nullptr)
+		instance = this;
+
+
+
+
 	/* Run at 60fps - Actually it runs at the refresh rate of the monitor */
-	//window.setVerticalSyncEnabled(true);
+	window.setVerticalSyncEnabled(true);
 }
 
 Application::~Application()
 {
-	/* TO DO: If needed */
+	instance = nullptr;
 }
 
 void Application::operator()()
@@ -24,20 +34,6 @@ void Application::operator()()
 
 void Application::gameLoop()
 {
-	/// TO DO: Delete
-	
-	/* Create a square of size 40,40 */
-	sf::RectangleShape rect(sf::Vector2f(40.0f, 40.0f));
-
-	/* Set the color to green */
-	rect.setFillColor(sf::Color(100, 250, 50));
-
-	/* Center it to the screen */
-	rect.setPosition(sf::Vector2f(getSize().x / 2 - rect.getSize().x / 2, getSize().y / 2 - rect.getSize().y / 2));
-	float direction = 1.0f;
-	float speed = 1.5f;
-
-	///	
 	
 	/* Used for restricting the Update Loop to a fixed frame rate */
 	sf::Clock updateClock;
@@ -48,6 +44,9 @@ void Application::gameLoop()
 	{
 		/* Handling of events should be done as fast as the graphics card allows */
 		handleEvent();
+		
+		/* Let the state do it's updating too */
+		//stateController->update();
 		
 		/* Elapsed time between frames */
 		sf::Time elapsedTime = updateClock.getElapsedTime();
@@ -60,21 +59,9 @@ void Application::gameLoop()
 
 			/* Clear previous frame */
 			window.clear();
-				
-			/// TO DO: Delete
-			
-			/* Basic example showing movement */
-			if (rect.getPosition().x + rect.getSize().x == getSize().x)
-				direction = -1.0f;
-			else if (rect.getPosition().x == 0)
-				direction = 1.0f;
-
-			rect.move(sf::Vector2f(speed * direction, 0.0f));
-
-			/* Draw our beautiful rectangle */
-			window.draw(rect);
-
-			///
+	
+			/* Draw what the state has to draw (be it the Menu or the Game itself */
+			//stateController->draw(window);
 			
 			/* Display the new frame */
 			window.display();
@@ -82,16 +69,31 @@ void Application::gameLoop()
 	}
 }
 
+Application * Application::getInstance()
+{
+	return instance;
+}
+
+sf::Vector2u Application::getSize()
+{
+	return this->window.getSize();
+}
+
+void Application::setTitle(const std::string & newTitle)
+{
+	this->window.setTitle(newTitle);
+}
+
+void Application::setSize(const int32_t x, const int32_t y)
+{
+	this->window.setSize(sf::Vector2u(x, y));
+}
+
 void Application::handleEvent()
 {
-	sf::Event event;
-	while (window.pollEvent(event))
+	while (window.pollEvent(this->event))
 	{
 		if (event.type == sf::Event::Closed)
 			window.close();
-
-		if (event.type == sf::Event::KeyPressed)
-			if (event.key.code == sf::Keyboard::Left)
-			{ /* TODO: Further thinking about the event handling */ }
 	}
 }
