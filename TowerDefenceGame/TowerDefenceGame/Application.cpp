@@ -10,8 +10,8 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 	if (instance == nullptr)
 		instance = this;
 
-
-
+	/* TODO: Switch our state to the Menu instead of Game */
+    stateController = std::make_unique<Game>();
 
 	/* Run at 60fps - Actually it runs at the refresh rate of the monitor */
 	window.setVerticalSyncEnabled(true);
@@ -46,7 +46,7 @@ void Application::gameLoop()
 		handleEvent();
 		
 		/* Let the state do it's updating too */
-		//stateController->update();
+		stateController->update();
 		
 		/* Elapsed time between frames */
 		sf::Time elapsedTime = updateClock.getElapsedTime();
@@ -61,7 +61,7 @@ void Application::gameLoop()
 			window.clear();
 	
 			/* Draw what the state has to draw (be it the Menu or the Game itself */
-			//stateController->draw(window);
+			stateController->draw(window);
 			
 			/* Display the new frame */
 			window.display();

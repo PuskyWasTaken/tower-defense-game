@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "IStateClass.h"
+#include "Game.h"
 
 class Application
 {
