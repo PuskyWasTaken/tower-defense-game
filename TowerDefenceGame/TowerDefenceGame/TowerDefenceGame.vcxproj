@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IEntity.h" />
     <ClInclude Include="SFML_tests.h" />
     <ClInclude Include="IStateClass.h" />
   </ItemGroup>
