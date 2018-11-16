@@ -46,7 +46,7 @@ void Application::gameLoop()
 		handleEvent();
 		
 		/* Let the state do it's updating too */
-		stateController->update();
+		stateController->update(window);
 		
 		/* Elapsed time between frames */
 		sf::Time elapsedTime = updateClock.getElapsedTime();

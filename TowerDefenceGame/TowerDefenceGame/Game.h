@@ -26,9 +26,9 @@ private:
 
 
 public: 
-	void update();
+	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);
-	void handleEvent();
+	void handleEvent(sf::RenderWindow &window);
 	//void readLevel();
 };
 

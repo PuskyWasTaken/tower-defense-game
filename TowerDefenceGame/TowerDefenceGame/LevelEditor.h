@@ -19,5 +19,11 @@ private:
 
 
 
+public:
+	void update(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window);
+	void handleEvent(sf::RenderWindow &window);
+
+
 };
 

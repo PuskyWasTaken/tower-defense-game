@@ -23,9 +23,9 @@ Game::Game()
 Game::~Game()
 {}
 
-void Game::update()
+void Game::update(sf::RenderWindow &window)
 {
-	handleEvent();
+	handleEvent(window);
 }
 
 void Game::draw(sf::RenderWindow & window)
@@ -51,7 +51,7 @@ void Game::draw(sf::RenderWindow & window)
 		///
 }
 
-void Game::handleEvent()
+void Game::handleEvent(sf::RenderWindow &window)
 {	
 	/// TO DO: Delete
 
