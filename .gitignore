@@ -8,3 +8,6 @@
 /TowerDefenceGame/TowerDefenceGame/Debug/*.idb
 /TowerDefenceGame/TowerDefenceGame/Debug/*.pdb
 .vs
+/TowerDefenceGame/.vs/TowerDefenceGame/v15/.suo
+/TowerDefenceGame/.vs/TowerDefenceGame/v15/Browse.VC.db
+/TowerDefenceGame/.vs/TowerDefenceGame/v15/ipch/AutoPCH/e6b4832ff66e719c/MAIN.ipch
