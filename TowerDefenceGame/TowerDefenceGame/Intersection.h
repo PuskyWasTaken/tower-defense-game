@@ -11,8 +11,20 @@ public:
 	Intersection();
 	~Intersection();
 
+	bool hasEntrance(const short cardinal) const;
+	void setEntrance(const short cardinal, const bool newBool);
+	
+	enum class cardinals
+	{
+		North,
+		South,
+		East,
+		West
+	};
+
 private:
 
+	bool entrance[4] = { false };
 
 };
 

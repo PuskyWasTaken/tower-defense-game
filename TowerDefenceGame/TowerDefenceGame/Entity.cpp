@@ -26,6 +26,11 @@ sf::Vector2f Entity::getPosition() const
 	return this->hitbox.getPosition();
 }
 
+sf::Vector2f Entity::getCenteredPosition() const
+{
+	return sf::Vector2f(getPosition().x - getWidth() / 2, getPosition().y - getHeight() / 2);
+}
+
 int32_t Entity::getWidth() const
 {
 	return this->hitbox.getSize().x;
@@ -38,7 +43,7 @@ int32_t Entity::getHeight() const
 
 void Entity::setCenterPosition(const sf::Vector2f& newPosition)
 {
-	this->hitbox.setPosition( sf::Vector2f( newPosition.x - hitbox.getSize().x / 2, newPosition.y - hitbox.getSize().y / 2 ) );
+	this->hitbox.setPosition( sf::Vector2f( newPosition.x - getWidth() / 2, newPosition.y - getHeight() / 2 ) );
 }
 
 void Entity::setPosition(const sf::Vector2f & newPosition)

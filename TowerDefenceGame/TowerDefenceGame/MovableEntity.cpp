@@ -32,6 +32,16 @@ void MovableEntity::setMovementY(const int direction)
 	setMovementDirection(sf::Vector2i(movementDirection.x, direction));
 }
 
+int MovableEntity::getMovementX() const
+{
+	return this->movementDirection.x;
+}
+
+int MovableEntity::getMovementY() const
+{
+	return this->movementDirection.y;
+}
+
 void MovableEntity::move()
 {
 	setPosition(sf::Vector2f(movementDirection.x * speed + getPosition().x, movementDirection.y  * speed + getPosition().y));

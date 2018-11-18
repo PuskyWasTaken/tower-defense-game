@@ -14,3 +14,15 @@ Intersection::Intersection()
 Intersection::~Intersection()
 {
 }
+
+bool Intersection::hasEntrance(short cardinal) const
+{
+	return entrance[cardinal];
+}
+
+void Intersection::setEntrance(const short cardinal, const bool newBool)
+{
+	entrance[cardinal] = newBool;
+}
+
+

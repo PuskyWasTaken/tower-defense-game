@@ -30,13 +30,23 @@ bool Enemy::isAlive() const
 	return this->alive;
 }
 
-void Enemy::setHealth(uint16_t health)
+bool Enemy::isInCollision() const
+{
+	return this->isDuringCollision;
+}
+
+void Enemy::setHealth(const uint16_t health)
 {
 	this->health = health;
 }
 
-void Enemy::setAlive(bool alive)
+void Enemy::setAlive(const bool alive)
 {
 	this->alive = alive;
+}
+
+void Enemy::setIsDuringCollision(const bool isDuringCollision)
+{
+	this->isDuringCollision = isDuringCollision;
 }
 

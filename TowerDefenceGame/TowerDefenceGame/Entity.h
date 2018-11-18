@@ -15,6 +15,7 @@ public:
 	 sf::RectangleShape getHitbox() const;
 	 sf::Sprite getSprite() const;
 	 sf::Vector2f getPosition() const;
+	 sf::Vector2f getCenteredPosition() const;
 	 int32_t getWidth() const;
 	 int32_t getHeight() const;
 

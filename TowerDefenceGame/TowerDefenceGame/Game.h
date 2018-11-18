@@ -19,17 +19,25 @@ private:
 	//std::thread gameThread;
 
 	/// TO DO: Delete
-	Enemy someEnemy;
 	Intersection someIntersection;
+	Enemy someEnemy;
+	sf::RectangleShape col;
+	///
 
-
-	/* Pusky TODO: Add a std::vector of intersections,*/
-
+	std::vector<Enemy> enemyArray;
+	std::vector<Intersection> intersectionArray;
 
 public: 
 	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);
 	void handleEvent(sf::RenderWindow &window);
+
+private:
+
+	void updateEnemyMovements();
+	void updateEnemyCollision(Enemy& enemy);
+	short getEntranceSide(const Enemy& enemy);
+	sf::Vector2i getMovementDirection(const short entrance) const;
 
 	//void readLevel();
 };
