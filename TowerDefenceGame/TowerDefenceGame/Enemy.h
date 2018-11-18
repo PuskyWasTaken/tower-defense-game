@@ -4,27 +4,23 @@
 class Enemy : public MovableEntity
 {
 public:
+
+	Enemy(const sf::Vector2f position, const sf::Vector2f size, const float speed, const sf::Vector2i movementDirection, const uint16_t health);
 	Enemy();
 	~Enemy();
 
 private:
-	int positionX;
-	int positionY;
+
 	uint16_t health;
-	bool alive;
-	sf::RectangleShape anEnemy;
-	float speed = 1.5f;
+	bool alive = true;
 
 public:
 
 	uint16_t getHealth() const;
-	bool getAlive() const;
+	bool isAlive() const;
 
 	void setHealth(uint16_t health);
 	void setAlive(bool alive);
-
-	sf::Vector2f getPosition() override;
-	void setPosition(sf::Vector2f centeredPosition) override;
 
 };
 

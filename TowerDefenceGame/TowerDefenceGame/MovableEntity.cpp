@@ -1,42 +1,38 @@
 #include "MovableEntity.h"
 
 
+MovableEntity::MovableEntity( const sf::Vector2f position,
+							  const sf::Vector2f size,
+							  const float speed,
+							  const sf::Vector2i movementDirection )
 
-MovableEntity::MovableEntity()
-{
-}
-
+	: Entity(position, size), speed(speed), movementDirection(movementDirection)
+{}
 
 MovableEntity::~MovableEntity()
-{
-}
-
-sf::RectangleShape MovableEntity::getHitbox()
-{
-	return this->hitbox;
-}
-
-sf::VertexArray MovableEntity::getSprite()
-{
-	return this->sprite;
-}
-
-sf::Vector2f MovableEntity::getPosition()
-{
-	return (sf::Vector2f(positionX + (1 / 2 * positionX), (positionY + (1 / 2 * positionY))));
-}
-
-void MovableEntity::setPosition(sf::Vector2f centeredPosition)
-{
-	centeredPosition = (sf::Vector2f(positionX + (1 / 2 * positionX), (positionY + (1 / 2 * positionY))));
-}
+{}
 
 void MovableEntity::setSpeed(float speed)
 {
 	this->speed = speed;
 }
 
-void MovableEntity::Move()
+void MovableEntity::setMovementDirection(const sf::Vector2i& movementDirection)
 {
-	/* TODO: implement */
+	this->movementDirection = movementDirection;
+}
+
+void MovableEntity::setMovementX(const int direction)
+{
+	setMovementDirection(sf::Vector2i(direction, movementDirection.y));
+}
+
+void MovableEntity::setMovementY(const int direction)
+{
+	setMovementDirection(sf::Vector2i(movementDirection.x, direction));
+}
+
+void MovableEntity::move()
+{
+	setPosition(sf::Vector2f(movementDirection.x * speed + getPosition().x, movementDirection.y  * speed + getPosition().y));
 }

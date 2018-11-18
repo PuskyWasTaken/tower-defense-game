@@ -1,27 +1,25 @@
 #pragma once
-#include"IEntity.h"
+#include "Entity.h"
 
-class MovableEntity : public IEntity
+class MovableEntity : public Entity
 {
 public:
-	MovableEntity();
+	MovableEntity(const sf::Vector2f position, const sf::Vector2f size, const float speed, const sf::Vector2i movementDirection );
 	~MovableEntity();
+	
 
-private:
-	int positionX;
-	int positionY;
-	sf::RectangleShape hitbox;
-	sf::VertexArray sprite; /* look after this when we'll have a sprite class */
+protected:
+
 	float speed;
-	sf::Vector2f movementDirection;
+	sf::Vector2i movementDirection;
 
 public:
-	sf::RectangleShape getHitbox();
-	sf::VertexArray getSprite();
-	sf::Vector2f getPosition();
-	void setPosition(sf::Vector2f centeredPosition);
-	void setSpeed(float speed);
-	void Move();
+	void setSpeed(const float speed);
+	void setMovementDirection(const sf::Vector2i& movementDirection);
+	void setMovementX(const int direction);
+	void setMovementY(const int direction);
+
+	void move();
 
 };
 

@@ -1,24 +1,17 @@
 #pragma once
-#include"Unmovable.h"
+#include "UnmovableEntity.h"
 
-class Tower : Unmovable
+class Tower : public UnmovableEntity
 {
 public:
 	Tower();
+	Tower(const sf::Vector2f position, const sf::Vector2f size, const float damage);
 	~Tower();
 
-private:
-	int positionX;
-	int positionY;
-	sf::RectangleShape hitbox;
-	sf::VertexArray sprite; 
+private: 
 	float damage;
-public:
-	sf::RectangleShape getHitbox() override;
-	sf::VertexArray getSprite()override;
-	sf::Vector2f getPosition() override;
-	void setPosition(sf::Vector2f centeredPosition) override;
 
-	float getDamage();
+public:
+	float getDamage() const;
 };
 

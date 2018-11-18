@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <thread>
 
+#include "Enemy.h"
+
 class Game : public IStateClass
 {
 public:
@@ -16,11 +18,8 @@ private:
 	//std::thread gameThread;
 
 	/// TO DO: Delete
-	sf::RectangleShape aPlaceHolderRect;
-	float directionX;
-	float directionY;
-	const float speed = 1.5f;
-	///
+	Enemy someEnemy;
+
 
 	/* Pusky TODO: Add a std::vector of intersections,*/
 
