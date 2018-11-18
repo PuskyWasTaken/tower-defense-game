@@ -7,8 +7,13 @@ Game::Game()
 	/// TO DO: Delete
 	someEnemy.setColour(sf::Color::Blue);
 	someEnemy.setMovementX(-1);
-	someEnemy.setSpeed(1.f);
-	someEnemy.setCenterPosition(sf::Vector2f(100, 100));
+	someEnemy.setMovementY(1);
+	someEnemy.setSpeed(0.5f);
+	someEnemy.setCenterPosition(sf::Vector2f(200, 100));
+
+	someIntersection.setColour(sf::Color::Red);
+	someIntersection.setPosition(sf::Vector2f(5,200));
+	someIntersection.setSize(sf::Vector2f(300, 100));
 
 }
 
@@ -30,6 +35,14 @@ void Game::draw(sf::RenderWindow & window)
 
 	/* Draw our beautiful enemy */
 	window.draw(someEnemy);
+	window.draw(someIntersection);
+
+	if (someEnemy.isCollision(someIntersection))
+	{
+		sf::RectangleShape col = someEnemy.getCollision(someIntersection);
+		col.setFillColor(sf::Color::Magenta);
+		window.draw(col);
+	}
 }
 
 void Game::handleEvent(sf::RenderWindow &window)
@@ -55,3 +68,5 @@ void Game::handleEvent(sf::RenderWindow &window)
 	///
 
 }
+
+

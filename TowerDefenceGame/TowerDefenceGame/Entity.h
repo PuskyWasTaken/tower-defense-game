@@ -15,11 +15,17 @@ public:
 	 sf::RectangleShape getHitbox() const;
 	 sf::Sprite getSprite() const;
 	 sf::Vector2f getPosition() const;
+	 int32_t getWidth() const;
+	 int32_t getHeight() const;
 
 	 void setCenterPosition(const sf::Vector2f& newPosition);
 	 void setPosition(const sf::Vector2f& newPosition);
 	 void setSize(const sf::Vector2f& size);
 	 void setColour(const sf::Color& newColor);
+	
+	 sf::RectangleShape getCollision(const Entity& otherEntity) const;
+	 bool isCollision(const Entity& otherEntity) const;
+
 
 protected:
 

@@ -4,6 +4,7 @@
 #include <thread>
 
 #include "Enemy.h"
+#include "Intersection.h"
 
 class Game : public IStateClass
 {
@@ -19,6 +20,7 @@ private:
 
 	/// TO DO: Delete
 	Enemy someEnemy;
+	Intersection someIntersection;
 
 
 	/* Pusky TODO: Add a std::vector of intersections,*/
@@ -28,6 +30,7 @@ public:
 	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);
 	void handleEvent(sf::RenderWindow &window);
+
 	//void readLevel();
 };
 
