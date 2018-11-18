@@ -22,69 +22,93 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{4c32fd06-f6d2-4174-937d-2b5491cc97ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities\Movable">
+      <UniqueIdentifier>{9d0520e8-879a-4071-bc4a-eaa1d1cc38fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Unmovable">
+      <UniqueIdentifier>{6235e0fe-6e8f-4ce3-86bc-94773c7c8796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Movable">
+      <UniqueIdentifier>{9281ade0-5959-4d16-a30f-2c6736efd7db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Unmovable">
+      <UniqueIdentifier>{218b3bd2-7d54-498c-bbda-c21beb325674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Application">
+      <UniqueIdentifier>{a9e6b796-0cfd-435f-8bf8-6dcba1db5830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{c3e0acc1-65e3-4904-b7e8-694e6e581830}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SFML_tests.cpp">
       <Filter>Test Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="MovableEntity.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Tower.cpp">
-      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities\Movable</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableEntity.cpp">
+      <Filter>Source Files\Entities\Movable</Filter>
+    </ClCompile>
     <ClCompile Include="UnmovableEntity.cpp">
-      <Filter>Source Files\Entities</Filter>
+      <Filter>Source Files\Entities\Unmovable</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Source Files\Entities\Unmovable</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Intersection.cpp">
+      <Filter>Source Files\Entities\Unmovable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
       <Filter>Test Files</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IStateClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovableEntity.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Tower.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="MovableEntity.h">
+      <Filter>Header Files\Entities\Movable</Filter>
+    </ClInclude>
     <ClInclude Include="UnmovableEntity.h">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Header Files\Entities\Unmovable</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Entities\Movable</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Header Files\Entities\Unmovable</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="IStateClass.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditor.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersection.h">
+      <Filter>Header Files\Entities\Unmovable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
