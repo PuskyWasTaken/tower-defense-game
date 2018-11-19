@@ -8,26 +8,26 @@ Game::Game()
 	/// TO DO: Delete
 	someEnemy.setColour(sf::Color::Blue);
 	someEnemy.setMovementX(-1);
-	someEnemy.setSpeed(1.f);
-	someEnemy.setCenterPosition(sf::Vector2f(800 - someEnemy.getWidth()/2, 400));
+	someEnemy.setSpeed(2.f);
+	someEnemy.setCenterPosition(sf::Vector2f(700 - someEnemy.getWidth() / 2, 400));
 
 	enemyArray.push_back(someEnemy);
 
 	someIntersection.setColour(sf::Color::Red);
 	someIntersection.setSize(sf::Vector2f(60, 60));
-	someIntersection.setCenterPosition(sf::Vector2f(400,400));
-	someIntersection.setEntrance(static_cast<short>(Intersection::cardinals::East), true);
+	someIntersection.setCenterPosition(sf::Vector2f(400, 400));
+	someIntersection.setEntrance(static_cast<short>(Intersection::cardinals::North), true);
 
 	intersectionArray.push_back(someIntersection);
 
-	Intersection anotherIntersection(sf::Vector2f(400,200), sf::Vector2f(60,60));
+	Intersection anotherIntersection(sf::Vector2f(400, 200), sf::Vector2f(60, 60));
 	anotherIntersection.setColour(sf::Color::Cyan);
-	anotherIntersection.setEntrance(static_cast<short>(Intersection::cardinals::South), true);
+	anotherIntersection.setEntrance(static_cast<short>(Intersection::cardinals::West), true);
 	intersectionArray.push_back(anotherIntersection);
 
 
 	Intersection yetAnotherInteresection = { sf::Vector2f(200,200), sf::Vector2f(60,60) };
-	yetAnotherInteresection.setEntrance(static_cast<short>(Intersection::cardinals::East), true);
+	yetAnotherInteresection.setEntrance(static_cast<short>(Intersection::cardinals::South), true);
 	intersectionArray.push_back(yetAnotherInteresection);
 
 	col.setFillColor(sf::Color::Magenta);
@@ -42,25 +42,31 @@ void Game::update(sf::RenderWindow &window)
 {
 	handleEvent(window);
 	updateEnemyMovements();
+
 }
 
 void Game::draw(sf::RenderWindow & window)
 {
 	/// TO DO: Delete
 
+	for (int i = 0; i < enemyArray.size(); ++i)
+		enemyArray[i].move();
+	
 	/* Basic example showing movement */
-	someEnemy.move();
 
-	/* Draw our beautiful enemy */
-	window.draw(someEnemy);
-	for ( Intersection i : intersectionArray)
+	/* Draw our beautiful enemies */
+	for (Enemy i : enemyArray)
+		window.draw(i);
+
+	/* Draw the intersections */
+	for (Intersection i : intersectionArray)
 		window.draw(i);
 
 	window.draw(col);
 }
 
 void Game::handleEvent(sf::RenderWindow &window)
-{	
+{
 	/// TO DO: Delete
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -107,23 +113,22 @@ void Game::updateEnemyCollision(Enemy& enemy)
 		else if (enemy.isCollision(intersectionArray[i]))
 		{
 			/* If the enemy is in the center of the intersection */
-			sf::RectangleShape collisionArea = enemy.getCollision(intersectionArray[i]);
-			if (!(collisionArea.getPosition().x + collisionArea.getSize().x != intersectionArray[i].getCenteredPosition().x
-				&& collisionArea.getPosition().y + collisionArea.getSize().y != intersectionArray[i].getCenteredPosition().y))
+			if ( intersectionArray[i].getCenter().x == enemy.getCenter().x
+				&&  intersectionArray[i].getCenter().y == enemy.getCenter().y ) 
 			{
-				srand(time(nullptr));
-				short random;
-				do
+				for (short j = 0; j < 4; ++j)
 				{
-					random = rand() % 4;
+					if (intersectionArray[i].hasEntrance(j))
+					{
+						enemy.setMovementDirection(getMovementDirection(j));
+						break;
+					}
 
-				} while (!intersectionArray[i].hasEntrance(random));
-
-				enemy.setMovementDirection(getMovementDirection(random));
+				}
 				enemy.setIsDuringCollision(false);
 
 				/// TODO : Delete line bellow
-				col = collisionArea;
+				col = enemy.getCollision(intersectionArray[i]);
 			}
 		}
 	}
@@ -134,7 +139,7 @@ short Game::getEntranceSide(const Enemy& enemy)
 	/* Find out where did the enemy come from */
 	if (enemy.getMovementX() > 0)
 		return static_cast<short>(Intersection::cardinals::West);
-	else if (enemy.getMovementX() > 0)
+	else if (enemy.getMovementX() < 0)
 		return static_cast<short>(Intersection::cardinals::East);
 	else if (enemy.getMovementY() < 0)
 		return static_cast<short>(Intersection::cardinals::North);
@@ -147,14 +152,18 @@ short Game::getEntranceSide(const Enemy& enemy)
 
 sf::Vector2i Game::getMovementDirection(const short entrance) const
 {
+	/* North */
 	if (entrance == 0)
-		return sf::Vector2i(-1,0);
-	else if (entrance == 1)
-		return sf::Vector2i(1,0);
-	else if (entrance == 2)
 		return sf::Vector2i(0,-1);
-	else if (entrance == 3)
+	/* South */
+	else if (entrance == 1)
 		return sf::Vector2i(0,1);
+	/* East */
+	else if (entrance == 2)
+		return sf::Vector2i(1,0);
+	/* West */
+	else if (entrance == 3)
+		return sf::Vector2i(-1,0);
 
 }
 

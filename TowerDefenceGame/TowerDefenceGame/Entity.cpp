@@ -26,9 +26,9 @@ sf::Vector2f Entity::getPosition() const
 	return this->hitbox.getPosition();
 }
 
-sf::Vector2f Entity::getCenteredPosition() const
+sf::Vector2i Entity::getCenter() const
 {
-	return sf::Vector2f(getPosition().x - getWidth() / 2, getPosition().y - getHeight() / 2);
+	return sf::Vector2i(((int)getPosition().x * 2 + (int)getWidth())/2, ((int)getPosition().y * 2 + (int)getHeight())/2);
 }
 
 int32_t Entity::getWidth() const
