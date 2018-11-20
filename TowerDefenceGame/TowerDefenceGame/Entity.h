@@ -8,7 +8,7 @@ class Entity : public sf::Drawable
 public:
 	 virtual ~Entity() {};
 
-	 Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture);
+	 Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::Vector2u& noOfFrames);
 	 Entity(const sf::Vector2f& position, const sf::Vector2f& size);
 
 
@@ -32,7 +32,7 @@ protected:
 
 	sf::RectangleShape hitbox;
 	sf::Sprite sprite;
-	sf::Texture texture;
+	sf::Texture* texture;
 
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 };

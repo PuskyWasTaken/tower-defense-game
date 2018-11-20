@@ -1,14 +1,22 @@
 #include "Entity.h"
 
 
-Entity::Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture)
-{}
+Entity::Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::Vector2u& noOfFrames)
+{
+	setSize(size);
+	setCenterPosition(position);
+	setColour(sf::Color::Green);
+
+	*this->texture = texture;
+}
 
 Entity::Entity(const sf::Vector2f& position, const sf::Vector2f& size)
 {
 	setSize(size);
 	setCenterPosition(position);
 	setColour(sf::Color::Green);
+
+	this->texture = nullptr;
 }
 
 sf::RectangleShape Entity::getHitbox() const

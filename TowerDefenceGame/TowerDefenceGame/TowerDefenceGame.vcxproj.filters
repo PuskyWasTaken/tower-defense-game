@@ -78,6 +78,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files\Entities\Movable</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Header Files\Entities\Movable</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
