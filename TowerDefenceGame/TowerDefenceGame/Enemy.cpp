@@ -1,10 +1,10 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy( const sf::Vector2f position,
-			  const sf::Vector2f size,
+Enemy::Enemy( const sf::Vector2f& position,
+			  const sf::Vector2f& size,
 			  const float speed,
-			  const sf::Vector2i movementDirection,
+			  const sf::Vector2i& movementDirection,
 			  const uint16_t health )
 
 	: MovableEntity(position, size, speed, movementDirection), health(health)

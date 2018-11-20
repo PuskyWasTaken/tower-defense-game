@@ -5,7 +5,7 @@ class Enemy : public MovableEntity
 {
 public:
 
-	Enemy(const sf::Vector2f position, const sf::Vector2f size, const float speed, const sf::Vector2i movementDirection, const uint16_t health);
+	Enemy(const sf::Vector2f& position, const sf::Vector2f& size, const float speed, const sf::Vector2i& movementDirection, const uint16_t health);
 	Enemy();
 	~Enemy();
 

@@ -6,7 +6,7 @@ Tower::Tower()
 {
 }
 
-Tower::Tower(const sf::Vector2f position, const sf::Vector2f size, const float damage)
+Tower::Tower(const sf::Vector2f& position, const sf::Vector2f& size, const float damage)
 	: UnmovableEntity(position, size), damage(damage)
 {
 }

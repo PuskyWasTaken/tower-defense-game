@@ -75,6 +75,9 @@
     <ClCompile Include="Intersection.cpp">
       <Filter>Source Files\Entities\Unmovable</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Entities\Movable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Intersection.h">
       <Filter>Header Files\Entities\Unmovable</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Entities\Movable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

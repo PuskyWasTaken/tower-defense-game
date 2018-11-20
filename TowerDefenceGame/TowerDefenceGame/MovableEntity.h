@@ -4,7 +4,7 @@
 class MovableEntity : public Entity
 {
 public:
-	MovableEntity(const sf::Vector2f position, const sf::Vector2f size, const float speed, const sf::Vector2i movementDirection );
+	MovableEntity(const sf::Vector2f& position, const sf::Vector2f& size, const float speed, const sf::Vector2i& movementDirection );
 	~MovableEntity();
 	
 

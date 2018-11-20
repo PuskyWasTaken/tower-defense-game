@@ -1,10 +1,10 @@
 #include "MovableEntity.h"
 
 
-MovableEntity::MovableEntity( const sf::Vector2f position,
-							  const sf::Vector2f size,
+MovableEntity::MovableEntity( const sf::Vector2f& position,
+							  const sf::Vector2f& size,
 							  const float speed,
-							  const sf::Vector2i movementDirection )
+							  const sf::Vector2i& movementDirection )
 
 	: Entity(position, size), speed(speed), movementDirection(movementDirection)
 {}
