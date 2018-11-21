@@ -1,7 +1,4 @@
 #include "Game.h"
-#include <time.h>
-#include <stdlib.h>
-
 
 Game::Game()
 {
@@ -31,6 +28,19 @@ Game::Game()
 	intersectionArray.push_back(yetAnotherInteresection);
 
 	col.setFillColor(sf::Color::Magenta);
+
+
+	/* Create a bullet and set it's destination to a enemy */
+	Enemy someOtherEnemy;
+	someOtherEnemy.setColour(sf::Color::Yellow);
+	someOtherEnemy.setMovementX(0);
+	someOtherEnemy.setSpeed(0.f);
+	someOtherEnemy.setCenterPosition(sf::Vector2f(300, 100));
+	enemyArray.push_back(someOtherEnemy);
+
+	bullet.setDestination(someOtherEnemy.getHitbox());
+	bullet.setSpeed(0.5f);
+	bullet.setColour(sf::Color::Blue);
 	///
 }
 
@@ -42,12 +52,12 @@ void Game::update(sf::RenderWindow &window)
 {
 	handleEvent(window);
 	updateEnemyMovements();
-
 }
 
 void Game::draw(sf::RenderWindow & window)
 {
 	/// TO DO: Delete
+	bullet.update();
 
 	for (int i = 0; i < enemyArray.size(); ++i)
 		enemyArray[i].move();
@@ -63,6 +73,7 @@ void Game::draw(sf::RenderWindow & window)
 		window.draw(i);
 
 	window.draw(col);
+	window.draw(bullet);
 }
 
 void Game::handleEvent(sf::RenderWindow &window)

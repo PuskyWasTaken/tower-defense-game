@@ -71,12 +71,17 @@ void Entity::setColour(const sf::Color & newColor)
 
 bool Entity::isCollision(const Entity & otherEntity) const
 {
+	return isCollisionWithRect(otherEntity.getHitbox());
+}
+
+bool Entity::isCollisionWithRect(const sf::RectangleShape & hitBox) const
+{
 	/* AABB Collision: true = there is a collision */
-	
-	if (this->getPosition().x < otherEntity.getPosition().x + otherEntity.getWidth() &&
-		this->getPosition().x + this->getWidth() > otherEntity.getPosition().x &&
-		this->getPosition().y < otherEntity.getPosition().y + otherEntity.getHeight() &&
-		this->getPosition().y + this->getHeight() > otherEntity.getPosition().y)
+
+	if (this->getPosition().x < hitBox.getPosition().x + hitBox.getSize().x &&
+		this->getPosition().x + this->getWidth() > hitBox.getPosition().x &&
+		this->getPosition().y < hitBox.getPosition().y + hitBox.getSize().y &&
+		this->getPosition().y + this->getHeight() > hitBox.getPosition().y)
 	{
 		return true;
 	}
@@ -105,4 +110,3 @@ sf::RectangleShape Entity::getCollision(const Entity & otherEntity) const
 
 	return collision;
 }
-

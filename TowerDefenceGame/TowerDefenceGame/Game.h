@@ -6,6 +6,10 @@
 #include "Enemy.h"
 #include "Intersection.h"
 
+///
+#include "Bullet.h"
+///
+
 class Game : public IStateClass
 {
 public:
@@ -22,6 +26,7 @@ private:
 	Intersection someIntersection;
 	Enemy someEnemy;
 	sf::RectangleShape col;
+	Bullet bullet;
 	///
 
 	std::vector<Enemy> enemyArray;

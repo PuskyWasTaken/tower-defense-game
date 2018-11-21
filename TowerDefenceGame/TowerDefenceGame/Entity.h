@@ -25,7 +25,9 @@ public:
 	 void setColour(const sf::Color& newColor);
 	
 	 sf::RectangleShape getCollision(const Entity& otherEntity) const;
+
 	 bool isCollision(const Entity& otherEntity) const;
+	 bool isCollisionWithRect(const sf::RectangleShape& hitBox) const;
 
 
 protected:

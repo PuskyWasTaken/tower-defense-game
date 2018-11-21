@@ -11,6 +11,9 @@ public:
 protected:
 
 	float speed;
+
+private:
+
 	sf::Vector2i movementDirection;
 
 public:
