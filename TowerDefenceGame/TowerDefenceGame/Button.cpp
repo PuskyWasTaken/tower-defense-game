@@ -1,7 +1,7 @@
 #include "Button.h"
 
 Button::Button() 
-	: Entity(sf::Vector2f(0,0), sf::Vector2f(20,30))
+	: Entity(sf::Vector2f(0,0), sf::Vector2f(50,30))
 {
 
 }
