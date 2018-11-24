@@ -14,28 +14,33 @@ private:
 
 public :
 
-	sf::Text buttonText;
+	sf::Text text;
 
 public:
 
-	sf::Font getFont()
+	sf::Font getFont() const
 	{
 		return font;
 	}
 	
-	void setFont(sf::Font f)
+	void setFont(const sf::Font& f)
 	{
-		this->font = font;
+		text.setFont(f);
 	}
 
-	sf::Text getText()
+	sf::Text getText() const
 	{
-		return buttonText;
+		return text;
 	}
 
-	void setText(sf::Text text)
+	void setText(const std::string& text)
 	{
-		this->buttonText = text;
+		this->text.setString(text);
 	}
+
+protected:
+
+	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+
 };
 

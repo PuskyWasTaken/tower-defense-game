@@ -9,7 +9,7 @@ public:
 	~MainMenu();
 
 private:
-	std::vector<Button> menuButtons;
+	Button startButton, levelEditorButton, exitButton;
 
 public:
 

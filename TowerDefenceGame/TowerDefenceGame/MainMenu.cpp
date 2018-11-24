@@ -2,35 +2,30 @@
 #include"Enemy.h"
 
 MainMenu::MainMenu()
-{
-	Button startButton, levelEditorButton, exitButton;
-
-		if (!startButton.getFont().loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
-		{
-			exit(1);
-		}
-	
+{	
 	startButton.setColour(sf::Color::Red);
-	startButton.setFont(startButton.getFont());
-	startButton.getText().setString("Play");
-	startButton.getText().setPosition(200, 60);
+
+	/* What the ... is this? */
+	//startButton.setFont(startButton.getFont());
+
+	/* TIP: Don't try to use std::Vector if you don't know how it works. */
+
+	startButton.setText("Start");
 	startButton.setSize(sf::Vector2f(100, 50));
 	startButton.setCenterPosition(sf::Vector2f(200, 60));
-	menuButtons.push_back(startButton);
+	startButton.text.setPosition(startButton.getPosition());
+	startButton.text.move(sf::Vector2f(0, startButton.getHeight() / 4));
 
-	levelEditorButton.setColour(sf::Color::Blue);
-	levelEditorButton.setFont(startButton.getFont());
-	levelEditorButton.getText().setString("Levels");
+	levelEditorButton.setText("Level Editor");
 	levelEditorButton.setSize(sf::Vector2f(100, 50));
 	levelEditorButton.setCenterPosition(sf::Vector2f(200, 160));
-	menuButtons.push_back(levelEditorButton);
+	levelEditorButton.text.setPosition(levelEditorButton.getPosition());
 
-	exitButton.setColour(sf::Color::Green);
-	exitButton.setFont(startButton.getFont());
-	exitButton.getText().setString("Exit");
+	exitButton.setText("Exit");
 	exitButton.setSize(sf::Vector2f(100, 50));
 	exitButton.setCenterPosition(sf::Vector2f(200, 260));
-	menuButtons.push_back(exitButton);
+	exitButton.text.setPosition(exitButton.getPosition());
+
 
 }
 
@@ -45,8 +40,9 @@ void MainMenu::update(sf::RenderWindow & window)
 
 void MainMenu::draw(sf::RenderWindow & window)
 {
-	for (Button ourButton : menuButtons)
-		window.draw(ourButton);
+	window.draw(startButton);
+	window.draw(levelEditorButton);
+	window.draw(exitButton);
 
 }
 
