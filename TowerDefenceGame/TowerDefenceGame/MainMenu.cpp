@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include"Enemy.h"
+#include<iostream> //to test mouse-button collision
 
 MainMenu::MainMenu()
 {	
@@ -48,4 +49,22 @@ void MainMenu::draw(sf::RenderWindow & window)
 
 void MainMenu::handleEvent(sf::RenderWindow & window)
 {
+	sf::RectangleShape mouseRect;
+	sf::Vector2f mousePositionOnWindow = mouseRect.getPosition();
+	mousePositionOnWindow = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+	mouseRect.setPosition(mousePositionOnWindow);
+
+	if (startButton.isCollisionWithRect(mouseRect))
+	
+		std::cout << "Cursor on start."<<std::endl;
+	else
+	{
+		if (levelEditorButton.isCollisionWithRect(mouseRect))
+		std::cout << "Cursor on level editor button." << std::endl;
+		else
+		{
+			if (exitButton.isCollisionWithRect(mouseRect))
+			std::cout << "Cursor on exit button." << std::endl;
+		}
+	}
 }
