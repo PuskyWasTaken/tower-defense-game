@@ -8,6 +8,8 @@
 
 LevelEditor::LevelEditor()
 {
+	m_testingPanel.setSize(sf::Vector2f(200, 800));
+	m_testingPanel.setCenterPosition(sf::Vector2f(700, 400));
 }
 
 
@@ -31,13 +33,14 @@ void LevelEditor::draw(sf::RenderWindow & window)
 	{
 		window.draw(i);
 	}
+	window.draw(m_testingPanel);
 }
 
 void LevelEditor::handleEvent(sf::RenderWindow &window)
 {
 
 	//if left mouse button is pressed get position
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)&m_isMousePressed == false)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)& (m_isMousePressed == false))
 	{
 		m_isMousePressed = true;
 		sf::Mouse::getPosition(window);

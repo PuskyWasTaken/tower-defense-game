@@ -136,6 +136,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
+    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="SFML_tests.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="UnmovableEntity.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MovableEntity.h" />
+    <ClInclude Include="Panel.h" />
     <ClInclude Include="SFML_tests.h" />
     <ClInclude Include="IStateClass.h" />
     <ClInclude Include="Tower.h" />

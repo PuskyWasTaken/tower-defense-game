@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Intersection.h"
+#include "Panel.h"
 
 
 class LevelEditor :
@@ -23,6 +24,7 @@ private:
 	std::vector<Intersection> m_intersectionArray;
 	bool m_isMousePressed = false;
 	sf::Vector2f toVector2f(const sf::Vector2i &toBeConverted);
+	Panel m_testingPanel;
 
 
 public:

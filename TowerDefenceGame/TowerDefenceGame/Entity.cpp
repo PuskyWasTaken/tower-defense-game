@@ -1,6 +1,11 @@
 #include "Entity.h"
 
 
+Entity::Entity()
+{
+	//is empty
+}
+
 Entity::Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::Vector2u& noOfFrames)
 {
 	setSize(size);
