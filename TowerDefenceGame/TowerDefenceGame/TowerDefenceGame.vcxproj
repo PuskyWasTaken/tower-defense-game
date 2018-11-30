@@ -159,6 +159,11 @@
     <ClInclude Include="Tower.h" />
     <ClInclude Include="UnmovableEntity.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.vcxproj">
+      <Project>{1d35846b-c8f9-4977-8abb-e8549cbcd793}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

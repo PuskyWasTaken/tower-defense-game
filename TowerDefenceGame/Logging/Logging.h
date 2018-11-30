@@ -2,7 +2,13 @@
 #include <iostream>
 #include <string>
 
-class Logger
+#ifdef LOGGING_EXPORTS
+#define LOGGING_API __declspec(dllexport)
+#else
+#define LOGGING_API __declspec(dllimport)
+#endif
+
+class LOGGING_API Logger
 {
 public:
 	enum class Level
@@ -13,7 +19,7 @@ public:
 	};
 
 public:
-	Logger(std::ostream& os, Level minimumLevel = Level::Info);
+	Logger(std::ostream& os, Level minimumLevel);
 
 	void log(const char * message, Level level);
 	void log(const std::string& message, Level level);

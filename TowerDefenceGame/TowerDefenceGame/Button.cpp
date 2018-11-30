@@ -1,12 +1,17 @@
 #include "Button.h"
+#include "..\Logging\Logging.h"
+#include<fstream>
 
 Button::Button() 
 	: Entity(sf::Vector2f(0,0), sf::Vector2f(50,30))
 {
-	if ( !font.loadFromFile("..\\Fonts\\arial.ttf") )
+	if (!font.loadFromFile("..\\Fonts\\arial.ttf"))
+	{
 		throw "Could not load font!";
-
-
+		std::ofstream of("syso.log", std::ios::app);
+		Logger logger(std::cout, Logger::Level::Error);
+		logger.log("Error loading font from file", Logger::Level::Error);
+	}
 	text.setFont(font);
 	text.setString("Default String!");
 	text.setFillColor(sf::Color::White);

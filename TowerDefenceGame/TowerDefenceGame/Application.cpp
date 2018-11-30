@@ -1,6 +1,8 @@
 #include "Application.h"
 #include"MainMenu.h"
 #include "LevelEditor.h"
+#include "../Logging/Logging.h"
+#include<fstream>
 
 /* I don't know if this is right or not - could have trouble with multiplayer later on. */
 Application *Application::instance = nullptr;
@@ -13,9 +15,12 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 		instance = this;
 
 	/* TODO: Switch our state to the Menu instead of Game */
-   stateController = std::make_unique<LevelEditor>();
-	//stateController = std::make_unique<MainMenu>();
+   //stateController = std::make_unique<LevelEditor>();
+	stateController = std::make_unique<MainMenu>();
 
+   std::ofstream of("syso.log", std::ios::app);
+   Logger logger(std::cout,Logger::Level::Info);
+   logger.log("Staarted Application...", Logger::Level::Info);
 
 	/* Run at 60fps - Actually it runs at the refresh rate of the monitor */
 	window.setVerticalSyncEnabled(true);
