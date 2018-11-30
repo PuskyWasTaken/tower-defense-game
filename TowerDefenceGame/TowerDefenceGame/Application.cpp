@@ -46,8 +46,6 @@ void Application::gameLoop()
 	/* Update */
 	while ( isRunning && window.isOpen() )
 	{
-		/* Handling of events should be done as fast as the graphics card allows */
-		handleEvent();
 		
 		/* Let the state do it's updating too */
 		stateController->update(window);
@@ -60,6 +58,9 @@ void Application::gameLoop()
 		{
 			/* Reset our timer */
 			updateClock.restart();
+
+			/* Handling of events should be done as fast as the graphics card allows */
+			handleEvent();
 
 			/* Clear previous frame */
 			window.clear();

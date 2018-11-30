@@ -24,11 +24,15 @@ public:
 	 void setPosition(const sf::Vector2f& newPosition);
 	 void setSize(const sf::Vector2f& size);
 	 void setColour(const sf::Color& newColor);
+	 void moveToPoint(const sf::Vector2f& point);
 	
 	 sf::RectangleShape getCollision(const Entity& otherEntity) const;
 
+
 	 bool isCollision(const Entity& otherEntity) const;
 	 bool isCollisionWithRect(const sf::RectangleShape& hitBox) const;
+	 bool isCollisonWithPoint(const sf::Vector2f & point) const;
+	 
 
 
 protected:

@@ -74,6 +74,8 @@ void Entity::setColour(const sf::Color & newColor)
 	this->hitbox.setFillColor(newColor);
 }
 
+
+
 bool Entity::isCollision(const Entity & otherEntity) const
 {
 	return isCollisionWithRect(otherEntity.getHitbox());
@@ -92,6 +94,9 @@ bool Entity::isCollisionWithRect(const sf::RectangleShape & hitBox) const
 	}
 	return false;
 }
+
+
+
 
 void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -115,3 +120,16 @@ sf::RectangleShape Entity::getCollision(const Entity & otherEntity) const
 
 	return collision;
 }
+
+
+bool Entity::isCollisonWithPoint(const sf::Vector2f & point) const
+{
+	sf::RectangleShape mouseRect;
+	mouseRect.setPosition(point);
+
+	if (isCollisionWithRect(mouseRect))
+		return true;
+	return false;
+}
+
+                                                                                                                                                                                                                                                                                              
