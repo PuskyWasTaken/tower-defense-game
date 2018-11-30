@@ -11,17 +11,17 @@ public:
 
 private:
 
-	uint16_t health;
+	int16_t health;
 	bool alive = true;
 	bool isDuringCollision = false;
 
 public:
 
-	uint16_t getHealth() const;
+	int16_t getHealth() const;
 	bool isAlive() const;
 	bool isInCollision() const;
 
-	void setHealth(const uint16_t health);
+	void setHealth(const int16_t health);
 	void setAlive(const bool alive);
 	void setIsDuringCollision(const bool isCollision);
 

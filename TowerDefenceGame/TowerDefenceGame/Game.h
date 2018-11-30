@@ -5,7 +5,7 @@
 
 #include "Enemy.h"
 #include "Intersection.h"
-
+#include "Tower.h"
 ///
 #include "Bullet.h"
 ///
@@ -27,6 +27,9 @@ private:
 	Enemy someEnemy;
 	sf::RectangleShape col;
 	Bullet bullet;
+	Tower someTower;
+	Enemy someOtherEnemy;
+
 	///
 
 	std::vector<Enemy> enemyArray;

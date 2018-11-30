@@ -20,7 +20,7 @@ Enemy::~Enemy()
 {
 }
 
-uint16_t Enemy::getHealth() const
+int16_t Enemy::getHealth() const
 {
 	return this->health;
 }
@@ -35,7 +35,7 @@ bool Enemy::isInCollision() const
 	return this->isDuringCollision;
 }
 
-void Enemy::setHealth(const uint16_t health)
+void Enemy::setHealth(const int16_t health)
 {
 	this->health = health;
 }

@@ -1,13 +1,13 @@
 #include "Bullet.h"
 
 Bullet::Bullet(const sf::Vector2f& position, const sf::RectangleShape& destination, const float speed)
-	: MovableEntity(position, sf::Vector2f(10, 10), speed, sf::Vector2i(0, 0)), isDestinationAchieved(false)
+	: MovableEntity(position, sf::Vector2f(10, 10), speed, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
 {
-	this->destination = destination;
+	this->m_destination = destination;
 }
 
 Bullet::Bullet()
-	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(10, 10), 0.f, sf::Vector2i(0, 0)), isDestinationAchieved(false)
+	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(10, 10), 0.f, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
 {}
 
 Bullet::~Bullet()
@@ -15,12 +15,12 @@ Bullet::~Bullet()
 
 void Bullet::update()
 {
-	if (this->isDestinationAchieved)
+	if (this->m_isDestinationAchieved)
 		return;
 
-	if (this->isCollisionWithRect(destination))
+	if (this->isCollisionWithRect(m_destination))
 	{
-		this->isDestinationAchieved = true;
+		this->m_isDestinationAchieved = true;
 		return;
 	}
 	
@@ -31,21 +31,26 @@ void Bullet::update()
 
 void Bullet::setDestination(const sf::RectangleShape& destination)
 {
-	this->destination = destination;
+	this->m_destination = destination;
+}
+
+bool Bullet::isDestinationAchieved() const
+{
+	return this->m_isDestinationAchieved;
 }
 
 void Bullet::updateMovementDirections()
 {
-	if (destination.getPosition().x + destination.getSize().x/2 > this->getCenter().x)
+	if (m_destination.getPosition().x + m_destination.getSize().x/2 > this->getCenter().x)
 		setMovementX(1.0f);
-	else if (destination.getPosition().x + destination.getSize().x / 2 < this->getCenter().x)
+	else if (m_destination.getPosition().x + m_destination.getSize().x / 2 < this->getCenter().x)
 		setMovementX(-1.0f);
 	else 
 		setMovementX(0.f);
 
-	if (destination.getPosition().y + destination.getSize().y / 2 > this->getCenter().y)
+	if (m_destination.getPosition().y + m_destination.getSize().y / 2 > this->getCenter().y)
 		setMovementY(1.0f);
-	else if (destination.getPosition().y + destination.getSize().y / 2 > this->getCenter().y)
+	else if (m_destination.getPosition().y + m_destination.getSize().y / 2 > this->getCenter().y)
 		setMovementY(-1.0f);
 	else
 		setMovementY(0.f);

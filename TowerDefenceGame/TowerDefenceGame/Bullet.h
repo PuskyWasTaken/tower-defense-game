@@ -10,8 +10,8 @@ public:
 	~Bullet();
 
 private:
-	sf::RectangleShape destination;
-	bool isDestinationAchieved;
+	sf::RectangleShape m_destination;
+	bool m_isDestinationAchieved;
 
 private:
 	void updateMovementDirections();
@@ -20,6 +20,6 @@ public:
 
 	void update();
 	void setDestination(const sf::RectangleShape& destination);
-
+	bool isDestinationAchieved() const;
 };
 
