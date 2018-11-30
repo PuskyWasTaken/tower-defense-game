@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "Intersection.h"
-#include "Panel.h"
+#include "LevelEditorPanel.h"
 
 
 class LevelEditor :
@@ -17,14 +17,13 @@ public:
 	//TODO implement VertexArray sprites
 
 private:
-	sf::VertexArray sprites();  //TODO: to look after when sprite class is done
-	sf::RenderTexture tiles();  //Tiles-> to pe converted in pgn
 	Intersection *m_GenericIntersection;
+	Intersection m_testIntersection;
 
 	std::vector<Intersection> m_intersectionArray;
 	bool m_isMousePressed = false;
 	sf::Vector2f toVector2f(const sf::Vector2i &toBeConverted)const;
-	Panel m_testingPanel;
+	LevelEditorPanel m_Panel;
 
 
 public:
@@ -33,7 +32,8 @@ public:
 	void handleEvent(sf::RenderWindow &window) override;
 
 
-	bool m_isDrawing = false;
+	bool m_isDraggingGenericIntersection = false;
+	bool m_isDraggingRealIntersection = false;
 
 
 };

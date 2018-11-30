@@ -8,8 +8,7 @@
 
 LevelEditor::LevelEditor()
 {
-	m_testingPanel.setSize(sf::Vector2f(200, 800));
-	m_testingPanel.setCenterPosition(sf::Vector2f(700, 400));
+
 }
 
 
@@ -37,12 +36,19 @@ void LevelEditor::draw(sf::RenderWindow & window)
 	//window.draw(*m_GenericIntersection);
 
 	//Drawing the pannel
-	window.draw(m_testingPanel);
+	window.draw(m_Panel);
+	window.draw(m_testIntersection);
+
+	for (Intersection &i : m_intersectionArray)
+	{
+		window.draw(i);
+	}
+
 
 	//Drawing the intersection in the pannel 
 
 	//TODO create a drawPanel function
-	for (Intersection &i : m_testingPanel.m_genericIntersections)
+	for (Intersection &i : m_Panel.m_genericIntersections)
 	{
 		window.draw(i);
 	}
@@ -57,57 +63,53 @@ void LevelEditor::handleEvent(sf::RenderWindow &window)
 	}
 
 
-	//if left mouse button is pressed get position
-	if (m_isMousePressed && !m_isDrawing)
-		for (Intersection &i : m_testingPanel.m_genericIntersections)
+	if (m_isMousePressed && !m_isDraggingGenericIntersection)
+		for (Intersection i : m_Panel.m_genericIntersections)
 			if (i.isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
 			{
-				m_GenericIntersection = &i;
-				m_isDrawing = true;
+				m_testIntersection = i;
+				m_isDraggingGenericIntersection = true;
 			}
 
-	if (m_isDrawing && m_isMousePressed)
-	{
-		m_GenericIntersection->setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isMousePressed == true)
-		{
+	if(m_isMousePressed && !m_isDraggingRealIntersection)
+        for (Intersection &i : m_intersectionArray)
+        		if (i.isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
+        		{
+        		m_GenericIntersection = &i;
+        		m_isDraggingRealIntersection = true;
+        		}
+	
 
+	if (m_isDraggingGenericIntersection && m_isMousePressed)
+	{
+		if (m_isDraggingGenericIntersection)
+		{
+			m_testIntersection.setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
+		}
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isMousePressed == true)
+		{
 			m_isMousePressed = false;
+			m_isDraggingGenericIntersection = false;
+			m_intersectionArray.push_back(m_testIntersection);
+			m_testIntersection.setSize(sf::Vector2f(0,0));
+
 		}
 	}
 
 
+	if (m_isDraggingRealIntersection && m_isMousePressed) {
 
-
-}
-
-
-
-
-/*{
-
-	//if left mouse button is pressed get position
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)& (m_isMousePressed == false))
-	{
-		m_isMousePressed = true;
-		for (Intersection &i : m_testingPanel.m_genericIntersections)
+		if (m_isDraggingRealIntersection)
 		{
-			while (i.isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window)))& (sf::Mouse::isButtonPressed(sf::Mouse::Right)))
-			{
-					std::cout << i.getHitbox().getPosition().x << " , " << i.getHitbox().getPosition().y;
-					i.setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
-					draw(window);
-			}
-
+			m_GenericIntersection->setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
+		}
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isMousePressed == true)
+		{
+			m_isMousePressed = false;
+			m_isDraggingRealIntersection = false;
 		}
 	}
 
-	//notify that the mouse is not pressed anymore and can take click
-	if (!sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isMousePressed == true)
-	{
-		m_isMousePressed = false;
-	}
+
+
 }
-*/
-
-
