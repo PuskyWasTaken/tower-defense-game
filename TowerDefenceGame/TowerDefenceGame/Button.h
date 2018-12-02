@@ -18,25 +18,21 @@ public :
 
 public:
 
-	sf::Font getFont() const
-	{
-		return font;
-	}
+	sf::Font getFont() const;
+
 	
-	void setFont(const sf::Font& f)
-	{
-		text.setFont(f);
-	}
+	void setFont(const sf::Font& f);
 
-	sf::Text getText() const
-	{
-		return text;
-	}
 
-	void setText(const std::string& text)
-	{
-		this->text.setString(text);
-	}
+	void setTextSize(unsigned int size);
+	
+	void setTextColor(sf::Color color);
+
+
+	sf::Text getText() const;
+
+
+	void setText(const std::string& text);
 
 protected:
 

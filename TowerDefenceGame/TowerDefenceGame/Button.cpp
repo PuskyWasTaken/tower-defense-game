@@ -34,6 +34,35 @@ Button::~Button()
 {
 }
 
+sf::Font Button::getFont() const
+{
+	return font;
+}
+
+void Button::setFont(const sf::Font & f)
+{
+	text.setFont(f);
+}
+
+void Button::setTextSize(unsigned int size)
+{
+	text.setCharacterSize(size);
+}
+
+void Button::setTextColor(sf::Color color)
+{
+	text.setFillColor(color);
+}
+
+sf::Text Button::getText() const
+{
+	return text;
+}
+
+void Button::setText(const std::string & text)
+{
+	this->text.setString(text);
+}
 void Button::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	//target.draw(this->hitbox);

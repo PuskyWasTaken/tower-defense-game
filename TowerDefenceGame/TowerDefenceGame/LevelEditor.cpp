@@ -47,7 +47,14 @@ void LevelEditor::draw(sf::RenderWindow & window)
 
 	window.draw(testingRectangle);
 
+	window.draw(m_Panel.instructions);
+
 	for (Intersection &i : m_Panel.m_genericIntersections)
+	{
+		window.draw(i);
+	}
+
+	for (Button &i : m_Panel.m_genericButtons)
 	{
 		window.draw(i);
 	}

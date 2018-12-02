@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Intersection.h"
+#include "Button.h"
 
 class Panel : public Entity
 {
