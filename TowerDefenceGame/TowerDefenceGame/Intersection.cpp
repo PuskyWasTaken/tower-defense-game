@@ -1,13 +1,13 @@
 #include "Intersection.h"
 
 
-Intersection::Intersection(const sf::Vector2f& position, const sf::Vector2f& size)
-	: UnmovableEntity(position, size)
+Intersection::Intersection(const sf::Vector2f& position, const sf::Vector2f& size, const short exit)
+	: UnmovableEntity(position, size), m_exit(exit)
 {
 }
 
 Intersection::Intersection()
-	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(40,40))
+	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(40,40)), m_exit(0)
 {}
 
 
@@ -15,14 +15,14 @@ Intersection::~Intersection()
 {
 }
 
-bool Intersection::hasEntrance(short cardinal) const
+short Intersection::getExit() const
 {
-	return entrance[cardinal];
+	return this->m_exit;
 }
 
-void Intersection::setEntrance(const short cardinal, const bool newBool)
+void Intersection::setExit(const short cardinal)
 {
-	entrance[cardinal] = newBool;
+	m_exit = cardinal;
 }
 
 

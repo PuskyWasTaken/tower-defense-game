@@ -13,23 +13,19 @@ Game::Game()
 	someIntersection.setColour(sf::Color::Red);
 	someIntersection.setSize(sf::Vector2f(60, 60));
 	someIntersection.setCenterPosition(sf::Vector2f(400, 400));
-	someIntersection.setEntrance(static_cast<short>(Intersection::cardinals::North), true);
+	someIntersection.setExit(0);
 
 	intersectionArray.push_back(someIntersection);
 
-	Intersection anotherIntersection(sf::Vector2f(400, 200), sf::Vector2f(60, 60));
+	Intersection anotherIntersection(sf::Vector2f(400, 200), sf::Vector2f(60, 60), 2);
 	anotherIntersection.setColour(sf::Color::Cyan);
-	anotherIntersection.setEntrance(static_cast<short>(Intersection::cardinals::West), true);
 	intersectionArray.push_back(anotherIntersection);
 
 
-	Intersection yetAnotherInteresection = { sf::Vector2f(200,200), sf::Vector2f(60,60) };
-	yetAnotherInteresection.setEntrance(static_cast<short>(Intersection::cardinals::South), true);
+	Intersection yetAnotherInteresection = { sf::Vector2f(200,200), sf::Vector2f(60,60), 2 };
 	intersectionArray.push_back(yetAnotherInteresection);
 
 	col.setFillColor(sf::Color::Magenta);
-
-
 
 	//Enemy someOtherEnemy;
 	someOtherEnemy.setColour(sf::Color::Yellow);
@@ -123,9 +119,6 @@ void Game::updateEnemyCollision(Enemy& enemy)
 		{
 			enemy.setIsDuringCollision(true);
 
-			/* What side it collided on should be disabled */
-			intersectionArray[i].setEntrance(getEntranceSide(enemy), false);
-
 		}
 		else if (enemy.isCollision(intersectionArray[i]))
 		{
@@ -133,15 +126,7 @@ void Game::updateEnemyCollision(Enemy& enemy)
 			if ( intersectionArray[i].getCenter().x == enemy.getCenter().x
 				&&  intersectionArray[i].getCenter().y == enemy.getCenter().y ) 
 			{
-				for (short j = 0; j < 4; ++j)
-				{
-					if (intersectionArray[i].hasEntrance(j))
-					{
-						enemy.setMovementDirection(getMovementDirection(j));
-						break;
-					}
-
-				}
+				enemy.setMovementDirection(getMovementDirection(intersectionArray[i].getExit()));
 				enemy.setIsDuringCollision(false);
 
 				/// TODO : Delete line bellow
@@ -149,22 +134,6 @@ void Game::updateEnemyCollision(Enemy& enemy)
 			}
 		}
 	}
-}
-
-short Game::getEntranceSide(const Enemy& enemy)
-{
-	/* Find out where did the enemy come from */
-	if (enemy.getMovementX() > 0)
-		return static_cast<short>(Intersection::cardinals::West);
-	else if (enemy.getMovementX() < 0)
-		return static_cast<short>(Intersection::cardinals::East);
-	else if (enemy.getMovementY() < 0)
-		return static_cast<short>(Intersection::cardinals::North);
-	else if (enemy.getMovementY() > 0)
-		return static_cast<short>(Intersection::cardinals::South);
-
-	/* TO DO: Add throw here */
-	return 0;
 }
 
 sf::Vector2i Game::getMovementDirection(const short entrance) const
@@ -181,7 +150,6 @@ sf::Vector2i Game::getMovementDirection(const short entrance) const
 	/* West */
 	else if (entrance == 3)
 		return sf::Vector2i(-1,0);
-
 }
 
 
