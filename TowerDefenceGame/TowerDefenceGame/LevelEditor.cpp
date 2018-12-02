@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Intersection.h"
 
-#include <iostream>
+
 
 
 
@@ -16,9 +16,36 @@ LevelEditor::~LevelEditor()
 {
 }
 
+void LevelEditor::saveToFile()
+{	
+	int levelId;
+	std::cout << "Insert here the level id";
+	std::cin >> levelId;
+	std::string levelName = givePath(levelId);
+	std::ofstream myFile;
+	myFile.open(levelName);
+	for (Intersection i : m_intersectionArray)
+	{ 
+		myFile << "<" << i.getPosition().x << "," << i.getPosition().y << "," << i.getExit() << ">\n";
+	}
+	myFile<< "IntersectionEnding\n";
+	for (sf::RectangleShape i : m_drawableZone)
+	{
+		myFile << "<" << i.getPosition().x << "," << i.getPosition().y << "," << i.getSize().x << "," << i.getSize().y <<">\n";
+	}
+	std::cout << "\n Level saved with succes \n";
+}
+
 sf::Vector2f LevelEditor::toVector2f(const sf::Vector2i & toBeConverted)const
 {
 	return sf::Vector2f(toBeConverted);
+}
+
+std::string LevelEditor::givePath(int & addTo)
+{
+	std::string path = "..\\Levels\\";
+	path.append(std::to_string(addTo));
+	return path;
 }
 
 void LevelEditor::update(sf::RenderWindow &window)
@@ -69,6 +96,8 @@ void LevelEditor::handleEvent(sf::RenderWindow &window)
 {
 	dragAndDropIntersections(window);
 	createDrawableZone(window);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)&&(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)))
+		saveToFile();
 }
 
 
@@ -115,7 +144,6 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 			m_isRMousePressed = false;
 			m_isDraggingGenericIntersection = false;
 			m_intersectionArray.push_back(m_testIntersection);
-			std::cout << m_intersectionArray.size() << " ";
 			m_testIntersection.setSize(sf::Vector2f(10,10));
 
 		}

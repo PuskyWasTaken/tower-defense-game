@@ -7,23 +7,23 @@ LevelEditorPanel::LevelEditorPanel()
 	northIntersection.setColour(sf::Color::Red);
 	northIntersection.setSize(sf::Vector2f(60, 60));
 	northIntersection.setCenterPosition(sf::Vector2f(650, 50));
-	northIntersection.setEntrance(static_cast<short>(Intersection::cardinals::North), true);
+	northIntersection.setExit(0);
 
 	southIntersection.setColour(sf::Color::Blue);
 	southIntersection.setSize(sf::Vector2f(60, 60));
 	southIntersection.setCenterPosition(sf::Vector2f(730, 50));
-	southIntersection.setEntrance(static_cast<short>(Intersection::cardinals::South), true);
+	southIntersection.setExit(1);
 
 
 	westIntersection.setColour(sf::Color::Green);
 	westIntersection.setSize(sf::Vector2f(60, 60));
 	westIntersection.setCenterPosition(sf::Vector2f(650, 150));
-	westIntersection.setEntrance(static_cast<short>(Intersection::cardinals::West), true);
+	westIntersection.setExit(3);
 
 	eastIntersection.setColour(sf::Color::Yellow);
 	eastIntersection.setSize(sf::Vector2f(60, 60));
 	eastIntersection.setCenterPosition(sf::Vector2f(730, 150));
-	eastIntersection.setEntrance(static_cast<short>(Intersection::cardinals::East), true);
+	eastIntersection.setExit(2);
 
 
 	m_genericIntersections.push_back(northIntersection);
@@ -61,7 +61,7 @@ LevelEditorPanel::LevelEditorPanel()
 	eastButton.text.setPosition(eastButton.getPosition());
 	eastButton.setTextColor(sf::Color::Black);
 
-	instructions.setText("*press S to save \n zone \n * press LeftClick+D  \n to create zone \n *press LeftClick+F \n to resize zone");
+	instructions.setText("*press S to save \n zone \n * press LeftClick+D  \n to create zone \n *press LeftClick+F \n to resize zone\n *press ctrl+y to\n save to file");
 	instructions.setColour(sf::Color::White);
 	instructions.setTextColor(sf::Color::Black);
 	instructions.text.setPosition(sf::Vector2f(600, 250));

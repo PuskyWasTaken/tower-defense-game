@@ -6,6 +6,10 @@
 #include "Intersection.h"
 #include "LevelEditorPanel.h"
 
+#include <fstream>
+#include <string>
+#include <iostream>
+
 
 class LevelEditor :
 	public IStateClass
@@ -24,9 +28,12 @@ private:
 
 	bool m_isRMousePressed = false;
 	bool m_isLMousePressed = false;
-
+	
+	void saveToFile();
 
 	sf::Vector2f toVector2f(const sf::Vector2i &toBeConverted)const;
+	std::string givePath(int &addTo);
+
 	LevelEditorPanel m_Panel;
 	std::vector<sf::RectangleShape> m_drawableZone;
 	sf::RectangleShape testingRectangle;
