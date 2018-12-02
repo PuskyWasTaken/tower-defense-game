@@ -21,19 +21,31 @@ private:
 	Intersection m_testIntersection;
 
 	std::vector<Intersection> m_intersectionArray;
-	bool m_isMousePressed = false;
+
+	bool m_isRMousePressed = false;
+	bool m_isLMousePressed = false;
+
+
 	sf::Vector2f toVector2f(const sf::Vector2i &toBeConverted)const;
 	LevelEditorPanel m_Panel;
+	std::vector<sf::RectangleShape> m_drawableZone;
+	sf::RectangleShape testingRectangle;
+
+
+	bool m_isDraggingGenericIntersection = false;
+	bool m_isDraggingRealIntersection = false;
+	bool m_isDrawing = false;
+	bool m_isResizing = false;
 
 
 public:
 	void update(sf::RenderWindow &window) override;
 	void draw(sf::RenderWindow &window) override;
 	void handleEvent(sf::RenderWindow &window) override;
+	void dragAndDropIntersections(sf::RenderWindow &window);
+	void createDrawableZone(sf::RenderWindow &window);
 
 
-	bool m_isDraggingGenericIntersection = false;
-	bool m_isDraggingRealIntersection = false;
 
 
 };
