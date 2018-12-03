@@ -1,6 +1,7 @@
 #include "Bullet.h"
 
-Bullet::Bullet(const sf::Vector2f& position, const sf::RectangleShape& destination, const float speed)
+
+Bullet::Bullet(const sf::Vector2f& position, const Enemy& destination, const float speed)
 	: MovableEntity(position, sf::Vector2f(10, 10), speed, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
 {
 	this->m_destination = destination;
@@ -14,22 +15,23 @@ Bullet::~Bullet()
 {}
 
 void Bullet::update()
-{
+{	
 	if (this->m_isDestinationAchieved)
 		return;
 
-	if (this->isCollisionWithRect(m_destination))
+	if (this->isCollisionWithRect(m_destination.getHitbox()))
 	{
 		this->m_isDestinationAchieved = true;
 		return;
 	}
 	
+	/* Do the movement */
 	updateMovementDirections();
-	this->move();
+	this->moveTo(sf::Vector2f(this->m_speed * cosf(m_degree), this->m_speed * sinf(m_degree)));
 
 }
 
-void Bullet::setDestination(const sf::RectangleShape& destination)
+void Bullet::setDestination(const Enemy& destination)
 {
 	this->m_destination = destination;
 }
@@ -41,18 +43,16 @@ bool Bullet::isDestinationAchieved() const
 
 void Bullet::updateMovementDirections()
 {
-	if (m_destination.getPosition().x + m_destination.getSize().x/2 > this->getCenter().x)
-		setMovementX(1.0f);
-	else if (m_destination.getPosition().x + m_destination.getSize().x / 2 < this->getCenter().x)
-		setMovementX(-1.0f);
-	else 
-		setMovementX(0.f);
+	sf::Vector2f distance;
 
-	if (m_destination.getPosition().y + m_destination.getSize().y / 2 > this->getCenter().y)
-		setMovementY(1.0f);
-	else if (m_destination.getPosition().y + m_destination.getSize().y / 2 > this->getCenter().y)
-		setMovementY(-1.0f);
-	else
-		setMovementY(0.f);
+	/* Calculate the distance between our bullet and the center of our destination */
+	distance.x = fabs(this->getPosition().x - m_destination.getCenter().x);
+	distance.y = fabs(this->getPosition().y - m_destination.getCenter().y);
+
+	/* Calculate the degree we have to move at */
+	float degree = atan2f(distance.y, distance.x);
+
+	this->m_degree = degree;
+	
 }
 

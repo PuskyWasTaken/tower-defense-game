@@ -42,7 +42,7 @@ Game::Game()
 	someTower.setSize(sf::Vector2f(100, 100));
 	someTower.setCenterPosition(sf::Vector2f(50, 50));
 	someTower.setColour(sf::Color::Magenta);
-	someTower.setIntruder(someOtherEnemy);
+	someTower.setIntruder(enemyArray[0]);
 
 	///
 }
@@ -123,8 +123,8 @@ void Game::updateEnemyCollision(Enemy& enemy)
 		else if (enemy.isCollision(intersectionArray[i]))
 		{
 			/* If the enemy is in the center of the intersection */
-			if ( intersectionArray[i].getCenter().x == enemy.getCenter().x
-				&&  intersectionArray[i].getCenter().y == enemy.getCenter().y ) 
+			if ( intersectionArray[i].getICenter().x == enemy.getICenter().x
+				&&  intersectionArray[i].getICenter().y == enemy.getICenter().y ) 
 			{
 				enemy.setMovementDirection(getMovementDirection(intersectionArray[i].getExit()));
 				enemy.setIsDuringCollision(false);

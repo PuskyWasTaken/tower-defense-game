@@ -1,25 +1,27 @@
 #pragma once
 #include "MovableEntity.h"
+#include <math.h>
+#include "Enemy.h"
 
 class Bullet :
 	public MovableEntity
 {
 public:
-	Bullet(const sf::Vector2f& position, const sf::RectangleShape& destination, const float speed);
+	Bullet(const sf::Vector2f& position, const Enemy& destination, const float speed);
 	Bullet();
 	~Bullet();
 
 private:
-	sf::RectangleShape m_destination;
+	Enemy m_destination;
 	bool m_isDestinationAchieved;
+	float m_degree;
 
-private:
 	void updateMovementDirections();
 
 public:
 
 	void update();
-	void setDestination(const sf::RectangleShape& destination);
+	void setDestination(const Enemy& destination);
 	bool isDestinationAchieved() const;
 };
 

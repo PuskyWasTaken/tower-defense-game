@@ -14,13 +14,16 @@ private:
 	
 	int16_t m_damage;
 	bool m_isAttacking = false;
-	//float fireRate = 1/60;
 
 	/* Remember to delete all bullet objects once we are done with the bulletArray */
 	std::vector<Bullet> m_bulletArray;
 
 	/* Pointer towards the intruder(enemy) */
 	Enemy* m_intruder = nullptr;
+
+	/* Fire Rate */
+	sf::Time m_fireRate = sf::seconds(1.0f);
+	sf::Clock m_updateClock;
 
 private:
 	void fireBullet();
@@ -32,6 +35,7 @@ public:
 	bool isAttacking() const;
 	float getDamage() const;
 
+	void setFireRate(float fireRate);
 	void setIntruder(Enemy& intruder);
 	void update(); 
 };

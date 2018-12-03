@@ -10,15 +10,16 @@ public:
 
 protected:
 
-	float speed;
+	float m_speed;
 
 private:
 
-	sf::Vector2i movementDirection;
+	sf::Vector2i m_movementDirection;
 
 public:
 
 	void setSpeed(const float speed);
+	float getSpeed() const;
 	void setMovementDirection(const sf::Vector2i& movementDirection);
 	void setMovementX(const int direction);
 	void setMovementY(const int direction);
@@ -27,6 +28,7 @@ public:
 	int getMovementY() const;
 
 	void move();
+	void moveTo(const sf::Vector2f& offset);
 
 };
 

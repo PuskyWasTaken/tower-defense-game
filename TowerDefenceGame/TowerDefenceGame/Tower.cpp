@@ -28,16 +28,26 @@ float Tower::getDamage() const
 
 void Tower::fireBullet()
 {
-	/* Notify that we are seeking our intruder */
-	if (!m_isAttacking)
-		m_isAttacking = true;
+	sf::Time elapsedTime = m_updateClock.getElapsedTime();
 
-	Bullet newBullet(this->getPosition(), m_intruder->getHitbox(), 1.0f);
 
-	newBullet.setColour(sf::Color::Red);
-	newBullet.setSize(sf::Vector2f(5, 5));
+	if (elapsedTime > m_fireRate)
+	{
+		/* Reset our timer */
+		m_updateClock.restart();
 
-	m_bulletArray.push_back(newBullet);
+		/* Notify that we are seeking our intruder */
+		if (!m_isAttacking)
+			m_isAttacking = true;
+
+		Bullet newBullet(this->getCenter(), *m_intruder, 1.0f);
+
+		newBullet.setColour(sf::Color::Red);
+		newBullet.setSize(sf::Vector2f(5, 5));
+
+		m_bulletArray.push_back(newBullet);
+	}
+
 }
 
 void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -48,6 +58,11 @@ void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	for (Bullet b : m_bulletArray)
 		target.draw(b);
 
+}
+
+void Tower::setFireRate(float fireRate)
+{
+	m_fireRate = sf::seconds(fireRate);
 }
 
 void Tower::setIntruder(Enemy& intruder)

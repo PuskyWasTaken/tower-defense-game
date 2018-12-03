@@ -16,7 +16,9 @@ public:
 	 sf::RectangleShape getHitbox() const;
 	 sf::Sprite getSprite() const;
 	 sf::Vector2f getPosition() const;
-	 sf::Vector2i getCenter() const;
+	 sf::Vector2i getICenter() const;
+	 sf::Vector2f getCenter() const;
+
 	 int32_t getWidth() const;
 	 int32_t getHeight() const;
 
@@ -24,10 +26,8 @@ public:
 	 void setPosition(const sf::Vector2f& newPosition);
 	 void setSize(const sf::Vector2f& size);
 	 void setColour(const sf::Color& newColor);
-	 void moveToPoint(const sf::Vector2f& point);
 	
 	 sf::RectangleShape getCollision(const Entity& otherEntity) const;
-
 
 	 bool isCollision(const Entity& otherEntity) const;
 	 bool isCollisionWithRect(const sf::RectangleShape& hitBox) const;
