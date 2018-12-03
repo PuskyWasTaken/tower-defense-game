@@ -35,14 +35,21 @@ private:
 	std::string givePath(int &addTo);
 
 	LevelEditorPanel m_Panel;
-	std::vector<sf::RectangleShape> m_drawableZone;
-	sf::RectangleShape testingRectangle;
+	std::vector<Entity> m_drawableZone;
+	Entity testingRectangle;
 
 
 	bool m_isDraggingGenericIntersection = false;
 	bool m_isDraggingRealIntersection = false;
 	bool m_isDrawing = false;
 	bool m_isResizing = false;
+
+	Intersection m_startingPoint;
+	Intersection m_endingPoint;
+
+	void setStartingPoint(const Intersection &intersection);
+	void setEndingPoint(const Intersection &intersection);
+	void setCorectColor();
 
 
 public:

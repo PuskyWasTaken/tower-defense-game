@@ -6,9 +6,9 @@
 
 
 
-
 LevelEditor::LevelEditor()
 {
+
 }
 
 
@@ -29,10 +29,14 @@ void LevelEditor::saveToFile()
 		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getExit() << "\n";
 	}
 	myFile<< "IntersectionEnding\n";
-	for (sf::RectangleShape i : m_drawableZone)
+	for (Entity i : m_drawableZone)
 	{
-		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getSize().x << "," << i.getSize().y <<"\n";
+		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getHitbox().getSize().x <<","<< i.getHitbox().getSize().y << "\n";
 	}
+	myFile << "DrawableZoneEnding\n";
+	myFile << m_startingPoint.getPosition().x << "," << m_startingPoint.getPosition().y << "," << m_startingPoint.getExit() << "\n";
+	myFile << "ReadStartingPointEnding\n";
+	myFile << m_endingPoint.getPosition().x << "," << m_endingPoint.getPosition().y << "," << m_endingPoint.getExit() << "\n";
 	std::cout << "\n Level saved with succes \n ";
 }
 
@@ -46,6 +50,44 @@ std::string LevelEditor::givePath(int & addTo)
 	std::string path = "..\\Levels\\";
 	path.append(std::to_string(addTo));
 	return path;
+}
+
+void LevelEditor::setStartingPoint(const Intersection & intersection)
+{
+	m_startingPoint.setCenterPosition(toVector2f(intersection.getCenter()));
+}
+
+void LevelEditor::setEndingPoint(const Intersection & intersection)
+{
+	m_endingPoint.setCenterPosition(toVector2f(intersection.getCenter()));
+}
+
+void LevelEditor::setCorectColor()
+{
+	for (Intersection &i : m_intersectionArray)
+	{
+		if (!i.isCollisionWithRect(m_startingPoint.getHitbox()) && !i.isCollisionWithRect(m_endingPoint.getHitbox()))
+		{
+			if (i.getExit() == 0)
+			{
+				i.setColour(sf::Color::Red);
+			}
+			if (i.getExit() == 1)
+			{
+				i.setColour(sf::Color::Blue);
+			}
+			if (i.getExit() == 2)
+			{
+				i.setColour(sf::Color::Yellow);
+			}
+			if (i.getExit() == 3)
+			{
+				i.setColour(sf::Color::Green);
+			}
+			
+		}
+		
+	}
 }
 
 void LevelEditor::update(sf::RenderWindow &window)
@@ -86,7 +128,7 @@ void LevelEditor::draw(sf::RenderWindow & window)
 		window.draw(i);
 	}
 	
-	for (sf::RectangleShape &i : m_drawableZone)
+	for (Entity &i : m_drawableZone)
 	{
 		window.draw(i);
 	}
@@ -142,7 +184,7 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 			m_isRMousePressed = false;
 			m_isDraggingGenericIntersection = false;
 			m_intersectionArray.push_back(m_testIntersection);
-			m_testIntersection.setSize(sf::Vector2f(10,10));
+			m_testIntersection.setSize(sf::Vector2f(0,0));
 
 		}
 	}
@@ -162,6 +204,49 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 	}
 
 
+	//delete an intersection
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
+		for (int i = 0; i < m_intersectionArray.size(); ++i)
+		{
+			if (m_intersectionArray[i].isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
+			{
+				m_intersectionArray.erase(m_intersectionArray.begin() + i);
+			}
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		for (int i = 0; i < m_intersectionArray.size(); i++)
+		{
+			if (m_intersectionArray[i].isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
+			{
+					setStartingPoint(m_intersectionArray[i]);
+					m_intersectionArray[i].setColour(sf::Color::Magenta);
+					setCorectColor();
+
+			}
+
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		for (int i = 0; i < m_intersectionArray.size(); i++)
+		{
+			if (m_intersectionArray[i].isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
+			{
+
+					setEndingPoint(m_intersectionArray[i]);
+					m_intersectionArray[i].setColour(sf::Color::White);
+					setCorectColor();
+			}
+
+		}
+	}
+
+
 
 }
 
@@ -176,7 +261,7 @@ void LevelEditor::createDrawableZone(sf::RenderWindow & window)
 	if (m_isLMousePressed && !m_isDrawing && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		testingRectangle.setPosition(toVector2f(sf::Mouse::getPosition(window)));
-		testingRectangle.setFillColor(sf::Color::Cyan);
+		testingRectangle.getHitbox().setFillColor(sf::Color::Cyan);
 		m_isLMousePressed = false;
 	}
 
@@ -186,9 +271,19 @@ void LevelEditor::createDrawableZone(sf::RenderWindow & window)
 		m_isResizing = false;
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
+	
+		for (int i = 0; i < m_drawableZone.size(); i++)
+		{
+			if (m_drawableZone[i].isCollisonWithPoint(toVector2f(sf::Mouse::getPosition(window))))
+				m_drawableZone.erase(m_drawableZone.begin() + i);
+		}
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		if (testingRectangle.getSize() != sf::Vector2f(0, 0))
+		if (testingRectangle.getHitbox().getSize() != sf::Vector2f(0, 0))
 		{
 			m_drawableZone.push_back(testingRectangle);
 		}

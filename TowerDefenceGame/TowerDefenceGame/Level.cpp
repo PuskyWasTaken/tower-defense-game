@@ -21,9 +21,19 @@ std::vector<Intersection> Level::getIntersectionArray()
 	return m_intersectionArray;
 }
 
-std::vector<sf::RectangleShape> Level::getDrawableZone()
+std::vector<Entity> Level::getDrawableZone()
 {
 	return m_drawableZoneArray;
+}
+
+Intersection Level::getStartingPoint()
+{
+	return m_startingPoint;
+}
+
+Intersection Level::getEndingPoint()
+{
+	return m_endingPoint;
 }
 
 void Level::readThisFromFile(const std::string & file)
@@ -37,7 +47,10 @@ void Level::readThisFromFile(const std::string & file)
 	bool isSizeXRead = false;
 	bool isSizeYRead = false;
 	bool isExitRead = false;
+	bool canReadIntersections = true;
 	bool canReadDrawable = false;
+	bool canReadStartingPoint = false;
+	bool canReadEndingPoint = false;
 	sf::Vector2f position;
 	while (!myFile.eof())
 	{
@@ -46,12 +59,23 @@ void Level::readThisFromFile(const std::string & file)
 			if (reader == "IntersectionEnding")
 			{
 				canReadDrawable = true;
+				canReadIntersections = false;
+			}
+			if (reader == "DrawableZoneEnding")
+			{
+				canReadDrawable = false;
+				canReadStartingPoint = true;
+			}
+			if (reader == "ReadStartingPointEnding")
+			{
+				canReadStartingPoint = false;
+				canReadEndingPoint = true;
 			}
 			std::istringstream iss(reader);
 
-			while (std::getline(iss, item, ',') && (item != "IntersectionEnding"))
+			while (std::getline(iss, item, ',') && (item != "IntersectionEnding") && (item != "DrawableZoneEnding") && (item != "ReadStartingPointEnding"))
 			{
-				if (!canReadDrawable)
+				if (canReadIntersections)
 				{
 
 					if (isPositionXRead && isPositionYRead && !isExitRead) //or if position x and y have been both read for this object
@@ -84,7 +108,7 @@ void Level::readThisFromFile(const std::string & file)
 					}
 
 				}
-				else
+				if (canReadDrawable)
 				{
 					if (isPositionXRead && isPositionYRead && isSizeXRead && !isSizeYRead) //or if position.x and position.y and size.x has been read
 					{
@@ -123,6 +147,69 @@ void Level::readThisFromFile(const std::string & file)
 						m_drawableZoneArray.push_back(m_genericRectangleShape);
 					}
 
+				}
+				if (canReadStartingPoint)
+				{
+					if (isPositionXRead && isPositionYRead && !isExitRead) //or if position x and y have been both read for this object
+					{
+						m_startingPoint.setExit(std::stoi(item));   //std::stoi converts strings to int
+						isExitRead = true;
+					}
+
+					if (isPositionXRead && !isPositionYRead && !isExitRead) //or if only position x has been read yet for this object
+					{
+						position.y = std::stof(item);
+						isPositionYRead = true;
+						m_startingPoint.setPosition(position);
+					}
+
+
+					if (!isPositionXRead && !isPositionYRead && !isExitRead) // or if nothing has been read yet for this object
+					{
+						position.x = std::stof(item);  //std::stof converts string to float
+						isPositionXRead = true;
+					}
+
+
+					if (isPositionXRead && isPositionYRead && isExitRead) // or if everything has been read for the intersection
+					{
+						isPositionXRead = false;
+						isPositionYRead = false;
+						isExitRead = false;
+						canReadStartingPoint = false;
+					}
+				}
+				if (canReadEndingPoint)
+				{
+					if (isPositionXRead && isPositionYRead && !isExitRead) //or if position x and y have been both read for this object
+					{
+						m_endingPoint.setExit(std::stoi(item));   //std::stoi converts strings to int
+						isExitRead = true;
+					}
+
+					if (isPositionXRead && !isPositionYRead && !isExitRead) //or if only position x has been read yet for this object
+					{
+						position.y = std::stof(item);
+						isPositionYRead = true;
+						m_endingPoint.setPosition(position);
+					}
+
+
+					if (!isPositionXRead && !isPositionYRead && !isExitRead) // or if nothing has been read yet for this object
+					{
+						position.x = std::stof(item);  //std::stof converts string to float
+						isPositionXRead = true;
+					}
+
+
+					if (isPositionXRead && isPositionYRead && isExitRead) // or if everything has been read for the intersection
+					{
+						isPositionXRead = false;
+						isPositionYRead = false;
+						isExitRead = false;
+						canReadEndingPoint = false;
+					}
+					
 				}
 
 			}

@@ -16,17 +16,23 @@ public:
 	~Level();
 
 	std::vector<Intersection> getIntersectionArray();
-	std::vector<sf::RectangleShape> getDrawableZone();
+	std::vector<Entity> getDrawableZone();
+
+	Intersection getStartingPoint();
+	Intersection getEndingPoint();
 
 private:
-
+	
 	void readThisFromFile(const std::string &file);
 	
 	std::vector<Intersection> m_intersectionArray;
-	std::vector<sf::RectangleShape> m_drawableZoneArray;
+	std::vector<Entity> m_drawableZoneArray;
+
 
 	Intersection m_genericIntersection;
-	sf::RectangleShape m_genericRectangleShape;
+	Entity m_genericRectangleShape;
+	Intersection m_startingPoint;
+	Intersection m_endingPoint;
 
 };
 
