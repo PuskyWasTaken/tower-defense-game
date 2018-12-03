@@ -6,9 +6,9 @@
 
 
 
+
 LevelEditor::LevelEditor()
 {
-
 }
 
 
@@ -26,14 +26,14 @@ void LevelEditor::saveToFile()
 	myFile.open(levelName);
 	for (Intersection i : m_intersectionArray)
 	{ 
-		myFile << "<" << i.getPosition().x << "," << i.getPosition().y << "," << i.getExit() << ">\n";
+		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getExit() << "\n";
 	}
 	myFile<< "IntersectionEnding\n";
 	for (sf::RectangleShape i : m_drawableZone)
 	{
-		myFile << "<" << i.getPosition().x << "," << i.getPosition().y << "," << i.getSize().x << "," << i.getSize().y <<">\n";
+		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getSize().x << "," << i.getSize().y <<"\n";
 	}
-	std::cout << "\n Level saved with succes \n";
+	std::cout << "\n Level saved with succes \n ";
 }
 
 sf::Vector2f LevelEditor::toVector2f(const sf::Vector2i & toBeConverted)const
@@ -99,8 +99,6 @@ void LevelEditor::handleEvent(sf::RenderWindow &window)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)&&(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)))
 		saveToFile();
 }
-
-
 
 void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 {
