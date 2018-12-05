@@ -6,6 +6,11 @@ Intersection::Intersection(const sf::Vector2f& position, const sf::Vector2f& siz
 {
 }
 
+Intersection::Intersection(const sf::Vector2f & position, const short exit)
+	: UnmovableEntity(position, sf::Vector2f(40,40)), m_exit(exit)
+{
+}
+
 Intersection::Intersection()
 	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(40,40)), m_exit(0)
 {}

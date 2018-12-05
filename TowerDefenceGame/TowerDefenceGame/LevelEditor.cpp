@@ -3,14 +3,9 @@
 #include "Intersection.h"
 
 
-
-
-
 LevelEditor::LevelEditor()
 {
-
 }
-
 
 LevelEditor::~LevelEditor()
 {
@@ -26,17 +21,14 @@ void LevelEditor::saveToFile()
 	myFile.open(levelName);
 	for (Intersection i : m_intersectionArray)
 	{ 
-		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getExit() << "\n";
+		myFile << "I," << i.getCenter().x << "," << i.getCenter().y << "," << i.getExit() << "\n";
 	}
-	myFile<< "IntersectionEnding\n";
 	for (Entity i : m_drawableZone)
 	{
-		myFile << i.getPosition().x << "," << i.getPosition().y << "," << i.getHitbox().getSize().x <<","<< i.getHitbox().getSize().y << "\n";
+		myFile << "D," << i.getCenter().x << "," << i.getCenter().y << "," << i.getHitbox().getSize().x <<","<< i.getHitbox().getSize().y << "\n";
 	}
-	myFile << "DrawableZoneEnding\n";
-	myFile << m_startingPoint.getPosition().x << "," << m_startingPoint.getPosition().y << "," << m_startingPoint.getExit() << "\n";
-	myFile << "ReadStartingPointEnding\n";
-	myFile << m_endingPoint.getPosition().x << "," << m_endingPoint.getPosition().y << "," << m_endingPoint.getExit() << "\n";
+	myFile << "S," << m_startingPoint.getCenter().x << "," << m_startingPoint.getCenter().y << "," << m_startingPoint.getExit() << "\n";
+	myFile << "E," << m_endingPoint.getCenter().x << "," << m_endingPoint.getCenter().y << "," << m_endingPoint.getExit() << "\n";
 	std::cout << "\n Level saved with succes \n ";
 }
 
@@ -54,12 +46,12 @@ std::string LevelEditor::givePath(int & addTo)
 
 void LevelEditor::setStartingPoint(const Intersection & intersection)
 {
-	m_startingPoint.setCenterPosition(toVector2f(intersection.getCenter()));
+	m_startingPoint.setCenterPosition(intersection.getCenter());
 }
 
 void LevelEditor::setEndingPoint(const Intersection & intersection)
 {
-	m_endingPoint.setCenterPosition(toVector2f(intersection.getCenter()));
+	m_endingPoint.setCenterPosition(intersection.getCenter());
 }
 
 void LevelEditor::setCorectColor()

@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <string>
+#include <vector>
 
 #include <SFML\Graphics.hpp>
 #include "Intersection.h"
@@ -15,24 +17,16 @@ public:
 	Level(std::string path);
 	~Level();
 
-	std::vector<Intersection> getIntersectionArray();
-	std::vector<Entity> getDrawableZone();
-
-	Intersection getStartingPoint();
-	Intersection getEndingPoint();
+	std::vector<Intersection> intersectionArray;
+	std::vector<Entity> drawableZoneArray;
+	Intersection startingPoint;
+	Intersection endingPoint;
 
 private:
 	
 	void readThisFromFile(const std::string &file);
-	
-	std::vector<Intersection> m_intersectionArray;
-	std::vector<Entity> m_drawableZoneArray;
-
-
 	Intersection m_genericIntersection;
 	Entity m_genericRectangleShape;
-	Intersection m_startingPoint;
-	Intersection m_endingPoint;
 
 };
 

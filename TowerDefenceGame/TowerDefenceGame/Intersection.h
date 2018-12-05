@@ -8,6 +8,7 @@ class Intersection :
 public:
 
 	Intersection(const sf::Vector2f& position, const sf::Vector2f& size, const short exit);
+	Intersection(const sf::Vector2f& position, const short exit);
 	Intersection();
 	~Intersection();
 

@@ -46,7 +46,7 @@ sf::Vector2i Entity::getICenter() const
 
 sf::Vector2f Entity::getCenter() const
 {
-	return { getPosition().x * 2 + getWidth() / 2, getPosition().y * 2 + getHeight() / 2 };
+	return { getPosition().x + getWidth() / 2, getPosition().y + getHeight() / 2 };
 }
 
 int32_t Entity::getWidth() const

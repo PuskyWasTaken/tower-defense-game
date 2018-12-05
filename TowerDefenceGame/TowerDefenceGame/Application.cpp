@@ -15,8 +15,7 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 		instance = this;
 
 	/* TODO: Switch our state to the Menu instead of Game */
-   //stateController = std::make_unique<LevelEditor>();
-	stateController = std::make_unique<LevelEditor>();
+	stateController = std::make_unique<Game>();
 
    std::ofstream of("syso.log", std::ios::app);
    Logger logger(std::cout,Logger::Level::Info);
@@ -50,17 +49,16 @@ void Application::gameLoop()
 
 	/* Update */
 	while ( isRunning && window.isOpen() )
-	{
-		
-		/* Let the state do it's updating too */
-		stateController->update(window);
-		
+	{	
 		/* Elapsed time between frames */
 		sf::Time elapsedTime = updateClock.getElapsedTime();
 		
 		/* Fixed Update */
 		if (elapsedTime > this->frameTime)
 		{
+			/* Let the state do it's updating */
+			stateController->update(window);
+
 			/* Reset our timer */
 			updateClock.restart();
 
@@ -70,7 +68,7 @@ void Application::gameLoop()
 			/* Clear previous frame */
 			window.clear();
 	
-			/* Draw what the state has to draw (be it the Menu or the Game itself */
+			/* Draw what the state has to draw */
 			stateController->draw(window);
 			
 			/* Display the new frame */

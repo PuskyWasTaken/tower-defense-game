@@ -6,9 +6,7 @@
 #include "Enemy.h"
 #include "Intersection.h"
 #include "Tower.h"
-///
-#include "Bullet.h"
-///
+#include "Level.h"
 
 class Game : public IStateClass
 {
@@ -22,18 +20,13 @@ private:
 	//sf::Thread
 	//std::thread gameThread;
 
-	/// TO DO: Delete
-	Intersection someIntersection;
-	Enemy someEnemy;
-	sf::RectangleShape col;
-	Bullet bullet;
-	Tower someTower;
-	Enemy someOtherEnemy;
+	Level m_currentLevel;
+	std::vector<Enemy> m_enemyArray;
+	std::vector<Tower> m_towerArray;
 
-	///
-
-	std::vector<Enemy> enemyArray;
-	std::vector<Intersection> intersectionArray;
+	/* Enemy Spawn Rate */
+	sf::Time m_spawnRate = sf::seconds(1.0f);
+	sf::Clock m_updateClock;
 
 public: 
 	void update(sf::RenderWindow &window);
@@ -42,11 +35,12 @@ public:
 
 private:
 
-	void updateEnemyMovements();
+	void updateEnemies();
+	void updateEnemiesMovements();
+	void updateEnemiesPositions();
 	void updateEnemyCollision(Enemy& enemy);
-	short getEntranceSide(const Enemy& enemy);
 	sf::Vector2i getMovementDirection(const short entrance) const;
 
-	//void readLevel();
+	void readLevel(const std::string& level);
 };
 
