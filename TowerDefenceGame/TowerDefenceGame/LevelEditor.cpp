@@ -82,6 +82,47 @@ void LevelEditor::setCorectColor()
 	}
 }
 
+sf::Vector2f LevelEditor::snapToGrid(sf::Vector2f & coordinates) const
+{
+	int32_t modifiedX = coordinates.x + 40;
+
+	/* r1 - distance from x1 to closest "square" in the left side, r2 - same but to the right side */
+	int32_t r1 = modifiedX % 40;
+	int32_t r2 = 40 - r1;
+
+	/* If the left side is closer than the right side */
+	if (r1 < r2)
+	{
+		/* Snap to the left */
+		coordinates.x = coordinates.x - r1;
+	}
+	else
+	{
+		/* Snap to the right */
+		coordinates.x = coordinates.x + r2;
+	}
+
+	int32_t modifiedY = coordinates.y + 40;
+
+	/* r1 - distance from x1 to closest "square" in the left side, r2 - same but to the right side */
+	r1 = modifiedY % 40;
+	r2 = 40 - r1;
+
+	/* If the left side is closer than the right side */
+	if (r1 < r2)
+	{
+		/* Snap to the left */
+		coordinates.y = coordinates.y - r1;
+	}
+	else
+	{
+		/* Snap to the right */
+		coordinates.y = coordinates.y + r2;
+	}
+
+	return coordinates;
+}
+
 void LevelEditor::update(sf::RenderWindow &window)
 {
 	handleEvent(window);
@@ -169,10 +210,13 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 	{
 		if (m_isDraggingGenericIntersection)
 		{
-			m_testIntersection.setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
+			sf::Vector2f mouseCoords = toVector2f(sf::Mouse::getPosition(window));
+			m_testIntersection.setCenterPosition(mouseCoords);
 		}
 		if (!sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isRMousePressed == true)
 		{
+			sf::Vector2f gen = m_testIntersection.getCenter();
+			m_testIntersection.setCenterPosition(snapToGrid(gen));
 			m_isRMousePressed = false;
 			m_isDraggingGenericIntersection = false;
 			m_intersectionArray.push_back(m_testIntersection);
@@ -186,10 +230,13 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 
 		if (m_isDraggingRealIntersection)
 		{
-			m_GenericIntersection->setCenterPosition(toVector2f(sf::Mouse::getPosition(window)));
+			sf::Vector2f mouseCoords = toVector2f(sf::Mouse::getPosition(window));
+			m_GenericIntersection->setCenterPosition(mouseCoords);
 		}
 		if (!sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isRMousePressed == true)
 		{
+			sf::Vector2f gen = m_GenericIntersection->getCenter();
+			m_GenericIntersection->setCenterPosition(snapToGrid(gen));
 			m_isRMousePressed = false;
 			m_isDraggingRealIntersection = false;
 		}

@@ -50,6 +50,7 @@ private:
 	void setStartingPoint(const Intersection &intersection);
 	void setEndingPoint(const Intersection &intersection);
 	void setCorectColor();
+	sf::Vector2f snapToGrid(sf::Vector2f& coordinates) const;
 
 
 public:
