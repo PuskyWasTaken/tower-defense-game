@@ -2,7 +2,7 @@
 
 
 Tower::Tower()
-	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(40,40)), m_damage(10)
+	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(Globals::towerSize, Globals::towerSize)), m_damage(Globals::defaultTowerDamage)
 {
 }
 
@@ -40,7 +40,7 @@ void Tower::fireBullet()
 		if (!m_isAttacking)
 			m_isAttacking = true;
 
-		Bullet newBullet(this->getCenter(), *m_intruder, 1.0f);
+		Bullet newBullet(this->getCenter(), *m_intruder, Globals::defaultBulletSpeed);
 
 		newBullet.setColour(sf::Color::Red);
 		newBullet.setSize(sf::Vector2f(5, 5));

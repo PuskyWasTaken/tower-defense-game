@@ -25,7 +25,7 @@ private:
 	std::vector<Tower> m_towerArray;
 
 	/* Enemy Spawn Rate */
-	sf::Time m_spawnRate = sf::seconds(1.0f);
+	sf::Time m_spawnRate = sf::seconds(Globals::defaultEnemySpawnRate);
 	sf::Clock m_updateClock;
 
 public: 

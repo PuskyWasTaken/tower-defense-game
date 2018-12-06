@@ -22,7 +22,7 @@ private:
 	Enemy* m_intruder = nullptr;
 
 	/* Fire Rate */
-	sf::Time m_fireRate = sf::seconds(1.0f);
+	sf::Time m_fireRate = sf::seconds(Globals::defaultTowerFireRate);
 	sf::Clock m_updateClock;
 
 private:

@@ -2,13 +2,13 @@
 
 
 Bullet::Bullet(const sf::Vector2f& position, const Enemy& destination, const float speed)
-	: MovableEntity(position, sf::Vector2f(10, 10), speed, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
+	: MovableEntity(position, Globals::defaultBulletSize, speed, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
 {
 	this->m_destination = destination;
 }
 
 Bullet::Bullet()
-	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(10, 10), 0.f, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
+	: MovableEntity(sf::Vector2f(0, 0), Globals::defaultBulletSize, Globals::defaultBulletSpeed, sf::Vector2i(0, 0)), m_isDestinationAchieved(false)
 {}
 
 Bullet::~Bullet()

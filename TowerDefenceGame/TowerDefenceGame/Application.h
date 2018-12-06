@@ -26,7 +26,7 @@ private:
 	bool isRunning;
 
 	/* Time to render a frame - Unties the game from the graphics card */
-	const sf::Time frameTime = sf::seconds(1.0f / 60.f);
+	const sf::Time frameTime = sf::seconds(Globals::frameRate);
 
 public:
 	/* Event handling */

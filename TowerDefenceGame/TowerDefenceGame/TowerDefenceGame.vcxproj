@@ -151,6 +151,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Intersection.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelEditor.h" />

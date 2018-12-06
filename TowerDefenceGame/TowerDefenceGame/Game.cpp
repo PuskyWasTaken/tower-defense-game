@@ -56,7 +56,6 @@ void Game::updateEnemies()
 		newEnemy.setPosition(m_currentLevel.startingPoint.getPosition());
 		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
 		newEnemy.setColour(sf::Color::Blue);
-		newEnemy.setSpeed(1);
 		m_enemyArray.push_back(newEnemy);
 	}
 	
@@ -96,17 +95,17 @@ void Game::updateEnemyCollision(Enemy& enemy)
 sf::Vector2i Game::getMovementDirection(const short entrance) const
 {
 	/* North */
-	if (entrance == 0)
-		return sf::Vector2i(0,-1);
+	if (entrance == Globals::Cardinals::North)
+		return Globals::MovementDirections::North;
 	/* South */
-	else if (entrance == 1)
-		return sf::Vector2i(0,1);
+	else if (entrance == Globals::Cardinals::South)
+		return Globals::MovementDirections::South;
 	/* East */
-	else if (entrance == 2)
-		return sf::Vector2i(1,0);
+	else if (entrance == Globals::Cardinals::East)
+		return Globals::MovementDirections::East;
 	/* West */
-	else if (entrance == 3)
-		return sf::Vector2i(-1,0);
+	else if (entrance == Globals::Cardinals::West)
+		return Globals::MovementDirections::West;
 }
 
 void Game::readLevel(const std::string& level)

@@ -7,23 +7,23 @@ LevelEditorPanel::LevelEditorPanel()
 	northIntersection.setColour(sf::Color::Red);
 	northIntersection.setSize(sf::Vector2f(60, 60));
 	northIntersection.setCenterPosition(sf::Vector2f(650, 50));
-	northIntersection.setExit(0);
+	northIntersection.setExit(Globals::Cardinals::North);
 
 	southIntersection.setColour(sf::Color::Blue);
 	southIntersection.setSize(sf::Vector2f(60, 60));
 	southIntersection.setCenterPosition(sf::Vector2f(730, 50));
-	southIntersection.setExit(1);
+	southIntersection.setExit(Globals::Cardinals::South);
 
 
 	westIntersection.setColour(sf::Color::Green);
 	westIntersection.setSize(sf::Vector2f(60, 60));
 	westIntersection.setCenterPosition(sf::Vector2f(650, 150));
-	westIntersection.setExit(3);
+	westIntersection.setExit(Globals::Cardinals::West);
 
 	eastIntersection.setColour(sf::Color::Yellow);
 	eastIntersection.setSize(sf::Vector2f(60, 60));
 	eastIntersection.setCenterPosition(sf::Vector2f(730, 150));
-	eastIntersection.setExit(2);
+	eastIntersection.setExit(Globals::Cardinals::East);
 
 
 	m_genericIntersections.push_back(northIntersection);

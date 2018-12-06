@@ -12,7 +12,7 @@ Enemy::Enemy( const sf::Vector2f& position,
 }
 
 Enemy::Enemy()
-	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(40, 40), 0.f, sf::Vector2i(0, 0) ), health(100)
+	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(Globals::enemySize, Globals::enemySize), Globals::defaultEnemyMoveSpeed, sf::Vector2i(0, 0) ), health(Globals::defaultEnemyHealth)
 {
 }
 

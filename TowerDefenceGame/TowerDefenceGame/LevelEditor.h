@@ -5,6 +5,7 @@
 
 #include "Intersection.h"
 #include "LevelEditorPanel.h"
+#include "Globals.h"
 
 #include <fstream>
 #include <string>

@@ -60,19 +60,19 @@ void LevelEditor::setCorectColor()
 	{
 		if (!i.isCollisionWithRect(m_startingPoint.getHitbox()) && !i.isCollisionWithRect(m_endingPoint.getHitbox()))
 		{
-			if (i.getExit() == 0)
+			if (i.getExit() == Globals::Cardinals::North)
 			{
 				i.setColour(sf::Color::Red);
 			}
-			if (i.getExit() == 1)
+			if (i.getExit() == Globals::Cardinals::South)
 			{
 				i.setColour(sf::Color::Blue);
 			}
-			if (i.getExit() == 2)
+			if (i.getExit() == Globals::Cardinals::East)
 			{
 				i.setColour(sf::Color::Yellow);
 			}
-			if (i.getExit() == 3)
+			if (i.getExit() == Globals::Cardinals::West)
 			{
 				i.setColour(sf::Color::Green);
 			}
@@ -84,11 +84,11 @@ void LevelEditor::setCorectColor()
 
 sf::Vector2f LevelEditor::snapToGrid(sf::Vector2f & coordinates) const
 {
-	int32_t modifiedX = coordinates.x + 40;
+	int32_t modifiedX = coordinates.x + Globals::intersectionSize;
 
 	/* r1 - distance from x1 to closest "square" in the left side, r2 - same but to the right side */
-	int32_t r1 = modifiedX % 40;
-	int32_t r2 = 40 - r1;
+	int32_t r1 = modifiedX % Globals::intersectionSize;
+	int32_t r2 = Globals::intersectionSize - r1;
 
 	/* If the left side is closer than the right side */
 	if (r1 < r2)
@@ -102,11 +102,11 @@ sf::Vector2f LevelEditor::snapToGrid(sf::Vector2f & coordinates) const
 		coordinates.x = coordinates.x + r2;
 	}
 
-	int32_t modifiedY = coordinates.y + 40;
+	int32_t modifiedY = coordinates.y + Globals::intersectionSize;
 
 	/* r1 - distance from x1 to closest "square" in the left side, r2 - same but to the right side */
-	r1 = modifiedY % 40;
-	r2 = 40 - r1;
+	r1 = modifiedY % Globals::intersectionSize;
+	r2 = Globals::intersectionSize - r1;
 
 	/* If the left side is closer than the right side */
 	if (r1 < r2)
