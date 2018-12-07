@@ -15,16 +15,16 @@ Bullet::~Bullet()
 {}
 
 void Bullet::update()
-{	
+{
 	if (this->m_isDestinationAchieved)
 		return;
 
-	if (this->isCollisionWithRect(m_destination.getHitbox()))
+	if (this->isCollision(m_destination))//this->isCollisionWithRect(m_destination.getHitbox()))
 	{
 		this->m_isDestinationAchieved = true;
 		return;
 	}
-	
+
 	/* Do the movement */
 	updateMovementDirections();
 	this->moveTo(sf::Vector2f(this->m_speed * cosf(m_degree), this->m_speed * sinf(m_degree)));
@@ -55,4 +55,5 @@ void Bullet::updateMovementDirections()
 	this->m_degree = degree;
 	
 }
+
 

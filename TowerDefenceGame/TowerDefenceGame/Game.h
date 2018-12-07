@@ -21,8 +21,11 @@ private:
 	//std::thread gameThread;
 
 	Level m_currentLevel;
-	std::vector<Enemy> m_enemyArray;
+	std::vector<std::shared_ptr<Enemy>> m_enemyArray;
 	std::vector<Tower> m_towerArray;
+
+	/// Remove below
+	Tower someTower;
 
 	/* Enemy Spawn Rate */
 	sf::Time m_spawnRate = sf::seconds(Globals::defaultEnemySpawnRate);
@@ -38,7 +41,7 @@ private:
 	void updateEnemies();
 	void updateEnemiesMovements();
 	void updateEnemiesPositions();
-	void updateEnemyCollision(Enemy& enemy);
+	void updateEnemyCollision(std::shared_ptr<Enemy> enemy);
 	sf::Vector2i getMovementDirection(const short entrance) const;
 
 	void readLevel(const std::string& level);

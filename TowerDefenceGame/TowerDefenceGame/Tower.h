@@ -19,7 +19,8 @@ private:
 	std::vector<Bullet> m_bulletArray;
 
 	/* Pointer towards the intruder(enemy) */
-	Enemy* m_intruder = nullptr;
+	std::shared_ptr<Enemy> m_intruder = nullptr;
+	//std::shared_ptr<Enemy> m_intruder = nullptr;
 
 	/* Fire Rate */
 	sf::Time m_fireRate = sf::seconds(Globals::defaultTowerFireRate);
@@ -27,6 +28,7 @@ private:
 
 private:
 	void fireBullet();
+	void setFillColor();
 
 protected:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
@@ -36,7 +38,7 @@ public:
 	float getDamage() const;
 
 	void setFireRate(float fireRate);
-	void setIntruder(Enemy& intruder);
+	void setIntruder(std::shared_ptr<Enemy> intruder);
 	void update(); 
 };
 

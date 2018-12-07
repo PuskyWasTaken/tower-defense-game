@@ -4,7 +4,15 @@ namespace Globals
 {
 	/* Intersection Stuff*/
 	const int intersectionSize = 40;
+	const bool intersectionBorder = true;
+	const int intersectionOutLineThickness = 2;
 
+	namespace Color
+	{
+		const sf::Color towerColor = sf::Color(255, 255, 255, 50);
+		const sf::Color bulletColor = sf::Color(255,255,255);
+	}
+	
 	const enum Cardinals {
 
 		North,
@@ -18,7 +26,7 @@ namespace Globals
 	const int enemySize = 40;
 	const int defaultEnemyHealth = 100;
 	const float defaultEnemyMoveSpeed = 1.0f;
-	const int defaultEnemySpawnRate = 1;
+	const int defaultEnemySpawnRate = 5;
 
 	namespace MovementDirections
 	{
@@ -29,12 +37,12 @@ namespace Globals
 	}
 
 	/* Bullet Stuff */
-	const float defaultBulletSpeed = 1.0;
-	const sf::Vector2f defaultBulletSize(10, 10);
+	const float defaultBulletSpeed = 5.0;
+	const sf::Vector2f defaultBulletSize(5, 5);
 
 
 	/* Tower Stuff*/
-	const int towerSize = 40;
+	const int towerSize = 240;
 	const int defaultTowerDamage = 10;
 	const float defaultTowerFireRate = 1.0f;
 

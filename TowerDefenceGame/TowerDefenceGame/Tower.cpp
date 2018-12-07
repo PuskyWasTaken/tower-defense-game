@@ -4,16 +4,34 @@
 Tower::Tower()
 	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(Globals::towerSize, Globals::towerSize)), m_damage(Globals::defaultTowerDamage)
 {
+	setFillColor();
+
 }
 
 Tower::Tower(const sf::Vector2f& position, const sf::Vector2f& size, const float damage)
-	: UnmovableEntity(position, size), m_damage(damage)
+	: UnmovableEntity(position, size),	m_damage(damage)
 {
+	setFillColor();
 }
 
 
 Tower::~Tower()
 {
+}
+
+void Tower::setFillColor()
+{
+	if (Globals::intersectionBorder)
+	{
+		this->hitbox.setOutlineThickness(Globals::intersectionOutLineThickness);
+		this->hitbox.setOutlineColor(Globals::Color::towerColor);
+		this->hitbox.setFillColor(sf::Color::Transparent);
+	}
+	else
+	{
+		this->hitbox.setFillColor(Globals::Color::towerColor);
+	}
+
 }
 
 bool Tower::isAttacking() const
@@ -42,8 +60,8 @@ void Tower::fireBullet()
 
 		Bullet newBullet(this->getCenter(), *m_intruder, Globals::defaultBulletSpeed);
 
-		newBullet.setColour(sf::Color::Red);
-		newBullet.setSize(sf::Vector2f(5, 5));
+		newBullet.setColour(Globals::Color::bulletColor);
+		newBullet.setSize(Globals::defaultBulletSize);
 
 		m_bulletArray.push_back(newBullet);
 	}
@@ -55,7 +73,7 @@ void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	/* Super */
 	Entity::draw(target,states);
 	
-	for (Bullet b : m_bulletArray)
+	for (const Bullet& b : m_bulletArray)
 		target.draw(b);
 
 }
@@ -65,15 +83,35 @@ void Tower::setFireRate(float fireRate)
 	m_fireRate = sf::seconds(fireRate);
 }
 
-void Tower::setIntruder(Enemy& intruder)
+void Tower::setIntruder(std::shared_ptr<Enemy> intruder)
 {
-	this->m_intruder = &intruder;
+	m_intruder = intruder;
+	//this->m_intruder = &intruder;
+	m_isAttacking = true;
 }
 
 void Tower::update()
 {
+	/* Check we actually have an indruder and this wasn't called by accident */
+	if (m_intruder == nullptr)
+		return;
+
+	/* If the intruder got out of range, stop shooting */
+	if (!this->isCollision(*m_intruder))
+	{
+		m_isAttacking = false;
+		return;
+	}
+
+	/* If our intruder is dded, stop shooting him */
+	if (m_intruder->getHealth() <= 0)
+	{
+		m_isAttacking = false;
+		return;
+	}
+
 	/* First, look if we have a intruder, then fire a new bullet at it */
-	if (m_intruder != nullptr && m_intruder->getHealth() > 0)
+	if (m_intruder->getHealth() > 0)
 		fireBullet();
 
 	/* Go through all of our bullets and see which ones got their target */
@@ -87,7 +125,7 @@ void Tower::update()
 			m_bulletArray.erase(m_bulletArray.begin() + i);
 
 			/* Substract the damage taken from the intruders health */
-			m_intruder->setHealth(m_intruder->getHealth() - 10);
+			m_intruder->setHealth(m_intruder->getHealth() - Globals::defaultTowerDamage);
 		}
 	}
 }
