@@ -39,6 +39,7 @@ void Game::update(sf::RenderWindow &window)
 
 void Game::draw(sf::RenderWindow & window)
 {
+
 	/* Draw our beautiful enemies */
 	for (int i = 0; i < m_enemyArray.size(); ++i)
 		window.draw(*m_enemyArray[i]);
@@ -50,10 +51,26 @@ void Game::draw(sf::RenderWindow & window)
 	for (Tower i : m_towerArray)
 		window.draw(i);
 
+	/* Draw our Shop overlay */
+	window.draw(m_shop);
 }
 
 void Game::handleEvent(sf::RenderWindow &window)
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(window);
+		
+		if (!m_shop.isSelected)
+			m_shop.update(mousePos);
+		else if (m_shop.isSelected && !m_shop.isCollisonWithPoint(mousePos))
+		{
+			/* Handle the shop button that was pressed */
+			handleShopPressed(mousePos);
+			m_shop.isSelected = false;
+		}
+	
+	}
 }
 
 void Game::updateEnemiesPositions()
@@ -126,6 +143,21 @@ sf::Vector2i Game::getMovementDirection(const short entrance) const
 	/* West */
 	else if (entrance == Globals::Cardinals::West)
 		return Globals::MovementDirections::West;
+}
+
+void Game::handleShopPressed(const sf::Vector2f& mousePos)
+{
+	switch (m_shop.selectedItem)
+	{
+	case Shop::item::towerItem :
+	{	
+		Tower newTower(mousePos, Globals::towerSize, Globals::defaultTowerDamage);
+		m_towerArray.push_back(newTower);
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void Game::readLevel(const std::string& level)

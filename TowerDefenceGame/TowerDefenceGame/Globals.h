@@ -42,10 +42,16 @@ namespace Globals
 
 
 	/* Tower Stuff*/
-	const int towerSize = 240;
+	const sf::Vector2f towerSize(240,240);
 	const int defaultTowerDamage = 10;
 	const float defaultTowerFireRate = 1.0f;
 
+	/* Shop Stuff */
+	const sf::Vector2f shopItemSize(70, 70);
+	const int startingGoldAmount = 100;
+
+	const int rasterLeft = 10;
+	const int rasterTop = 80;
 
 	const float frameRate = 1.0f / 60.f;
 }

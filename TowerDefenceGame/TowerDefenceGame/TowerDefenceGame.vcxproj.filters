@@ -111,6 +111,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

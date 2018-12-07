@@ -7,6 +7,7 @@
 #include "Intersection.h"
 #include "Tower.h"
 #include "Level.h"
+#include "Shop.h"
 
 class Game : public IStateClass
 {
@@ -23,6 +24,8 @@ private:
 	Level m_currentLevel;
 	std::vector<std::shared_ptr<Enemy>> m_enemyArray;
 	std::vector<Tower> m_towerArray;
+	Shop m_shop;
+	int m_gold = Globals::startingGoldAmount;
 
 	/// Remove below
 	Tower someTower;
@@ -38,11 +41,16 @@ public:
 
 private:
 
+	/* Enemy stuff */
+	
 	void updateEnemies();
 	void updateEnemiesMovements();
 	void updateEnemiesPositions();
 	void updateEnemyCollision(std::shared_ptr<Enemy> enemy);
 	sf::Vector2i getMovementDirection(const short entrance) const;
+
+	/* Shop stuff */
+	void handleShopPressed(const sf::Vector2f& mousePos);
 
 	void readLevel(const std::string& level);
 };

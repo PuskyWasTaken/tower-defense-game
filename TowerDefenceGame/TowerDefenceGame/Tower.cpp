@@ -2,7 +2,7 @@
 
 
 Tower::Tower()
-	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(Globals::towerSize, Globals::towerSize)), m_damage(Globals::defaultTowerDamage)
+	: UnmovableEntity(sf::Vector2f(0,0), Globals::towerSize), m_damage(Globals::defaultTowerDamage)
 {
 	setFillColor();
 

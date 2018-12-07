@@ -140,6 +140,7 @@
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="SFML_tests.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="UnmovableEntity.cpp" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Panel.h" />
     <ClInclude Include="SFML_tests.h" />
     <ClInclude Include="IStateClass.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="UnmovableEntity.h" />
   </ItemGroup>
