@@ -11,6 +11,7 @@ public:
 
 	void update(const sf::Vector2f& mouseCoordinates);
 	void setGold(const int newGold);
+	void setLifePoints(const int newLifePoints);
 
 public:
 
@@ -30,6 +31,7 @@ private:
 
 	std::vector<Entity> m_shopItems;
 	Button m_goldItem;
+	Button m_lifePointsItem;
 
 
 public:

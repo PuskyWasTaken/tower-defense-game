@@ -11,6 +11,10 @@ Shop::Shop()
 	this->m_goldItem.setSize(sf::Vector2f(180, 40));
 	this->m_goldItem.text.setPosition(m_goldItem.getPosition());
 
+	this->m_lifePointsItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->m_goldItem.getPosition().y + m_goldItem.getHeight() + Globals::itemSpacingHeight));
+	this->m_lifePointsItem.setSize(sf::Vector2f(180, 40));
+	this->m_lifePointsItem.text.setPosition(m_lifePointsItem.getPosition());
+
 	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 1 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
 											  this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
 	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 4 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
@@ -50,6 +54,11 @@ void Shop::setGold(const int newGold)
 	this->m_goldItem.setText("Gold: " + std::to_string(newGold));
 }
 
+void Shop::setLifePoints(const int newLifePoints)
+{
+	this->m_lifePointsItem.setText("Life: " + std::to_string(newLifePoints));
+}
+
 void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	Entity::draw(target, states);
@@ -57,6 +66,7 @@ void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(shopItem);
 
 	target.draw(m_goldItem);
+	target.draw(m_lifePointsItem);
 }
 
 

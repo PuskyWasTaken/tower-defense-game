@@ -5,6 +5,9 @@ Game::Game()
 	/* Set our initial gold value */
 	m_shop.setGold(m_gold);
 
+	/* Set our initial life value */
+	m_shop.setLifePoints(m_lifePoints);
+
 	/* Shadow thingy */
 	m_shadowEntity.setVisible(false);
 	m_shadowEntity.setMainTowerVisible(false);
@@ -12,10 +15,6 @@ Game::Game()
 	//Level defaultLevel();
 	//m_currentLevel = &defaultLevel;
 	m_currentLevel = Level("..\\Levels\\1");
-
-	/// Remove below
-	someTower.setCenterPosition({500, 240});
-	m_towerArray.push_back(someTower);
 }
 Game::~Game()
 {}
@@ -55,6 +54,17 @@ void Game::draw(sf::RenderWindow & window)
 void Game::handleEvent(sf::RenderWindow &window)
 {
 	sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(window);
+	
+	/* If right clicked pressed */
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		/* Cancel any shadow thingy */
+		m_shop.isSelected = false;
+		m_shadowEntity.setVisible(false);
+		m_shadowEntity.setMainTowerVisible(false);
+
+		return;
+	}
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -197,10 +207,24 @@ void Game::updateEnemiesMovements()
 			break;
 		}
 		
-		updateEnemyCollision(m_enemyArray[i]);
+		/* Check if our is in the center of our intersection - and at the same time upate the collision */
+		if (updateEnemyCollision(m_enemyArray[i]))
+		{
+			/* Check if it's actually the ending point */
+			if (m_enemyArray[i]->isCollision(m_currentLevel.endingPoint))
+			{
+				/* Remove the enemy from the array */
+				m_enemyArray.erase(m_enemyArray.begin() + i);
+
+				/* Substract damage from our hp */
+				m_lifePoints -= Globals::enemyDamage;
+				m_shop.setLifePoints(m_lifePoints);
+			}
+		}
+
 	}
 }
-void Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
+bool Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 {
 	/* Check for a collision */
 	for (int i = 0; i < m_currentLevel.intersectionArray.size(); ++i)
@@ -209,7 +233,6 @@ void Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 		if (enemy->isCollision(m_currentLevel.intersectionArray[i]) && !enemy->isInCollision())
 		{
 			enemy->setIsDuringCollision(true);
-
 		}
 		else if (enemy->isCollision(m_currentLevel.intersectionArray[i]))
 		{
@@ -219,9 +242,12 @@ void Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 			{
 				enemy->setMovementDirection(getMovementDirection(m_currentLevel.intersectionArray[i].getExit()));
 				enemy->setIsDuringCollision(false);
+				return true;
 			}
 		}
 	}
+
+	return false;
 }
 sf::Vector2i Game::getMovementDirection(const short entrance) const
 {

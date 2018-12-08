@@ -66,9 +66,11 @@ namespace Globals
 
 	const int rasterLeft = 10;
 	const int rasterTop = 80;
+	const int itemSpacingHeight = 5;
 
 	/* Shadow Stuff */
 
-
+	const int32_t enemyDamage = 1;
+	const int32_t startingPlayerHp = 10;
 	const float frameRate = 1.0f / 60.f;
 }
