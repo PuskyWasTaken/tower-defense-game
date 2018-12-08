@@ -191,6 +191,7 @@ ogg.lib
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletTests.cpp" />
+    <ClCompile Include="ButtonTests.cpp" />
     <ClCompile Include="EnemyTest.cpp" />
     <ClCompile Include="IntersectionTests.cpp" />
     <ClCompile Include="stdafx.cpp">

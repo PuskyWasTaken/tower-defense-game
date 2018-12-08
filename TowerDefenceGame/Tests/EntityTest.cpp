@@ -15,7 +15,6 @@ namespace Tests
 		TEST_METHOD(DefaultConstructor)
 		{
 			Entity entity(sf::Vector2f(10,10), sf::Vector2f(20,20));
-
 			Assert::IsTrue(sf::Vector2f(10, 10) == entity.getPosition());
 			Assert::IsTrue(sf::Vector2f(20, 20) == entity.getHitbox().getSize());
 

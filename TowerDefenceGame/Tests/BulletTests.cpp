@@ -19,6 +19,14 @@ namespace Tests
 			Enemy bulletDestination;
 			myBullet.setDestination(bulletDestination);
 			Assert::IsTrue(bulletDestination.isCollisionWithRect(myBullet.getHitbox()));	
-		}			
+		}		
+
+		TEST_METHOD(BulletValidator)
+		{
+			Bullet myBullet;
+			myBullet.setColour(sf::Color(255, 255, 255));
+			Assert::IsFalse(myBullet.getHitbox().getFillColor() != Globals::Color::bulletColor);
+			
+		}
 	};
 }
