@@ -25,7 +25,7 @@ namespace Globals
 	/* Enemy stuff */
 	const int enemySize = 40;
 	const int defaultEnemyHealth = 100;
-	const float defaultEnemyMoveSpeed = 1.0f;
+	const float defaultEnemyMoveSpeed = 0.8f;
 	const int defaultEnemySpawnRate = 5;
 
 	namespace MovementDirections
@@ -37,7 +37,7 @@ namespace Globals
 	}
 
 	/* Bullet Stuff */
-	const float defaultBulletSpeed = 5.0;
+	const float defaultBulletSpeed = 10.0;
 	const sf::Vector2f defaultBulletSize(5, 5);
 
 

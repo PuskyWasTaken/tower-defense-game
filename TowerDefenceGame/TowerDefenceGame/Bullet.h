@@ -15,6 +15,7 @@ private:
 	Enemy m_destination;
 	bool m_isDestinationAchieved;
 	float m_degree;
+	sf::Vector2f unitVector;
 
 	void updateMovementDirections();
 

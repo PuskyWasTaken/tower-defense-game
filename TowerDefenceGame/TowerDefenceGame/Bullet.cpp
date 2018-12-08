@@ -27,7 +27,7 @@ void Bullet::update()
 
 	/* Do the movement */
 	updateMovementDirections();
-	this->moveTo(sf::Vector2f(this->m_speed * cosf(m_degree), this->m_speed * sinf(m_degree)));
+	this->moveTo(unitVector * Globals::defaultBulletSpeed);
 
 }
 
@@ -46,13 +46,14 @@ void Bullet::updateMovementDirections()
 	sf::Vector2f distance;
 
 	/* Calculate the distance between our bullet and the center of our destination */
-	distance.x = fabs(this->getPosition().x - m_destination.getCenter().x);
-	distance.y = fabs(this->getPosition().y - m_destination.getCenter().y);
-
+	//distance.x = fabs(this->getPosition().x - m_destination.getCenter().x);
+	//distance.y = fabs(this->getPosition().y - m_destination.getCenter().y);
+	distance = this->getPosition() - m_destination.getPosition();
+	float magnitude = sqrt((distance.x * distance.x) + (distance.y*distance.y));
 	/* Calculate the degree we have to move at */
-	float degree = atan2f(distance.y, distance.x);
+	unitVector = sf::Vector2f(distance.x*(-1) / magnitude, distance.y*(-1) / magnitude);
 
-	this->m_degree = degree;
+	//this->m_degree = degree;
 	
 }
 
