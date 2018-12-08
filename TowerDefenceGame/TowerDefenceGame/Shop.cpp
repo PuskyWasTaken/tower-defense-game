@@ -3,8 +3,8 @@
 Shop::Shop()
 {
 	
-	setSize(sf::Vector2f(200, 800));
-	setCenterPosition(sf::Vector2f(700, 400));
+	setSize(Globals::panelSize);
+	setPosition(sf::Vector2f(Globals::windowSize.x - this->getWidth(), 0));
 	this->setColour(sf::Color::White);
 
 	this->m_goldItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->getPosition().y + Globals::rasterTop/6));
