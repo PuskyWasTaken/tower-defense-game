@@ -15,6 +15,9 @@ namespace Globals
 		const sf::Color shadowColorOff = sf::Color(244, 66, 66, 100);
 		const sf::Color drawableZoneColor = sf::Color(244, 50, 50, 60);
 		const sf::Color enemyColor = sf::Color(255, 0, 0, 255);
+		const sf::Color speedyEnemyColor = sf::Color(255, 100, 0, 255);
+		const sf::Color buffEnemyColor = sf::Color(255, 60, 0, 255);
+		const sf::Color tankEnemyColor = sf::Color(80, 0, 0, 255);
 	}
 	
 	const enum Cardinals {
@@ -27,11 +30,9 @@ namespace Globals
 
 
 	/* Enemy stuff */
-	const int enemySize = 40;
-	const int defaultEnemyHealth = 150;
-	const float defaultEnemyMoveSpeed = 0.8f;
+	const sf::Vector2f enemySize(40,40);
 	const int defaultEnemySpawnRate = 5;
-	const int defaultGoldRewardAmount = 50;
+	const int defaultGoldRewardAmount = 5;
 
 	namespace MovementDirections
 	{
@@ -40,6 +41,40 @@ namespace Globals
 		const sf::Vector2i East(1, 0);
 		const sf::Vector2i West(-1, 0);
 	}
+
+	namespace EnemyTypes
+	{
+		const int noOfEnemyTypes = 4;
+		
+		struct EnemyObject
+		{
+			EnemyObject(const int hp, const float moveSpeed, const int chanceToSpawn, const sf::Color color)
+				: moveSpeed(moveSpeed), hp(hp), chanceToSpawn(chanceToSpawn), color(color)
+			{}
+
+			const float moveSpeed;
+			const int hp;
+			const int chanceToSpawn;
+			const sf::Color color;
+		};
+
+		const EnemyObject enemyObjects[noOfEnemyTypes] =
+		{
+			{100,0.8f, 60, Color::enemyColor},
+			{80,1.0f, 5, Color::speedyEnemyColor},
+			{200,0.8f, 40, Color::buffEnemyColor},
+			{400,0.6f, 10, Color::tankEnemyColor}
+		};
+	}
+
+	const enum enemyType {
+
+		defaultType,
+		speedType,
+		buffType,
+		tankType
+	};
+
 
 	/* Bullet Stuff */
 	const float defaultBulletSpeed = 10.0;

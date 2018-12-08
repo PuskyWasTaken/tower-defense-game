@@ -15,6 +15,7 @@ private:
 	bool m_alive = true;
 	bool m_isDuringCollision = false;
 	int16_t m_startingHealth;
+	sf::Color m_startingColor;
 
 public:
 
@@ -23,6 +24,7 @@ public:
 	bool isAlive() const;
 	bool isInCollision() const;
 
+	void setColour(const sf::Color & newColor);
 	void setHealth(const int16_t health);
 	void setAlive(const bool alive);
 	void setIsDuringCollision(const bool isCollision);

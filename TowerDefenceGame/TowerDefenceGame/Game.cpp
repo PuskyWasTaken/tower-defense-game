@@ -2,6 +2,9 @@
 
 Game::Game()
 {
+	/* Random seed */
+	srand(time(nullptr));
+	
 	/* Set our initial gold value */
 	m_shop.setGold(m_gold);
 
@@ -180,10 +183,26 @@ void Game::updateEnemies()
 		/* Reset our timer */
 		m_updateClock.restart();
 
-		/* Spawn the enemy and set it's starting movement direction and position */
-		Enemy newEnemy;
-		newEnemy.setPosition(m_currentLevel.startingPoint.getPosition());
+		/* Get the type of enemy */
+		bool shouldSpawn;
+		int16_t enemyType;
+
+		do
+		{
+			/* Get a random type of enemy */
+			enemyType = rand() % Globals::EnemyTypes::noOfEnemyTypes;
+
+			/* Should it spawn? If not, keep looking */
+			shouldSpawn = rand() % 100 / Globals::EnemyTypes::enemyObjects[enemyType].chanceToSpawn + 1 == 1 ? true : false;
+
+		} while (!shouldSpawn);
+		
+		/* Spawn the enemy and set it's starting movement direction and position, health, color */
+		Enemy newEnemy(m_currentLevel.startingPoint.getCenter(), Globals::enemySize, Globals::EnemyTypes::enemyObjects[enemyType].moveSpeed, sf::Vector2i(0,0), Globals::EnemyTypes::enemyObjects[enemyType].hp);
 		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
+		newEnemy.setColour(Globals::EnemyTypes::enemyObjects[enemyType].color);
+
+		/* Push our enemy into the array */
 		m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
 	}
 	
@@ -199,7 +218,7 @@ void Game::updateEnemiesMovements()
 		if (m_enemyArray[i]->getHealth() <= 0)
 		{
 			/* Reward the player based on how powerful the enemy was */
-			m_gold +=  ( Globals::defaultGoldRewardAmount * m_enemyArray[i]->getStartingHealth() ) / Globals::defaultEnemyHealth;
+			m_gold +=  ( Globals::defaultGoldRewardAmount * m_enemyArray[i]->getStartingHealth() ) / Globals::EnemyTypes::enemyObjects[Globals::enemyType::defaultType].hp;
 			m_shop.setGold(m_gold);
 			
 			/* Remove the enemy from the array */

@@ -2,6 +2,8 @@
 #include "IStateClass.h"
 #include <SFML/Graphics.hpp>
 #include <thread>
+#include <time.h>
+#include <stdlib.h>
 
 #include "Enemy.h"
 #include "Intersection.h"

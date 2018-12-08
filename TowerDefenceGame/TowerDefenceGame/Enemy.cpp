@@ -14,7 +14,10 @@ Enemy::Enemy( const sf::Vector2f& position,
 }
 
 Enemy::Enemy()
-	: MovableEntity(sf::Vector2f(0, 0), sf::Vector2f(Globals::enemySize, Globals::enemySize), Globals::defaultEnemyMoveSpeed, sf::Vector2i(0, 0) ), m_health(Globals::defaultEnemyHealth)
+	: MovableEntity(sf::Vector2f(0, 0), Globals::enemySize,
+	  Globals::EnemyTypes::enemyObjects[Globals::enemyType::defaultType].moveSpeed,
+	  sf::Vector2i(0, 0) ),
+	  m_health(Globals::EnemyTypes::enemyObjects[Globals::enemyType::defaultType].hp)
 {
 	this->setColour(Globals::Color::enemyColor);
 	m_startingHealth = this->m_health;
@@ -44,13 +47,19 @@ bool Enemy::isInCollision() const
 	return this->m_isDuringCollision;
 }
 
+void Enemy::setColour(const sf::Color & newColor)
+{
+	Entity::setColour(newColor);
+	m_startingColor = newColor;
+}
+
 void Enemy::setHealth(const int16_t health)
 {
 	this->m_health = health;
-	sf::Color color = Globals::Color::enemyColor;
+	sf::Color color = m_startingColor;
 	color.a = (this->m_health*color.a)/m_startingHealth;
 
-	this->setColour(color);
+	Entity::setColour(color);
 }
 
 void Enemy::setAlive(const bool alive)
