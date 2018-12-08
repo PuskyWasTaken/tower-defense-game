@@ -108,7 +108,7 @@ void Game::handleEvent(sf::RenderWindow &window)
 	}
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		Application::getInstance()->setState(std::make_unique<MainMenu>());
 	}

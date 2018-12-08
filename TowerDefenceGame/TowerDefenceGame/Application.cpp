@@ -15,7 +15,7 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 		instance = this;
 
 	/* TODO: Switch our state to the Menu instead of Game */
-	stateController = std::make_unique<Game>();
+	stateController = std::make_unique<MainMenu>();
 
    std::ofstream of("syso.log", std::ios::app);
    Logger logger(std::cout,Logger::Level::Info);

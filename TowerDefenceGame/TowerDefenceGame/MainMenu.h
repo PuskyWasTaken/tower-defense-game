@@ -2,6 +2,9 @@
 #include "IStateClass.h"
 #include"Button.h"
 #include"Enemy.h"
+#include "Application.h"
+#include "Game.h"
+#include "LevelEditor.h"
 class MainMenu : public IStateClass
 {
 public:

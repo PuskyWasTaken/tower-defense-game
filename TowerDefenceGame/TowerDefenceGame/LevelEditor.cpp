@@ -173,6 +173,10 @@ void LevelEditor::handleEvent(sf::RenderWindow &window)
 	createDrawableZone(window);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)&&(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)))
 		saveToFile();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		Application::getInstance()->setState(std::make_unique<MainMenu>());
+	}
 }
 
 void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)

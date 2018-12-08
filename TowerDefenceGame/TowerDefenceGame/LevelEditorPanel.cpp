@@ -22,8 +22,6 @@ LevelEditorPanel::LevelEditorPanel()
 	westIntersection.setPosition(sf::Vector2f(this->getPosition().x + 1*(Globals::panelIntersectionSize.x/2) + Globals::rasterTop,
 		this->getPosition().y + 4 * (Globals::panelIntersectionSize.y/2)+ Globals::rasterLeft ));
 
-	//sf::Vector2f(this->getPosition().x + 1 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
-		//this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop)
 
 	westIntersection.setExit(Globals::Cardinals::West);
 

@@ -12,19 +12,18 @@ MainMenu::MainMenu()
 	/* TIP: Don't try to use std::Vector if you don't know how it works. */
 
 	startButton.setText("Start");
-	startButton.setSize(sf::Vector2f(100, 50));
-	startButton.setCenterPosition(sf::Vector2f(200, 60));
+	startButton.setSize(Globals::mainMenuButtonSize);
+	startButton.setCenterPosition(sf::Vector2f(Globals::windowSize.x / 2, Globals::windowSize.y/2 - Globals::mainMenuButtonSize.y*4 ));
 	startButton.text.setPosition(startButton.getPosition());
-	startButton.text.move(sf::Vector2f(0, startButton.getHeight() / 4));
 
 	levelEditorButton.setText("Level Editor");
-	levelEditorButton.setSize(sf::Vector2f(100, 50));
-	levelEditorButton.setCenterPosition(sf::Vector2f(200, 160));
+	levelEditorButton.setSize(Globals::mainMenuButtonSize);
+	levelEditorButton.setCenterPosition(sf::Vector2f(startButton.getCenter().x, startButton.getCenter().y + Globals::mainMenuButtonSize.y * 1.5));
 	levelEditorButton.text.setPosition(levelEditorButton.getPosition());
 
 	exitButton.setText("Exit");
-	exitButton.setSize(sf::Vector2f(100, 50));
-	exitButton.setCenterPosition(sf::Vector2f(200, 260));
+	exitButton.setSize(Globals::mainMenuButtonSize);
+	exitButton.setCenterPosition(sf::Vector2f(levelEditorButton.getCenter().x, levelEditorButton.getCenter().y + Globals::mainMenuButtonSize.y * 1.5));
 	exitButton.text.setPosition(exitButton.getPosition());
 
 
@@ -54,17 +53,21 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 	mousePositionOnWindow = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	mouseRect.setPosition(mousePositionOnWindow);
 
-	if (startButton.isCollisionWithRect(mouseRect))
-	
-		std::cout << "Cursor on start."<<std::endl;
-	else
-	{
-		if (levelEditorButton.isCollisionWithRect(mouseRect))
-		std::cout << "Cursor on level editor button." << std::endl;
-		else
+
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			if (exitButton.isCollisionWithRect(mouseRect))
-			std::cout << "Cursor on exit button." << std::endl;
+			if (startButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
+			{
+				Application::getInstance()->setState(std::make_unique<Game>());
+			}
+			if (levelEditorButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
+			{
+				Application::getInstance()->setState(std::make_unique<LevelEditor>());
+			}
+			if (exitButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
+			{
+				std::cout << "Sorry, ran out of money for documentation on how to do this\n";
+			}
 		}
-	}
 }

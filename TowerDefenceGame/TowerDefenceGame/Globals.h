@@ -126,4 +126,9 @@ namespace Globals
 
 	const sf::Vector2f windowSize = sf::Vector2f(1200, 1000);
 
+
+	/*Main menu stuff*/
+
+	const sf::Vector2f mainMenuButtonSize = sf::Vector2f(250, 100);
+
 }
