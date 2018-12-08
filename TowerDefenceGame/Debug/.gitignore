@@ -2,3 +2,8 @@
 /Logging.exp
 /Logging.lib
 /syso.log
+/Tests.dll
+/Tests.exp
+/Tests.lib
+/TowerDefenceGameTests.exp
+/TowerDefenceGameTests.lib
