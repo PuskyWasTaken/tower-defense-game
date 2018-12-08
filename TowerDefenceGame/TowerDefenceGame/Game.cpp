@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "MainMenu.h"
 
-Game::Game()
+Game::Game(const std::string &path)
 {
 	/* Random seed */
 	srand(time(nullptr));
@@ -19,7 +19,7 @@ Game::Game()
 
 	//Level defaultLevel();
 	//m_currentLevel = &defaultLevel;
-	m_currentLevel = Level("..\\Levels\\1");
+	m_currentLevel = Level(path);
 }
 Game::~Game()
 {}
@@ -113,7 +113,7 @@ void Game::handleEvent(sf::RenderWindow &window)
 		m_shop.setGold(m_gold);
 	}
 
-
+	/*Exit to main menu*/
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		Application::getInstance()->setState(std::make_unique<MainMenu>());

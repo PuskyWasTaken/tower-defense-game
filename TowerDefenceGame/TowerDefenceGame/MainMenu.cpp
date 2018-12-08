@@ -59,7 +59,7 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 		{
 			if (startButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
-				Application::getInstance()->setState(std::make_unique<Game>());
+				Application::getInstance()->setState(std::make_unique<LevelLoader>());
 			}
 			if (levelEditorButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
@@ -67,7 +67,7 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 			}
 			if (exitButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
-				std::cout << "Sorry, ran out of money for documentation on how to do this\n";
+				window.close();
 			}
 		}
 }

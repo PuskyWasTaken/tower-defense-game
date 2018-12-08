@@ -133,4 +133,7 @@ namespace Globals
 
 	const sf::Vector2f mainMenuButtonSize = sf::Vector2f(250, 100);
 
+	/*Level selector stuff*/
+	const sf::Vector2f levelSelectorButtonSize = sf::Vector2f(400, 100);
+
 }

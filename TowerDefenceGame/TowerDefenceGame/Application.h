@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "IStateClass.h"
 #include "Game.h"
+#include "LevelLoader.h"
 
 class Application
 {

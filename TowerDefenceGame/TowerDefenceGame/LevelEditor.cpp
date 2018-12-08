@@ -46,12 +46,12 @@ std::string LevelEditor::givePath(int & addTo)
 
 void LevelEditor::setStartingPoint(const Intersection & intersection)
 {
-	m_startingPoint.setCenterPosition(intersection.getCenter());
+	m_startingPoint = intersection;
 }
 
 void LevelEditor::setEndingPoint(const Intersection & intersection)
 {
-	m_endingPoint.setCenterPosition(intersection.getCenter());
+	m_endingPoint = intersection;
 }
 
 void LevelEditor::setCorectColor()
@@ -259,6 +259,7 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 		}
 	}
 
+	//create starting point
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		for (int i = 0; i < m_intersectionArray.size(); i++)
@@ -274,6 +275,7 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 		}
 	}
 
+	//create ending point
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
 		for (int i = 0; i < m_intersectionArray.size(); i++)
