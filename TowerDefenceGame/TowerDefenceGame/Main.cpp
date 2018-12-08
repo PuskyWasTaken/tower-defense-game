@@ -7,7 +7,7 @@
 int main(int argc, char**argv)
 {
 	/* Instantiate our application (game) */
-	Application application("Tower Defence Game!", 800, 800);
+	Application application("Tower Defence Game!", Globals::windowSize.x, Globals::windowSize.y);
 
 	/* Run it */
 	application();

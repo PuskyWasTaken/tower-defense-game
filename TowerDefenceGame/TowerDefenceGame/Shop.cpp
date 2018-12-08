@@ -23,7 +23,6 @@ Shop::Shop()
 											  this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
 	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 4 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
 											  this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
-
 }
 
 Shop::~Shop()

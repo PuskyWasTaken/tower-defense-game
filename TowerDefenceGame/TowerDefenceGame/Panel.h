@@ -11,8 +11,5 @@ public:
 	Panel();
 	~Panel();
 
-	std::vector<Intersection> m_genericIntersections;
-
-
 };
 

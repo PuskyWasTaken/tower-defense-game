@@ -28,10 +28,10 @@ namespace Globals
 
 	/* Enemy stuff */
 	const int enemySize = 40;
-	const int defaultEnemyHealth = 100;
+	const int defaultEnemyHealth = 150;
 	const float defaultEnemyMoveSpeed = 0.8f;
 	const int defaultEnemySpawnRate = 5;
-	const int defaultGoldRewardAmount = 5;
+	const int defaultGoldRewardAmount = 50;
 
 	namespace MovementDirections
 	{
@@ -73,4 +73,22 @@ namespace Globals
 	const int32_t enemyDamage = 1;
 	const int32_t startingPlayerHp = 10;
 	const float frameRate = 1.0f / 60.f;
+
+
+	/*Panel stuff*/
+	const sf::Vector2f panelSize = sf::Vector2f(200, 1000);
+	const sf::Vector2f panelCenterPosition = sf::Vector2f(1100, 500);
+	const sf::Vector2f panelIntersectionSize = sf::Vector2f(60,60);
+	const sf::Vector2f panelButtonSize = sf::Vector2f(80, 30);
+	const sf::Vector2f panelButtonDefaultOffset = sf::Vector2f(0,45);
+	const std::int8_t panelIntersectionDefaultOffset = -20;
+	const std::int16_t panelDefaultTextXOffset = -100;
+	const std::int16_t panelDefaultTextYOffset = -200;
+
+
+
+	/*Aplication stuff*/
+
+	const sf::Vector2f windowSize = sf::Vector2f(1200, 1000);
+
 }

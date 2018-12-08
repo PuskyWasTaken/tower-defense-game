@@ -4,8 +4,8 @@
 
 Panel::Panel()
 {
-	setSize(sf::Vector2f(200, 800));
-	setCenterPosition(sf::Vector2f(700, 400));
+	setSize(Globals::panelSize);
+	setCenterPosition(Globals::panelCenterPosition);
 }
 
 
