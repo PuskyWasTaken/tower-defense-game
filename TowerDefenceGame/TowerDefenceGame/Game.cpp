@@ -211,7 +211,6 @@ void Game::handleShopPressed(const sf::Vector2f& mousePos)
 	{
 	case Shop::item::towerItem :
 	{	
-		std::cout << m_gold;
 		/* Make sure we can afford the item */
 		if (m_gold < Globals::defaultTowerPrice)
 		{
@@ -222,6 +221,7 @@ void Game::handleShopPressed(const sf::Vector2f& mousePos)
 		Tower newTower(mousePos, Globals::towerSize, Globals::defaultTowerDamage);
 		m_towerArray.push_back(newTower);
 		m_gold -= Globals::defaultTowerPrice;
+		m_shop.setGold(m_gold);
 		break;
 	}
 	default:
