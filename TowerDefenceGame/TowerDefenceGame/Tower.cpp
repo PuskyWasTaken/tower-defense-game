@@ -124,6 +124,10 @@ void Tower::update()
 	if (!this->isCollision(*m_intruder))
 	{
 		m_isAttacking = false;
+
+		/* Clear the bullet array */
+		m_bulletArray.clear();
+
 		return;
 	}
 

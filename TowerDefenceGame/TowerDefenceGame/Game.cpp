@@ -26,6 +26,12 @@ Game::~Game()
 
 void Game::update(sf::RenderWindow &window)
 {
+	if (m_gameIsWon)
+	{
+		Application::getInstance()->setState(std::make_unique<MainMenu>());
+		return;
+	}
+
 	updateTowers();
 	updateShadowEntity();
 	updateEnemies();
@@ -187,6 +193,14 @@ void Game::updateEnemies()
 	/* Check if we should spawn 1 more enemy */
 	if (elapsedTime > m_spawnRate)
 	{
+		/* Update our spawn rate */
+		float spawnRate = Globals::defaultEnemySpawnRate - (Globals::enemySpawnCurve * m_noOfEnemiesKilled);
+		if (spawnRate < Globals::minSpawnRate)
+			spawnRate = 1;
+
+		m_spawnRate = sf::seconds(spawnRate);
+		
+		
 		/* Reset our timer */
 		m_updateClock.restart();
 
@@ -230,6 +244,11 @@ void Game::updateEnemiesMovements()
 			
 			/* Remove the enemy from the array */
 			m_enemyArray.erase(m_enemyArray.begin() + i);
+			m_noOfEnemiesKilled++;
+
+			if (m_noOfEnemiesKilled >= Globals::winConditionEnemyKillCount)
+				m_gameIsWon = true;
+
 			break;
 		}
 		

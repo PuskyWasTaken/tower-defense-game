@@ -30,8 +30,10 @@ namespace Globals
 
 
 	/* Enemy stuff */
-	const sf::Vector2f enemySize(40,40);
-	const int defaultEnemySpawnRate = 5;
+	const sf::Vector2f enemySize(40, 40);
+	const int defaultEnemySpawnRate = 8;
+	const float enemySpawnCurve = 0.05f;
+	const float minSpawnRate = 1.0f;
 	const int defaultGoldRewardAmount = 5;
 
 	namespace MovementDirections
@@ -60,10 +62,10 @@ namespace Globals
 
 		const EnemyObject enemyObjects[noOfEnemyTypes] =
 		{
-			{100,0.8f, 60, Color::enemyColor},
-			{80,1.0f, 5, Color::speedyEnemyColor},
-			{200,0.8f, 40, Color::buffEnemyColor},
-			{400,0.6f, 10, Color::tankEnemyColor}
+			{100, 0.8f, 60, Color::enemyColor},
+			{80, 1.0f, 5, Color::speedyEnemyColor},
+			{200, 0.8f, 40, Color::buffEnemyColor},
+			{400, 0.6f, 10, Color::tankEnemyColor}
 		};
 	}
 
@@ -82,7 +84,7 @@ namespace Globals
 
 
 	/* Tower Stuff */
-	const sf::Vector2f towerSize(240,240);
+	const sf::Vector2f towerSize(240, 240);
 	const sf::Vector2f towerMainSize(40,40);
 	const bool enableTowerRange = false;
 	const unsigned int defaultTowerPrice = 40;
@@ -110,7 +112,7 @@ namespace Globals
 	const float frameRate = 1.0f / 60.f;
 
 
-	/*Panel stuff*/
+	/* Panel stuff */
 	const sf::Vector2f panelSize = sf::Vector2f(200, 1000);
 	const sf::Vector2f panelCenterPosition = sf::Vector2f(1100, 500);
 	const sf::Vector2f panelIntersectionSize = sf::Vector2f(60,60);
@@ -122,8 +124,8 @@ namespace Globals
 
 
 
-	/*Aplication stuff*/
-
+	/* Aplication stuff */
+	const uint32_t winConditionEnemyKillCount = 300;
 	const sf::Vector2f windowSize = sf::Vector2f(1200, 1000);
 
 
