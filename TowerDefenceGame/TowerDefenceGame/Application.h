@@ -32,6 +32,7 @@ public:
 	/* Event handling */
 	void handleEvent();
 	void gameLoop();
+	void setState(std::unique_ptr<IStateClass> newState);
 
 public:
 

@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Application.h"
+#include "MainMenu.h"
 
 Game::Game()
 {
@@ -24,7 +26,6 @@ Game::~Game()
 
 void Game::update(sf::RenderWindow &window)
 {
-
 	updateTowers();
 	updateShadowEntity();
 	updateEnemies();
@@ -104,6 +105,12 @@ void Game::handleEvent(sf::RenderWindow &window)
 	{
 		m_gold += 50;
 		m_shop.setGold(m_gold);
+	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		Application::getInstance()->setState(std::make_unique<MainMenu>());
 	}
 }
 void Game::updateTowers()

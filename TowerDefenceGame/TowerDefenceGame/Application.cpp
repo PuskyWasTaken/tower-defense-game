@@ -77,6 +77,11 @@ void Application::gameLoop()
 	}
 }
 
+void Application::setState(std::unique_ptr<IStateClass> newState)
+{
+	this->stateController = std::move(newState);
+}
+
 Application * Application::getInstance()
 {
 	return instance;
