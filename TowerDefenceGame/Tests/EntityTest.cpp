@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Tests
 {		
-	TEST_CLASS(EntityTest)
+	TEST_CLASS(EntityTests)
 	{
 	public:
 		

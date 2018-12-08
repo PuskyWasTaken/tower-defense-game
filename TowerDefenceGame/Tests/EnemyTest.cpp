@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include"SFML/Graphics.hpp"
-#include"../TowerDefenceGame/Entity.h"
-#include"../TowerDefenceGame/MovableEntity.h"
 #include"../TowerDefenceGame/Enemy.h"
 #include"../TowerDefenceGame/Globals.h"
+#include"../TowerDefenceGame/Bullet.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -61,6 +60,26 @@ namespace Tests
 			Enemy myEnemy;
 			myEnemy.setColour(sf::Color::Black);
 			Assert::IsTrue(myEnemy.getHitbox().getFillColor() == Globals::Color::enemyColor);
+		}
+
+		TEST_METHOD(EnemyHealth)
+		{
+			Bullet bullet;
+			Enemy targetEnemy;
+			int16_t targetHealth = targetEnemy.getStartingHealth();
+
+			
+			if (targetEnemy.isCollisionWithRect(bullet.getHitbox()))
+			{
+				targetEnemy.setIsDuringCollision(targetEnemy.isCollisionWithRect(bullet.getHitbox()));
+				targetEnemy.setHealth(targetHealth--);
+				
+			}
+
+			if (targetHealth == 0)
+				targetEnemy.setAlive(false);
+
+			Assert::IsTrue(targetEnemy.isAlive());
 		}
 	};
 
