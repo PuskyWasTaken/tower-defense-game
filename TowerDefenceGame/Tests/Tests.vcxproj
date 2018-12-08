@@ -115,7 +115,7 @@ vorbisenc.lib
 ;vorbisfile.lib
 ;vorbis.lib;
 ogg.lib;
-ws2_32.lib;$(SolutionDir)\TowerDefenceGame\Debug\Entity.obj;%(AdditionalDependencies)</AdditionalDependencies>
+ws2_32.lib;$(SolutionDir)\TowerDefenceGame\Debug\Entity.obj;$(SolutionDir)\TowerDefenceGame\Debug\MovableEntity.obj;$(SolutionDir)\TowerDefenceGame\Debug\UnmovableEntity.obj;$(SolutionDir)\TowerDefenceGame\Debug\Enemy.obj;$(SolutionDir)\TowerDefenceGame\Debug\Button.obj;$(SolutionDir)\TowerDefenceGame\Debug\Bullet.obj;$(SolutionDir)\TowerDefenceGame\Debug\Intersection.obj;$(SolutionDir)\TowerDefenceGame\Debug\Tower.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -164,7 +164,7 @@ flac.lib
 vorbisfile.lib;
 vorbis.lib;
 ogg.lib
-;ws2_32.lib;$(SolutionDir)\TowerDefenceGame\Debug\Entity.obj;$(SolutionDir)\TowerDefenceGame\Debug\Enemy.obj;%(AdditionalDependencies);%(AdditionalDependencies);%(AdditionalDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+;ws2_32.lib;$(SolutionDir)\TowerDefenceGame\Debug\Entity.obj;$(SolutionDir)\TowerDefenceGame\Debug\MovableEntity.obj;$(SolutionDir)\TowerDefenceGame\Debug\UnmovableEntity.obj;$(SolutionDir)\TowerDefenceGame\Debug\Enemy.obj;$(SolutionDir)\TowerDefenceGame\Debug\Button.obj;$(SolutionDir)\TowerDefenceGame\Debug\Bullet.obj;$(SolutionDir)\TowerDefenceGame\Debug\Intersection.obj;$(SolutionDir)\TowerDefenceGame\Debug\Tower.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -190,6 +190,7 @@ ogg.lib
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -199,6 +200,9 @@ ogg.lib
     <ClCompile Include="EntityTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.vcxproj">
+      <Project>{1d35846b-c8f9-4977-8abb-e8549cbcd793}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TowerDefenceGame\TowerDefenceGame.vcxproj">
       <Project>{b0b4a28e-52ff-4739-9527-e5db9b72eef8}</Project>
     </ProjectReference>
