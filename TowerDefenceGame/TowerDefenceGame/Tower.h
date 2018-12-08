@@ -43,6 +43,7 @@ public:
 	float getDamage() const;
 	bool isMainTowerVisible() const;
 
+	void setDamage(const int16_t newDamage);
 	void setMainTowerVisible(const bool visible);
 	void setFireRate(float fireRate);
 	void setIntruder(std::shared_ptr<Enemy> intruder);

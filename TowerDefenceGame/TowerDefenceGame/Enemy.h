@@ -11,13 +11,15 @@ public:
 
 private:
 
-	int16_t health;
-	bool alive = true;
-	bool isDuringCollision = false;
+	int16_t m_health;
+	bool m_alive = true;
+	bool m_isDuringCollision = false;
+	int16_t m_startingHealth;
 
 public:
 
 	int16_t getHealth() const;
+	int16_t getStartingHealth() const;
 	bool isAlive() const;
 	bool isInCollision() const;
 

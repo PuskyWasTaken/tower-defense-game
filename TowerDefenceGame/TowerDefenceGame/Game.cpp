@@ -22,22 +22,8 @@ Game::~Game()
 
 void Game::update(sf::RenderWindow &window)
 {
-	/* Go through all of our towers and check if any enemy entered in their collision */
-	for (int i = 0; i < m_towerArray.size(); ++i)
-	{
-		/* Go through each enemy and check if it's colliding with any */
-		if (!m_towerArray[i].isAttacking())
-		{
-			for (int j = 0; j < m_enemyArray.size(); ++j)
-				if (m_towerArray[i].isCollision(*m_enemyArray[j]))
-					m_towerArray[i].setIntruder(m_enemyArray[j]);
-		}
-		else
-		{
-			m_towerArray[i].update();
-		}
-	}
 
+	updateTowers();
 	updateShadowEntity();
 	updateEnemies();
 	handleEvent(window);
@@ -100,6 +86,24 @@ void Game::handleEvent(sf::RenderWindow &window)
 		m_shadowEntity.setCenterPosition(mousePos);
 	}
 }
+void Game::updateTowers()
+{
+	/* Go through all of our towers and check if any enemy entered in their collision */
+	for (int i = 0; i < m_towerArray.size(); ++i)
+	{
+		/* Go through each enemy and check if it's colliding with any */
+		if (!m_towerArray[i].isAttacking())
+		{
+			for (int j = 0; j < m_enemyArray.size(); ++j)
+				if (m_towerArray[i].isCollision(*m_enemyArray[j]))
+					m_towerArray[i].setIntruder(m_enemyArray[j]);
+		}
+		else
+		{
+			m_towerArray[i].update();
+		}
+	}
+}
 void Game::updateEnemiesPositions()
 {
 	for (int i = 0; i < m_enemyArray.size(); ++i)
@@ -154,7 +158,6 @@ void Game::updateEnemies()
 		Enemy newEnemy;
 		newEnemy.setPosition(m_currentLevel.startingPoint.getPosition());
 		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
-		newEnemy.setColour(sf::Color::Blue);
 		m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
 	}
 	
@@ -165,7 +168,21 @@ void Game::updateEnemiesMovements()
 {
 	/* Go through the enemyArray and update the movement of each of them according with what intersections they collide with */
 	for (int i = 0; i < m_enemyArray.size(); ++i)
+	{
+		/* Check if our enemy is dead */
+		if (m_enemyArray[i]->getHealth() <= 0)
+		{
+			/* Reward the player based on how powerful the enemy was */
+			m_gold +=  ( Globals::defaultGoldRewardAmount * m_enemyArray[i]->getStartingHealth() ) / Globals::defaultEnemyHealth;
+			m_shop.setGold(m_gold);
+			
+			/* Remove the enemy from the array */
+			m_enemyArray.erase(m_enemyArray.begin() + i);
+			break;
+		}
+		
 		updateEnemyCollision(m_enemyArray[i]);
+	}
 }
 void Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 {
@@ -211,17 +228,37 @@ void Game::handleShopPressed(const sf::Vector2f& mousePos)
 	{
 	case Shop::item::towerItem :
 	{	
-		/* Make sure we can afford the item */
-		if (m_gold < Globals::defaultTowerPrice)
-		{
-			m_shop.isSelected = false;
+		/* Buy the tower if we can */
+		if (!buyTower(Globals::defaultTowerPrice))
 			return;
-		}
 
 		Tower newTower(mousePos, Globals::towerSize, Globals::defaultTowerDamage);
 		m_towerArray.push_back(newTower);
-		m_gold -= Globals::defaultTowerPrice;
-		m_shop.setGold(m_gold);
+
+		break;
+	}
+	case Shop::item::speedyTowerItem :
+	{
+		/* Buy the tower if we can */
+		if (!buyTower(Globals::speedyTowerPrice))
+			return;
+
+		Tower newTower(mousePos, Globals::towerSize, Globals::defaultTowerDamage);
+		newTower.setFireRate(Globals::towerSpeedyFireRate);
+
+		m_towerArray.push_back(newTower);
+
+		break;
+	}
+	case Shop::item::powerfullTowerItem :
+	{
+		/* Buy the tower if we can */
+		if (!buyTower(Globals::powerfullTowerPrice))
+			return;
+
+		Tower newTower(mousePos, Globals::towerSize, Globals::powerfullTowerDamage);
+		m_towerArray.push_back(newTower);
+
 		break;
 	}
 	default:
@@ -234,5 +271,18 @@ void Game::readLevel(const std::string& level)
 	//m_currentLevel = &newLevel;
 }
 
+bool Game::buyTower(const int price)
+{
+	/* Make sure we can afford the item */
+	if (m_gold < price)
+	{
+		m_shop.isSelected = false;
+		return false;
+	}
+
+	m_gold -= price;
+	m_shop.setGold(m_gold);
+	return true;
 
 
+}

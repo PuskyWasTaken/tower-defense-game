@@ -14,6 +14,7 @@ namespace Globals
 		const sf::Color shadowColorOn = sf::Color(210, 210, 210, 100);
 		const sf::Color shadowColorOff = sf::Color(244, 66, 66, 100);
 		const sf::Color drawableZoneColor = sf::Color(244, 50, 50, 60);
+		const sf::Color enemyColor = sf::Color(255, 0, 0, 255);
 	}
 	
 	const enum Cardinals {
@@ -30,6 +31,7 @@ namespace Globals
 	const int defaultEnemyHealth = 100;
 	const float defaultEnemyMoveSpeed = 0.8f;
 	const int defaultEnemySpawnRate = 5;
+	const int defaultGoldRewardAmount = 5;
 
 	namespace MovementDirections
 	{
@@ -44,14 +46,18 @@ namespace Globals
 	const sf::Vector2f defaultBulletSize(5, 5);
 
 
-	/* Tower Stuff*/
+	/* Tower Stuff */
 	const sf::Vector2f towerSize(240,240);
 	const sf::Vector2f towerMainSize(40,40);
 	const bool enableTowerRange = false;
 	const unsigned int defaultTowerPrice = 40;
+	const unsigned int speedyTowerPrice = 60;
+	const unsigned int powerfullTowerPrice = 120;
 	
 	const int defaultTowerDamage = 10;
+	const int powerfullTowerDamage = 20;
 	const float defaultTowerFireRate = 1.0f;
+	const float towerSpeedyFireRate = 0.5f;
 
 	/* Shop Stuff */
 	const sf::Vector2f shopItemSize(70, 70);

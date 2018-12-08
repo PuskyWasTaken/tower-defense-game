@@ -92,6 +92,10 @@ void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(b);
 
 }
+void Tower::setDamage(const int16_t newDamage)
+{
+	this->m_damage = newDamage;
+}
 void Tower::setMainTowerVisible(const bool visible)
 {
 	m_mainTower.setVisible(visible);
@@ -123,6 +127,10 @@ void Tower::update()
 	if (m_intruder->getHealth() <= 0)
 	{
 		m_isAttacking = false;
+
+		/* Clear the bullet array */
+		m_bulletArray.clear();
+
 		return;
 	}
 

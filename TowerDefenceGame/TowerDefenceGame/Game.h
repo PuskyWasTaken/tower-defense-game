@@ -47,6 +47,7 @@ private:
 	/* Enemy stuff */
 	
 	void updateShadowEntity();
+	void updateTowers();
 	void updateEnemies();
 	void updateEnemiesMovements();
 	void updateEnemiesPositions();
@@ -55,6 +56,7 @@ private:
 
 	/* Shop stuff */
 	void handleShopPressed(const sf::Vector2f& mousePos);
+	bool buyTower(const int price);
 
 	void readLevel(const std::string& level);
 };
