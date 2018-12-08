@@ -16,6 +16,8 @@ public:
 private: 
 	
 	int16_t m_damage;
+	sf::Vector2f m_bulletSize = Globals::defaultBulletSize;
+
 	bool m_isAttacking = false;
 
 	Entity m_mainTower;
@@ -43,6 +45,7 @@ public:
 	float getDamage() const;
 	bool isMainTowerVisible() const;
 
+	void setBulletSize(const sf::Vector2f& newSize);
 	void setDamage(const int16_t newDamage);
 	void setMainTowerVisible(const bool visible);
 	void setFireRate(float fireRate);

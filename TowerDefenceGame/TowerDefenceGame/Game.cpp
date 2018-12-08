@@ -85,6 +85,13 @@ void Game::handleEvent(sf::RenderWindow &window)
 		/* Update it's position on the mouse */
 		m_shadowEntity.setCenterPosition(mousePos);
 	}
+
+	/* Cheat code to add money */
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+	{
+		m_gold += 50;
+		m_shop.setGold(m_gold);
+	}
 }
 void Game::updateTowers()
 {
@@ -133,6 +140,15 @@ void Game::updateShadowEntity()
 
 			if (mainHitboxToEntity == collisionToEntity)
 			{
+				/* Now check that we are not colliding with any other towers */
+				for (const Tower& tower : m_towerArray)
+					if (mainHitboxToEntity.isCollisionWithRect(tower.getMainHitbox()))
+					{
+						m_canPlaceShadowEntity = false;
+						m_shadowEntity.setMainColour(Globals::Color::shadowColorOff);
+						return;
+					}
+				
 				m_canPlaceShadowEntity = true;
 				m_shadowEntity.setMainColour(Globals::Color::shadowColorOn);
 				return;
@@ -224,6 +240,7 @@ sf::Vector2i Game::getMovementDirection(const short entrance) const
 }
 void Game::handleShopPressed(const sf::Vector2f& mousePos)
 {
+	
 	switch (m_shop.selectedItem)
 	{
 	case Shop::item::towerItem :
@@ -257,6 +274,7 @@ void Game::handleShopPressed(const sf::Vector2f& mousePos)
 			return;
 
 		Tower newTower(mousePos, Globals::towerSize, Globals::powerfullTowerDamage);
+		newTower.setBulletSize(Globals::powerfullTowerBulletSize);
 		m_towerArray.push_back(newTower);
 
 		break;

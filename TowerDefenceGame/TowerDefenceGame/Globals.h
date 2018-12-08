@@ -53,6 +53,7 @@ namespace Globals
 	const unsigned int defaultTowerPrice = 40;
 	const unsigned int speedyTowerPrice = 60;
 	const unsigned int powerfullTowerPrice = 120;
+	const sf::Vector2f powerfullTowerBulletSize(8, 8);
 	
 	const int defaultTowerDamage = 10;
 	const int powerfullTowerDamage = 20;

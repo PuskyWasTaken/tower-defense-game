@@ -75,7 +75,7 @@ void Tower::fireBullet()
 		Bullet newBullet(this->getCenter(), *m_intruder, Globals::defaultBulletSpeed);
 
 		newBullet.setColour(Globals::Color::bulletColor);
-		newBullet.setSize(Globals::defaultBulletSize);
+		newBullet.setSize(m_bulletSize);
 
 		m_bulletArray.push_back(newBullet);
 	}
@@ -91,6 +91,10 @@ void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	for (const Bullet& b : m_bulletArray)
 		target.draw(b);
 
+}
+void Tower::setBulletSize(const sf::Vector2f & newSize)
+{
+	this->m_bulletSize = newSize;
 }
 void Tower::setDamage(const int16_t newDamage)
 {
