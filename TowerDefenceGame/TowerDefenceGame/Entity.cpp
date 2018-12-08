@@ -1,6 +1,14 @@
 #include "Entity.h"
 
 
+bool Entity::operator==(const Entity & otherEntity)
+{
+	return this->hitbox.getPosition().x == otherEntity.hitbox.getPosition().x &&
+		this->hitbox.getPosition().y == otherEntity.hitbox.getPosition().y &&
+		this->hitbox.getSize().x == otherEntity.hitbox.getSize().x &&
+		this->hitbox.getSize().y == otherEntity.hitbox.getSize().y;
+}
+
 Entity::Entity()
 {
 	//is empty
@@ -105,7 +113,8 @@ bool Entity::isCollisionWithRect(const sf::RectangleShape & hitBox) const
 
 void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(this->hitbox);
+	if (visible)
+		target.draw(this->hitbox);
 }
 
 sf::RectangleShape Entity::getCollision(const Entity & otherEntity) const
@@ -135,6 +144,16 @@ bool Entity::isCollisonWithPoint(const sf::Vector2f & point) const
 	if (isCollisionWithRect(mouseRect))
 		return true;
 	return false;
+}
+
+bool Entity::isVisible() const
+{
+	return this->visible;
+}
+
+void Entity::setVisible(const bool visible)
+{
+	this->visible = visible;
 }
 
                                                                                                                                                                                                                                                                                               

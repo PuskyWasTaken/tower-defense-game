@@ -36,7 +36,10 @@ void Level::readThisFromFile(const std::string & file)
 		if (splittedStrings[0] == "I")
 			intersectionArray.push_back(Intersection(sf::Vector2f(std::stoi(splittedStrings[1]), std::stoi(splittedStrings[2])), std::stoi(splittedStrings[3])));
 		else if (splittedStrings[0] == "D")
+		{
 			drawableZoneArray.push_back(Entity(sf::Vector2f(std::stoi(splittedStrings[1]), std::stoi(splittedStrings[2])), sf::Vector2f(std::stoi(splittedStrings[3]), std::stoi(splittedStrings[4]))));
+			drawableZoneArray.back().setColour(Globals::Color::drawableZoneColor);
+		}
 		else if (splittedStrings[0] == "S")
 			startingPoint = Intersection(sf::Vector2f(std::stoi(splittedStrings[1]), std::stoi(splittedStrings[2])), std::stoi(splittedStrings[3]));
 		else if (splittedStrings[0] == "E")

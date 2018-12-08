@@ -10,11 +10,16 @@ public:
 	Tower(const sf::Vector2f& position, const sf::Vector2f& size, const float damage);
 	~Tower();
 
+	void setCenterPosition(const sf::Vector2f & newPosition);
+	void setPosition(const sf::Vector2f& newPosition);
+
 private: 
 	
 	int16_t m_damage;
 	bool m_isAttacking = false;
 
+	Entity m_mainTower;
+	
 	/* Remember to delete all bullet objects once we are done with the bulletArray */
 	std::vector<Bullet> m_bulletArray;
 
@@ -36,9 +41,15 @@ protected:
 public:
 	bool isAttacking() const;
 	float getDamage() const;
+	bool isMainTowerVisible() const;
 
+	void setMainTowerVisible(const bool visible);
 	void setFireRate(float fireRate);
 	void setIntruder(std::shared_ptr<Enemy> intruder);
 	void update(); 
+
+	void setMainColour(const sf::Color& newColor);
+
+	sf::RectangleShape getMainHitbox() const;
 };
 

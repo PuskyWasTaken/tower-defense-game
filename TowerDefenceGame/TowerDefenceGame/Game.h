@@ -27,6 +27,9 @@ private:
 	Shop m_shop;
 	int m_gold = Globals::startingGoldAmount;
 
+	Tower m_shadowEntity;
+	bool m_canPlaceShadowEntity;
+
 	/// Remove below
 	Tower someTower;
 
@@ -43,6 +46,7 @@ private:
 
 	/* Enemy stuff */
 	
+	void updateShadowEntity();
 	void updateEnemies();
 	void updateEnemiesMovements();
 	void updateEnemiesPositions();

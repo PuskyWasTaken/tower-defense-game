@@ -5,20 +5,31 @@ Tower::Tower()
 	: UnmovableEntity(sf::Vector2f(0,0), Globals::towerSize), m_damage(Globals::defaultTowerDamage)
 {
 	setFillColor();
-
+	m_mainTower.setSize(Globals::towerMainSize);
+	this->visible = Globals::enableTowerRange;
 }
-
 Tower::Tower(const sf::Vector2f& position, const sf::Vector2f& size, const float damage)
 	: UnmovableEntity(position, size),	m_damage(damage)
 {
 	setFillColor();
+	m_mainTower.setSize(Globals::towerMainSize);
+	m_mainTower.setCenterPosition(this->getCenter());
+	this->visible = Globals::enableTowerRange;
 }
-
-
 Tower::~Tower()
 {
 }
 
+void Tower::setCenterPosition(const sf::Vector2f& newPosition)
+{
+	Entity::setCenterPosition(newPosition);
+	m_mainTower.setCenterPosition(this->getCenter());
+}
+void Tower::setPosition(const sf::Vector2f & newPosition)
+{
+	Entity::setPosition(newPosition);
+	m_mainTower.setPosition(this->getPosition());
+}
 void Tower::setFillColor()
 {
 	if (Globals::intersectionBorder)
@@ -32,18 +43,21 @@ void Tower::setFillColor()
 		this->hitbox.setFillColor(Globals::Color::towerColor);
 	}
 
-}
+	this->m_mainTower.setColour(Globals::Color::shadowColorOn);
 
+}
 bool Tower::isAttacking() const
 {
 	return this->m_isAttacking;
 }
-
 float Tower::getDamage() const
 {
 	return this->m_damage;
 }
-
+bool Tower::isMainTowerVisible() const
+{
+	return this->m_mainTower.isVisible();
+}
 void Tower::fireBullet()
 {
 	sf::Time elapsedTime = m_updateClock.getElapsedTime();
@@ -67,29 +81,31 @@ void Tower::fireBullet()
 	}
 
 }
-
 void Tower::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	/* Super */
 	Entity::draw(target,states);
 	
+	target.draw(m_mainTower);
+
 	for (const Bullet& b : m_bulletArray)
 		target.draw(b);
 
 }
-
+void Tower::setMainTowerVisible(const bool visible)
+{
+	m_mainTower.setVisible(visible);
+}
 void Tower::setFireRate(float fireRate)
 {
 	m_fireRate = sf::seconds(fireRate);
 }
-
 void Tower::setIntruder(std::shared_ptr<Enemy> intruder)
 {
 	m_intruder = intruder;
 	//this->m_intruder = &intruder;
 	m_isAttacking = true;
 }
-
 void Tower::update()
 {
 	/* Check we actually have an indruder and this wasn't called by accident */
@@ -128,6 +144,15 @@ void Tower::update()
 			m_intruder->setHealth(m_intruder->getHealth() - Globals::defaultTowerDamage);
 		}
 	}
+}
+void Tower::setMainColour(const sf::Color & newColor)
+{
+	this->m_mainTower.setColour(newColor);
+}
+
+sf::RectangleShape Tower::getMainHitbox() const
+{
+	return this->m_mainTower.getHitbox();
 }
 
 

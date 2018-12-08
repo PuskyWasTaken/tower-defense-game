@@ -10,7 +10,10 @@ namespace Globals
 	namespace Color
 	{
 		const sf::Color towerColor = sf::Color(255, 255, 255, 50);
-		const sf::Color bulletColor = sf::Color(255,255,255);
+		const sf::Color bulletColor = sf::Color(255, 255, 255);
+		const sf::Color shadowColorOn = sf::Color(210, 210, 210, 100);
+		const sf::Color shadowColorOff = sf::Color(244, 66, 66, 100);
+		const sf::Color drawableZoneColor = sf::Color(244, 50, 50, 60);
 	}
 	
 	const enum Cardinals {
@@ -43,6 +46,10 @@ namespace Globals
 
 	/* Tower Stuff*/
 	const sf::Vector2f towerSize(240,240);
+	const sf::Vector2f towerMainSize(40,40);
+	const bool enableTowerRange = false;
+	const unsigned int defaultTowerPrice = 40;
+	
 	const int defaultTowerDamage = 10;
 	const float defaultTowerFireRate = 1.0f;
 
@@ -52,6 +59,9 @@ namespace Globals
 
 	const int rasterLeft = 10;
 	const int rasterTop = 80;
+
+	/* Shadow Stuff */
+
 
 	const float frameRate = 1.0f / 60.f;
 }

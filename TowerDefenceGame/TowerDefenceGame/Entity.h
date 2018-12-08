@@ -9,6 +9,8 @@ class Entity : public sf::Drawable
 public:
 	 virtual ~Entity() {};
 
+	 bool operator == (const Entity& otherEntity);
+
 	 Entity();
 	 Entity(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Texture& texture, const sf::Vector2u& noOfFrames);
 	 Entity(const sf::Vector2f& position, const sf::Vector2f& size);
@@ -34,10 +36,12 @@ public:
 	 bool isCollisionWithRect(const sf::RectangleShape& hitBox) const;
 	 bool isCollisonWithPoint(const sf::Vector2f & point) const;
 	 
-
+	 bool isVisible() const;
+	 void setVisible(const bool visible);
 
 protected:
 
+	bool visible = true;
 	sf::RectangleShape hitbox;
 	sf::Sprite sprite;
 	sf::Texture* texture;

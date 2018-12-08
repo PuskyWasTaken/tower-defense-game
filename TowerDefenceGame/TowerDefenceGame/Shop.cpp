@@ -1,12 +1,15 @@
 #include "Shop.h"
 
-
-
 Shop::Shop()
 {
+	
 	setSize(sf::Vector2f(200, 800));
 	setCenterPosition(sf::Vector2f(700, 400));
 	this->setColour(sf::Color::White);
+
+	this->m_goldItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->getPosition().y + Globals::rasterTop/6));
+	this->m_goldItem.setSize(sf::Vector2f(180, 40));
+	this->m_goldItem.text.setPosition(m_goldItem.getPosition());
 
 	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 1 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
 											  this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
@@ -44,7 +47,7 @@ void Shop::update(const sf::Vector2f & mouseCoordinates)
 
 void Shop::setGold(const int newGold)
 {
-	this->m_goldItem.setText("Gold: " + newGold);
+	this->m_goldItem.setText("Gold: " + std::to_string(newGold));
 }
 
 void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -52,6 +55,8 @@ void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	Entity::draw(target, states);
 	for (const Entity& shopItem : m_shopItems)
 		target.draw(shopItem);
+
+	target.draw(m_goldItem);
 }
 
 
