@@ -16,6 +16,9 @@ public :
 
 	sf::Text text;
 
+private:
+	void setUpButton();
+
 public:
 
 	sf::Font getFont() const;

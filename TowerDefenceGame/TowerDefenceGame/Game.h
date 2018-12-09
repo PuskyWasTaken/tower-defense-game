@@ -10,6 +10,7 @@
 #include "Tower.h"
 #include "Level.h"
 #include "Shop.h"
+#include "EndScreen.h"
 
 class Game : public IStateClass
 {
@@ -53,6 +54,7 @@ private:
 	void updateEnemies();
 	void updateEnemiesMovements();
 	void updateEnemiesPositions();
+	bool checkWinLossConditions();
 	bool updateEnemyCollision(std::shared_ptr<Enemy> enemy);
 	sf::Vector2i getMovementDirection(const short entrance) const;
 

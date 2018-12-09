@@ -29,11 +29,8 @@ Game::~Game()
 
 void Game::update(sf::RenderWindow &window)
 {
-	if (m_gameIsWon)
-	{
-		Application::getInstance()->setState(std::make_unique<MainMenu>());
-		return;
-	}
+	/* If we reached the end, then stop everything else from working */
+	if (checkWinLossConditions()) return;
 
 	updateTowers();
 	updateShadowEntity();
@@ -144,6 +141,21 @@ void Game::updateEnemiesPositions()
 {
 	for (int i = 0; i < m_enemyArray.size(); ++i)
 		m_enemyArray[i]->move();
+}
+bool Game::checkWinLossConditions()
+{
+	if (m_gameIsWon)
+	{
+		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
+		return true;
+	}
+	else if (m_lifePoints <= 0)
+	{
+		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
+		return true;
+	}
+
+	return false;
 }
 void Game::updateShadowEntity()
 {

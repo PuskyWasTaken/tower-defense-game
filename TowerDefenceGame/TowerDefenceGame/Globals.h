@@ -7,6 +7,14 @@ namespace Globals
 	const bool intersectionBorder = true;
 	const int intersectionOutLineThickness = 2;
 
+	
+	namespace Strings
+	{
+		const std::string lostGame = "You lost :(\n";
+		const std::string wonGame = "You won!\n";
+		const std::string backToMenu = "Press any key to continue!\n";
+	}
+	
 	namespace Color
 	{
 		const sf::Color towerColor = sf::Color(255, 255, 255, 50);
@@ -18,6 +26,8 @@ namespace Globals
 		const sf::Color speedyEnemyColor = sf::Color(255, 100, 0, 255);
 		const sf::Color buffEnemyColor = sf::Color(255, 60, 0, 255);
 		const sf::Color tankEnemyColor = sf::Color(80, 0, 0, 255);
+		const sf::Color defaultButtonColor = sf::Color(244, 50, 50, 200);
+
 	}
 	
 	const enum Cardinals {
