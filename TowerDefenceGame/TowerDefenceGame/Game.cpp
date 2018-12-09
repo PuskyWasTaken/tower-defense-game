@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Application.h"
 #include "MainMenu.h"
+#include"../Logging/Logging.h"
 
 Game::Game(const std::string &path)
 {
@@ -20,6 +21,8 @@ Game::Game(const std::string &path)
 	//Level defaultLevel();
 	//m_currentLevel = &defaultLevel;
 	m_currentLevel = Level(path);
+	Logger logger(std::cout, Logger::Level::Info);
+	logger.log("Started game", Logger::Level::Info);
 }
 Game::~Game()
 {}
@@ -366,6 +369,8 @@ bool Game::buyTower(const int price)
 	if (m_gold < price)
 	{
 		m_shop.isSelected = false;
+		Logger logger(std::cout, Logger::Level::Info);
+		logger.log("You can't afford to pay for that", Logger::Level::Warning);
 		return false;
 	}
 

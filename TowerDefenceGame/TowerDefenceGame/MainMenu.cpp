@@ -1,15 +1,11 @@
 #include "MainMenu.h"
 #include"Enemy.h"
-#include<iostream> //to test mouse-button collision
+#include<iostream>
+#include"../Logging/Logging.h"
 
 MainMenu::MainMenu()
 {	
 	startButton.setColour(sf::Color::Red);
-
-	/* What the ... is this? */
-	//startButton.setFont(startButton.getFont());
-
-	/* TIP: Don't try to use std::Vector if you don't know how it works. */
 
 	startButton.setText("Start");
 	startButton.setSize(Globals::mainMenuButtonSize);
@@ -57,16 +53,23 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
+			Logger logger(std::cout, Logger::Level::Info);
+
 			if (startButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
 				Application::getInstance()->setState(std::make_unique<LevelLoader>());
+				
+				logger.log("Start button is pressed!", Logger::Level::Info);
 			}
 			if (levelEditorButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
 				Application::getInstance()->setState(std::make_unique<LevelEditor>());
+				logger.log("LevelEditor button is pressed!", Logger::Level::Info);
 			}
 			if (exitButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
+				logger.log("Exit button is pressed!", Logger::Level::Info);
+
 				window.close();
 			}
 		}
