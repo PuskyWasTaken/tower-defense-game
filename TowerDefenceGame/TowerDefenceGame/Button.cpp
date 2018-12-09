@@ -25,8 +25,8 @@ void Button::setUpButton()
 	if (!font.loadFromFile("..\\Fonts\\arial.ttf"))
 	{
 		throw "Could not load font!";
-		std::ofstream of("syso.log", std::ios::app);
-		Logger logger(std::cout, Logger::Level::Error);
+		
+		Logger logger(std::cout);
 		logger.log("Error loading font from file", Logger::Level::Error);
 	}
 
@@ -34,10 +34,6 @@ void Button::setUpButton()
 	text.setString("Default String!");
 	text.setFillColor(sf::Color::White);
 	text.setCharacterSize(24);
-}
-
-Button::~Button()
-{
 }
 
 sf::Font Button::getFont() const
