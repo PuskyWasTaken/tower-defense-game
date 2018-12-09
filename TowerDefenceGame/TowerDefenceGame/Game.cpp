@@ -21,7 +21,7 @@ Game::Game(const std::string &path)
 	//Level defaultLevel();
 	//m_currentLevel = &defaultLevel;
 	m_currentLevel = Level(path);
-	Logger logger(std::cout, Logger::Level::Info);
+	Logger logger(std::cout);
 	logger.log("Started game", Logger::Level::Info);
 }
 Game::~Game()
@@ -136,6 +136,7 @@ void Game::updateTowers()
 			m_towerArray[i].update();
 		}
 	}
+
 }
 void Game::updateEnemiesPositions()
 {
@@ -237,6 +238,9 @@ void Game::updateEnemies()
 		Enemy newEnemy(m_currentLevel.startingPoint.getCenter(), Globals::enemySize, Globals::EnemyTypes::enemyObjects[enemyType].moveSpeed, sf::Vector2i(0,0), Globals::EnemyTypes::enemyObjects[enemyType].hp);
 		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
 		newEnemy.setColour(Globals::EnemyTypes::enemyObjects[enemyType].color);
+
+		Logger logger(std::cout);
+		logger.log("Spawn enemy", Logger::Level::Info);
 
 		/* Push our enemy into the array */
 		m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
@@ -381,7 +385,7 @@ bool Game::buyTower(const int price)
 	if (m_gold < price)
 	{
 		m_shop.isSelected = false;
-		Logger logger(std::cout, Logger::Level::Info);
+		Logger logger(std::cout);
 		logger.log("You can't afford to pay for that", Logger::Level::Warning);
 		return false;
 	}

@@ -17,7 +17,7 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 	/* TODO: Switch our state to the Menu instead of Game */
 	stateController = std::make_unique<MainMenu>();
 
-   Logger logger(std::cout,Logger::Level::Info);
+   Logger logger(std::cout);
    logger.log("Started application", Logger::Level::Info);
 
 	/* Run at 60fps - Actually it runs at the refresh rate of the monitor */

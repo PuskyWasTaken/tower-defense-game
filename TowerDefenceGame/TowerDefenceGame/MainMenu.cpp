@@ -53,7 +53,7 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			Logger logger(std::cout, Logger::Level::Info);
+			Logger logger(std::cout);
 
 			if (startButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{

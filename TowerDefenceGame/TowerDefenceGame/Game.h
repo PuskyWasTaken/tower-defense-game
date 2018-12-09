@@ -36,7 +36,7 @@ private:
 
 	/* Enemy Spawn Rate */
 	bool m_gameIsWon = false;
-	uint32_t m_noOfEnemiesKilled = 298;
+	uint32_t m_noOfEnemiesKilled = 0;
 	sf::Time m_spawnRate = sf::seconds(Globals::defaultEnemySpawnRate);
 	sf::Clock m_updateClock;
 

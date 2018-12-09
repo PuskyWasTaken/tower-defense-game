@@ -19,7 +19,7 @@ public:
 	};
 
 public:
-	Logger(std::ostream& os, Level minimumLevel);
+	Logger(std::ostream& os);
 
 	void log(const char * message, Level level);
 	void log(const std::string& message, Level level);

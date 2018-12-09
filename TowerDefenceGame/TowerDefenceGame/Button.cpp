@@ -36,6 +36,10 @@ void Button::setUpButton()
 	text.setCharacterSize(24);
 }
 
+Button::~Button()
+{
+}
+
 sf::Font Button::getFont() const
 {
 	return font;
