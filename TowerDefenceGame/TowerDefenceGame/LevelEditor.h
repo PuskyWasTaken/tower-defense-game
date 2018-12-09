@@ -7,6 +7,9 @@
 #include "LevelEditorPanel.h"
 #include "Globals.h"
 #include "MainMenu.h"
+#include "Application.h"
+#include "Intersection.h"
+#include "../Logging/Logging.h"
 
 #include <fstream>
 #include <string>
@@ -31,10 +34,9 @@ private:
 	bool m_isRMousePressed = false;
 	bool m_isLMousePressed = false;
 	
-	void saveToFile();
+	void saveToFile(const int levelId);
 
 	sf::Vector2f toVector2f(const sf::Vector2i &toBeConverted)const;
-	std::string givePath(int &addTo);
 
 	LevelEditorPanel m_Panel;
 	std::vector<Entity> m_drawableZone;

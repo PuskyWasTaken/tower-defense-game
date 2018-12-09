@@ -67,7 +67,7 @@ LevelEditorPanel::LevelEditorPanel()
 	eastButton.text.setPosition(eastButton.getPosition());
 	eastButton.setTextColor(sf::Color::Black);
 
-	instructions.setText("*press S to save \n zone \n * press RightClick+D  \n to create zone \n *press RightClick+F \n to resize zone\n *press ctrl+y to\n save to file\n*press Z to delete \n hovered element\n*Q-make this starting\n point\n*E-make this \nending point");
+	instructions.setText("*press S to save \n zone \n * press RightClick+D  \n to create zone \n *press RightClick+F \n to resize zone\n *press [1-4] to\n save to file\n*press Z to delete \n hovered element\n*Q-make this starting\n point\n*E-make this \nending point");
 	instructions.setColour(sf::Color::White);
 	instructions.setTextColor(sf::Color::Black);
 	instructions.text.setPosition(sf::Vector2f(this->getCenter().x +Globals::panelDefaultTextXOffset, this->getCenter().y + Globals::panelDefaultTextYOffset));

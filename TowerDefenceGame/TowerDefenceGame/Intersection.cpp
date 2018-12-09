@@ -4,16 +4,20 @@
 Intersection::Intersection(const sf::Vector2f& position, const sf::Vector2f& size, const short exit)
 	: UnmovableEntity(position, size), m_exit(exit)
 {
+	this->setColour(Globals::Color::intersectionColor);
 }
 
 Intersection::Intersection(const sf::Vector2f & position, const short exit)
 	: UnmovableEntity(position, sf::Vector2f(Globals::intersectionSize, Globals::intersectionSize)), m_exit(exit)
 {
+	this->setColour(Globals::Color::intersectionColor);
 }
 
 Intersection::Intersection()
 	: UnmovableEntity(sf::Vector2f(0,0), sf::Vector2f(Globals::intersectionSize,Globals::intersectionSize)), m_exit(Globals::Cardinals::North)
-{}
+{
+	this->setColour(Globals::Color::intersectionColor);
+}
 
 
 Intersection::~Intersection()

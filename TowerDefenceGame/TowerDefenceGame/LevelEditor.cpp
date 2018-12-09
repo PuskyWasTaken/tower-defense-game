@@ -1,59 +1,47 @@
 #include "LevelEditor.h"
-#include "Application.h"
-#include "Intersection.h"
-
 
 LevelEditor::LevelEditor()
-{
-}
+{}
 
 LevelEditor::~LevelEditor()
-{
-}
+{}
 
-void LevelEditor::saveToFile()
+void LevelEditor::saveToFile(const int levelId)
 {	
-	int levelId;
-	std::cout << "Insert here the level id";
-	std::cin >> levelId;
-	std::string levelName = givePath(levelId);
-	std::ofstream myFile;
-	myFile.open(levelName);
-	for (Intersection i : m_intersectionArray)
-	{ 
-		myFile << "I," << i.getCenter().x << "," << i.getCenter().y << "," << i.getExit() << "\n";
-	}
-	for (Entity i : m_drawableZone)
+	std::string path = "..\\Levels\\" + std::to_string(levelId);
+
+	std::ofstream myFile(path);
+	if (!myFile.is_open())
 	{
-		myFile << "D," << i.getCenter().x << "," << i.getCenter().y << "," << i.getHitbox().getSize().x <<","<< i.getHitbox().getSize().y << "\n";
+		Logger logger(std::cout);
+		logger.log("Could not open file!", Logger::Level::Error);
+		return;
 	}
+
+	for (Intersection i : m_intersectionArray)
+		myFile << "I," << i.getCenter().x << "," << i.getCenter().y << "," << i.getExit() << "\n";
+
+	for (Entity i : m_drawableZone)
+		myFile << "D," << i.getCenter().x << "," << i.getCenter().y << "," << i.getHitbox().getSize().x <<","<< i.getHitbox().getSize().y << "\n";
+
 	myFile << "S," << m_startingPoint.getCenter().x << "," << m_startingPoint.getCenter().y << "," << m_startingPoint.getExit() << "\n";
 	myFile << "E," << m_endingPoint.getCenter().x << "," << m_endingPoint.getCenter().y << "," << m_endingPoint.getExit() << "\n";
-	std::cout << "\n Level saved with succes \n ";
-}
 
+	Logger logger(std::cout);
+	logger.log("Saved to file Succesfully!", Logger::Level::Info);
+}
 sf::Vector2f LevelEditor::toVector2f(const sf::Vector2i & toBeConverted)const
 {
 	return sf::Vector2f(toBeConverted);
 }
-
-std::string LevelEditor::givePath(int & addTo)
-{
-	std::string path = "..\\Levels\\";
-	path.append(std::to_string(addTo));
-	return path;
-}
-
 void LevelEditor::setStartingPoint(const Intersection & intersection)
 {
 	m_startingPoint = intersection;
 }
-
 void LevelEditor::setEndingPoint(const Intersection & intersection)
 {
 	m_endingPoint = intersection;
 }
-
 void LevelEditor::setCorectColor()
 {
 	for (Intersection &i : m_intersectionArray)
@@ -81,7 +69,6 @@ void LevelEditor::setCorectColor()
 		
 	}
 }
-
 sf::Vector2f LevelEditor::snapToGrid(sf::Vector2f & coordinates) const
 {
 	int32_t modifiedX = coordinates.x + Globals::intersectionSize;
@@ -122,12 +109,10 @@ sf::Vector2f LevelEditor::snapToGrid(sf::Vector2f & coordinates) const
 
 	return coordinates;
 }
-
 void LevelEditor::update(sf::RenderWindow &window)
 {
 	handleEvent(window);
 }
-
 void LevelEditor::draw(sf::RenderWindow & window)
 {
 	for (Intersection i : m_intersectionArray)
@@ -166,19 +151,28 @@ void LevelEditor::draw(sf::RenderWindow & window)
 		window.draw(i);
 	}
 }
-
 void LevelEditor::handleEvent(sf::RenderWindow &window)
 {
 	dragAndDropIntersections(window);
 	createDrawableZone(window);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)&&(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)))
-		saveToFile();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+
+	sf::Event event;
+	window.pollEvent(event);
+
+	/* If any key was pressed */
+	if (event.type == sf::Event::KeyPressed)
 	{
-		Application::getInstance()->setState(std::make_unique<MainMenu>());
+		switch (event.key.code)
+		{
+		case sf::Keyboard::Num1:saveToFile(1); break;
+		case sf::Keyboard::Num2 :saveToFile(2);	break;
+		case sf::Keyboard::Num3 :saveToFile(3);	break;
+		case sf::Keyboard::Num4 :saveToFile(4);	break;
+		case sf::Keyboard::Escape:Application::getInstance()->setState(std::make_unique<MainMenu>()); break;
+		default: break;
+		}
 	}
 }
-
 void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_isRMousePressed==false)
@@ -294,7 +288,6 @@ void LevelEditor::dragAndDropIntersections(sf::RenderWindow &window)
 
 
 }
-
 void LevelEditor::createDrawableZone(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_isLMousePressed == false)

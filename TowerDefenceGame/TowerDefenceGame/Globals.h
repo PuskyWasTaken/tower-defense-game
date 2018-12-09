@@ -27,6 +27,7 @@ namespace Globals
 		const sf::Color buffEnemyColor = sf::Color(255, 60, 0, 255);
 		const sf::Color tankEnemyColor = sf::Color(80, 0, 0, 255);
 		const sf::Color defaultButtonColor = sf::Color(244, 50, 50, 200);
+		const sf::Color intersectionColor = sf::Color(70, 160, 100, 60);
 
 	}
 	
