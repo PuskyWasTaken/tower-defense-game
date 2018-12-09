@@ -29,9 +29,11 @@ public:
 
 private:
 
-	std::vector<Entity> m_shopItems;
+	std::vector<Button> m_shopItems;
 	Button m_goldItem;
 	Button m_lifePointsItem;
+
+	Button newButton;
 
 
 public:

@@ -34,8 +34,6 @@ public:
 
 	void setText(const std::string& text);
 
-protected:
-
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
 };

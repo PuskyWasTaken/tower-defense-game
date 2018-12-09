@@ -94,11 +94,13 @@ namespace Globals
 	
 	const int defaultTowerDamage = 10;
 	const int powerfullTowerDamage = 20;
+	const int speedyTowerDamage = 10;
 	const float defaultTowerFireRate = 1.0f;
 	const float towerSpeedyFireRate = 0.5f;
+	const float powerfullTowerFireRate = 0.5f;
 
 	/* Shop Stuff */
-	const sf::Vector2f shopItemSize(70, 70);
+	const sf::Vector2f shopItemSize(200, 100);
 	const int startingGoldAmount = 100;
 
 	const int rasterLeft = 10;

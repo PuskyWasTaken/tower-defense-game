@@ -15,14 +15,32 @@ Shop::Shop()
 	this->m_lifePointsItem.setSize(sf::Vector2f(180, 40));
 	this->m_lifePointsItem.text.setPosition(m_lifePointsItem.getPosition());
 
-	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 1 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
-											  this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
-	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 4 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
-											  this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
-	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 1 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
-											  this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
-	m_shopItems.push_back(Entity(sf::Vector2f(this->getPosition().x + 4 * (Globals::shopItemSize.x / 2) + Globals::rasterLeft,
-											  this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop), Globals::shopItemSize));
+	//default tower
+	newButton.setPosition(sf::Vector2f(this->getPosition().x ,this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
+	newButton.setSize(Globals::shopItemSize);
+	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextSize(20);
+	newButton.setText(" Price: " +std::to_string(Globals::defaultTowerPrice) + "\n Damage: "+ std::to_string(Globals::defaultTowerDamage) +
+	"\n Fire Rate: " +std::to_string(Globals::defaultTowerFireRate));
+	m_shopItems.push_back(newButton);
+	
+	//speedy tower
+	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
+	newButton.setSize(Globals::shopItemSize);
+	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextSize(20);
+	newButton.setText(" Price: " + std::to_string(Globals::speedyTowerPrice) + "\n Damage: " + std::to_string(Globals::speedyTowerDamage) +
+		"\n Fire Rate: " + std::to_string(Globals::towerSpeedyFireRate));
+	m_shopItems.push_back(newButton);
+	
+	//powerfull tower
+	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 7 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
+	newButton.setSize(Globals::shopItemSize);
+	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextSize(20);
+	newButton.setText(" Price: " + std::to_string(Globals::powerfullTowerPrice) + "\n Damage: " + std::to_string(Globals::powerfullTowerDamage) +
+		"\n Fire Rate: " + std::to_string(Globals::powerfullTowerFireRate));
+	m_shopItems.push_back(newButton);
 }
 
 Shop::~Shop()
@@ -61,7 +79,7 @@ void Shop::setLifePoints(const int newLifePoints)
 void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	Entity::draw(target, states);
-	for (const Entity& shopItem : m_shopItems)
+	for (const Button& shopItem : m_shopItems)
 		target.draw(shopItem);
 
 	target.draw(m_goldItem);
