@@ -127,6 +127,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="EndScreen.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="EndScreen.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Entity.h" />
