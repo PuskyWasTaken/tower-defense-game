@@ -26,10 +26,11 @@ namespace Globals
 		const sf::Color speedyEnemyColor = sf::Color(255, 100, 0, 255);
 		const sf::Color buffEnemyColor = sf::Color(255, 60, 0, 255);
 		const sf::Color tankEnemyColor = sf::Color(80, 0, 0, 255);
-		const sf::Color defaultButtonColor = sf::Color(244, 50, 50, 200);
+		//const sf::Color defaultButtonColor = sf::Color(244, 50, 50, 200);
+		const sf::Color defaultButtonColor = sf::Color(28, 124, 84, 200);
 		const sf::Color intersectionColor = sf::Color(70, 160, 100, 60);
 		const sf::Color backgroundColor = sf::Color(31, 44, 56, 255);
-		const sf::Color panelColor = sf::Color(108, 91, 123, 255);
+		const sf::Color panelColor = sf::Color(185, 177, 158, 10);
 
 	}
 	
@@ -160,6 +161,11 @@ namespace Globals
 		const std::string kenVector_thin = "..\\Res\\Fonts\\kenvector_future_thin.ttf";
 
 		const std::string defaultFont = kenVector;
+	}
+
+	namespace TextSize
+	{
+		const uint32_t small = 16;
 	}
 
 }

@@ -1,7 +1,5 @@
 #include "LevelEditorPanel.h"
 
-
-
 LevelEditorPanel::LevelEditorPanel()
 {
 	northIntersection.setColour(sf::Color::Red);
@@ -37,41 +35,43 @@ LevelEditorPanel::LevelEditorPanel()
 	m_genericIntersections.push_back(westIntersection);
 	m_genericIntersections.push_back(eastIntersection);
 
-	northButton.setColour(sf::Color::Red);
+	northButton.setColour(sf::Color::Transparent);
 	northButton.setSize(Globals::panelButtonSize);;
 	northButton.setCenterPosition(northIntersection.getCenter() + Globals::panelButtonDefaultOffset);
-	northButton.setText("North");
+	northButton.setText("  North");
+	northButton.setTextSize(Globals::TextSize::small);
 	northButton.text.setPosition(northButton.getPosition());
-	northButton.setTextColor(sf::Color::Black);
+
 	
 
-	southButton.setColour(sf::Color::Blue);
+	southButton.setColour(sf::Color::Transparent);
 	southButton.setSize(Globals::panelButtonSize);
 	southButton.setCenterPosition(southIntersection.getCenter() + Globals::panelButtonDefaultOffset);
-	southButton.setText("South");
+	southButton.setText("  South");
+	southButton.setTextSize(Globals::TextSize::small);
 	southButton.text.setPosition(southButton.getPosition());
-	southButton.setTextColor(sf::Color::Black);
 
-	westButton.setColour(sf::Color::Green);
+
+	westButton.setColour(sf::Color::Transparent);
 	westButton.setSize(Globals::panelButtonSize);
 	westButton.setCenterPosition(westIntersection.getCenter() + Globals::panelButtonDefaultOffset);
-	westButton.setText("West");
+	westButton.setText("  West");
+	westButton.setTextSize(Globals::TextSize::small);
 	westButton.text.setPosition(westButton.getPosition());
-	westButton.setTextColor(sf::Color::Black);
 
 
-	eastButton.setColour(sf::Color::Yellow);
+
+	eastButton.setColour(sf::Color::Transparent);
 	eastButton.setSize(Globals::panelButtonSize);
 	eastButton.setCenterPosition(eastIntersection.getCenter() + Globals::panelButtonDefaultOffset);
-	eastButton.setText("East");
+	eastButton.setText("  East");
+	eastButton.setTextSize(Globals::TextSize::small);
 	eastButton.text.setPosition(eastButton.getPosition());
-	eastButton.setTextColor(sf::Color::Black);
 
-	instructions.setText("*press S to save \n zone \n * press RightClick+D  \n to create zone \n *press RightClick+F \n to resize zone\n *press [1-4] to\n save to file\n*press Z to delete \n hovered element\n*Q-make this starting\n point\n*E-make this \nending point");
-	instructions.setColour(sf::Color::White);
-	instructions.setTextColor(sf::Color::Black);
+
+	instructions.setText("* press S\n to save zone\n\n* press L-Click + D\n to create zone \n\n* press L-Click + F\n to resize zone\n\n* press [1-4]\n to save to file\n\n* press Z\n to DEL hovered\n element\n\n* Q - make this\n starting point\n\n* E - make this\n ending point");
 	instructions.text.setPosition(sf::Vector2f(this->getCenter().x +Globals::panelDefaultTextXOffset, this->getCenter().y + Globals::panelDefaultTextYOffset));
-	instructions.setTextSize(20);
+	instructions.setTextSize(Globals::TextSize::small);
 	instructions.setSize(sf::Vector2f(0, 0));
 
 	m_genericButtons.push_back(northButton);

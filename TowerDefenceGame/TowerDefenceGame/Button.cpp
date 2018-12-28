@@ -41,8 +41,8 @@ sf::Font Button::getFont() const
 	return font;
 }
 
-void Button::setFont(const sf::Font & f)
-{
+void Button::setFont(const sf::Font& f)
+{	
 	text.setFont(f);
 }
 
