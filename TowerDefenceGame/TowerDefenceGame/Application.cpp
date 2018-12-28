@@ -65,7 +65,7 @@ void Application::gameLoop()
 			handleEvent();
 
 			/* Clear previous frame */
-			window.clear();
+			window.clear(Globals::Color::backgroundColor);
 	
 			/* Draw what the state has to draw */
 			stateController->draw(window);

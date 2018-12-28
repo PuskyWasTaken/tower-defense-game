@@ -28,6 +28,8 @@ namespace Globals
 		const sf::Color tankEnemyColor = sf::Color(80, 0, 0, 255);
 		const sf::Color defaultButtonColor = sf::Color(244, 50, 50, 200);
 		const sf::Color intersectionColor = sf::Color(70, 160, 100, 60);
+		const sf::Color backgroundColor = sf::Color(31, 44, 56, 255);
+		const sf::Color panelColor = sf::Color(108, 91, 123, 255);
 
 	}
 	
@@ -153,9 +155,9 @@ namespace Globals
 	/* Button Stuff */
 	namespace Fonts
 	{
-		const std::string arial = "..\\Fonts\\arial.ttf";
-		const std::string kenVector = "..\\Fonts\\kenvector_future.ttf";
-		const std::string kenVector_thin = "..\\Fonts\\kenvector_future_thin.ttf";
+		const std::string arial = "..\\Res\\Fonts\\arial.ttf";
+		const std::string kenVector = "..\\Res\\Fonts\\kenvector_future.ttf";
+		const std::string kenVector_thin = "..\\Res\\Fonts\\kenvector_future_thin.ttf";
 
 		const std::string defaultFont = kenVector;
 	}

@@ -1,8 +1,9 @@
 #pragma once
 #include "Entity.h"
 #include "Button.h"
+#include "Panel.h"
 
-class Shop : public Entity
+class Shop : public Panel
 {
 
 public:
