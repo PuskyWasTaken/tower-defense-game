@@ -114,10 +114,10 @@
     <ClCompile Include="Shop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EndScreen.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelector.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,10 +182,10 @@
     <ClInclude Include="Shop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EndScreen.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelector.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>

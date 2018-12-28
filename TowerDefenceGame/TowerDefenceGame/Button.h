@@ -11,9 +11,6 @@ public:
 private:
 
 	sf::Font font;
-
-public :
-
 	sf::Text text;
 
 private:
@@ -27,9 +24,9 @@ public:
 	void setFont(const sf::Font& f);
 
 
-	void setTextSize(unsigned int size);
-	
-	void setTextColor(sf::Color color);
+	void setTextSize(const unsigned int size);
+	void setTextPosition(const sf::Vector2f& position);
+	void setTextColor(const sf::Color& color);
 
 
 	sf::Text getText() const;

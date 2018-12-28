@@ -13,6 +13,7 @@ public:
 
 private:
 	Button startButton, levelEditorButton, exitButton;
+	Button gameName;
 
 public:
 

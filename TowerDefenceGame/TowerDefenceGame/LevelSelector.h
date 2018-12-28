@@ -3,12 +3,12 @@
 #include "Game.h"
 #include "Button.h"
 #include "Application.h"
-class LevelLoader :
+class LevelSelector :
 	public IStateClass
 {
 public:
-	LevelLoader();
-	~LevelLoader();
+	LevelSelector();
+	~LevelSelector();
 private:
 	 Button m_instructions;
 	 Button newButton;

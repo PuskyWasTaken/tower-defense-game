@@ -4,16 +4,16 @@ Shop::Shop()
 {
 	this->m_goldItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->getPosition().y + Globals::rasterTop/6));
 	this->m_goldItem.setSize(sf::Vector2f(180, 40));
-	this->m_goldItem.text.setPosition(m_goldItem.getPosition());
+	this->m_goldItem.setTextPosition(m_goldItem.getPosition());
 
 	this->m_lifePointsItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->m_goldItem.getPosition().y + m_goldItem.getHeight() + Globals::itemSpacingHeight));
 	this->m_lifePointsItem.setSize(sf::Vector2f(180, 40));
-	this->m_lifePointsItem.text.setPosition(m_lifePointsItem.getPosition());
+	this->m_lifePointsItem.setTextPosition(m_lifePointsItem.getPosition());
 
 	//default tower
 	newButton.setPosition(sf::Vector2f(this->getPosition().x ,this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
-	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextPosition(newButton.getPosition());
 	newButton.setTextSize(20);
 	newButton.setText(" Price: " +std::to_string(Globals::defaultTowerPrice) + "\n Damage: "+ std::to_string(Globals::defaultTowerDamage) +
 	"\n Fire Rate: " +std::to_string(Globals::defaultTowerFireRate));
@@ -22,7 +22,7 @@ Shop::Shop()
 	//speedy tower
 	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
-	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextPosition(newButton.getPosition());
 	newButton.setTextSize(20);
 	newButton.setText(" Price: " + std::to_string(Globals::speedyTowerPrice) + "\n Damage: " + std::to_string(Globals::speedyTowerDamage) +
 		"\n Fire Rate: " + std::to_string(Globals::towerSpeedyFireRate));
@@ -31,7 +31,7 @@ Shop::Shop()
 	//powerfull tower
 	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 7 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
-	newButton.text.setPosition(newButton.getPosition());
+	newButton.setTextPosition(newButton.getPosition());
 	newButton.setTextSize(20);
 	newButton.setText(" Price: " + std::to_string(Globals::powerfullTowerPrice) + "\n Damage: " + std::to_string(Globals::powerfullTowerDamage) +
 		"\n Fire Rate: " + std::to_string(Globals::powerfullTowerFireRate));

@@ -40,7 +40,7 @@ LevelEditorPanel::LevelEditorPanel()
 	northButton.setCenterPosition(northIntersection.getCenter() + Globals::panelButtonDefaultOffset);
 	northButton.setText("  North");
 	northButton.setTextSize(Globals::TextSize::small);
-	northButton.text.setPosition(northButton.getPosition());
+	northButton.setTextPosition(northButton.getPosition());
 
 	
 
@@ -49,7 +49,7 @@ LevelEditorPanel::LevelEditorPanel()
 	southButton.setCenterPosition(southIntersection.getCenter() + Globals::panelButtonDefaultOffset);
 	southButton.setText("  South");
 	southButton.setTextSize(Globals::TextSize::small);
-	southButton.text.setPosition(southButton.getPosition());
+	southButton.setTextPosition(southButton.getPosition());
 
 
 	westButton.setColour(sf::Color::Transparent);
@@ -57,7 +57,7 @@ LevelEditorPanel::LevelEditorPanel()
 	westButton.setCenterPosition(westIntersection.getCenter() + Globals::panelButtonDefaultOffset);
 	westButton.setText("  West");
 	westButton.setTextSize(Globals::TextSize::small);
-	westButton.text.setPosition(westButton.getPosition());
+	westButton.setTextPosition(westButton.getPosition());
 
 
 
@@ -66,11 +66,12 @@ LevelEditorPanel::LevelEditorPanel()
 	eastButton.setCenterPosition(eastIntersection.getCenter() + Globals::panelButtonDefaultOffset);
 	eastButton.setText("  East");
 	eastButton.setTextSize(Globals::TextSize::small);
-	eastButton.text.setPosition(eastButton.getPosition());
+	eastButton.setTextPosition(eastButton.getPosition());
 
 
+	instructions.setColour(sf::Color::Transparent);
 	instructions.setText("* press S\n to save zone\n\n* press L-Click + D\n to create zone \n\n* press L-Click + F\n to resize zone\n\n* press [1-4]\n to save to file\n\n* press Z\n to DEL hovered\n element\n\n* Q - make this\n starting point\n\n* E - make this\n ending point");
-	instructions.text.setPosition(sf::Vector2f(this->getCenter().x +Globals::panelDefaultTextXOffset, this->getCenter().y + Globals::panelDefaultTextYOffset));
+	instructions.setTextPosition(sf::Vector2f(this->getCenter().x +Globals::panelDefaultTextXOffset, this->getCenter().y + Globals::panelDefaultTextYOffset));
 	instructions.setTextSize(Globals::TextSize::small);
 	instructions.setSize(sf::Vector2f(0, 0));
 
@@ -83,4 +84,22 @@ LevelEditorPanel::LevelEditorPanel()
 
 LevelEditorPanel::~LevelEditorPanel()
 {
+}
+
+void LevelEditorPanel::draw(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	Panel::draw(target, states);
+	
+	target.draw(this->instructions);
+
+	target.draw(northButton);
+	target.draw(southButton);
+	target.draw(westButton);
+	target.draw(eastButton);
+
+	target.draw(northIntersection);
+	target.draw(southIntersection);
+	target.draw(westIntersection);
+	target.draw(eastIntersection);
+	
 }

@@ -51,7 +51,12 @@ void Button::setTextSize(unsigned int size)
 	text.setCharacterSize(size);
 }
 
-void Button::setTextColor(sf::Color color)
+void Button::setTextPosition(const sf::Vector2f & position)
+{
+	text.setPosition(position);
+}
+
+void Button::setTextColor(const sf::Color& color)
 {
 	text.setFillColor(color);
 }

@@ -25,5 +25,8 @@ public:
 	Button instructions;
 
 	std::vector<Button> m_genericButtons;
+
+
+	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 };
 

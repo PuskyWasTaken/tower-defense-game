@@ -147,7 +147,7 @@ namespace Globals
 
 	/*Main menu stuff*/
 
-	const sf::Vector2f mainMenuButtonSize = sf::Vector2f(250, 100);
+	const sf::Vector2f mainMenuButtonSize = sf::Vector2f(250, 40);
 
 	/*Level selector stuff*/
 	const sf::Vector2f levelSelectorButtonSize = sf::Vector2f(400, 100);
@@ -166,6 +166,8 @@ namespace Globals
 	namespace TextSize
 	{
 		const uint32_t small = 16;
+		const uint32_t big = 60;
+		const uint32_t normal = 24;
 	}
 
 }

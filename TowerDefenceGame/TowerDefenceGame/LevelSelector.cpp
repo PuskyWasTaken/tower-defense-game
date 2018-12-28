@@ -1,53 +1,49 @@
-#include "LevelLoader.h"
+#include "LevelSelector.h"
 
 
-LevelLoader::LevelLoader()
+LevelSelector::LevelSelector()
 {
 	m_instructions.setSize(Globals::levelSelectorButtonSize);
-	m_instructions.setCenterPosition(sf::Vector2f((Globals::windowSize.x / 2), (Globals::windowSize.y / 2) - 3*Globals::levelSelectorButtonSize.y));
-	m_instructions.text.setCharacterSize(40);
-	m_instructions.text.setPosition(m_instructions.getPosition());
-	m_instructions.text.setString("Chose the level you \n want to play!");
-
-
+	m_instructions.setColour(sf::Color::Transparent);
+	m_instructions.setPosition(sf::Vector2f(Globals::windowSize.x / 4, Globals::rasterTop));
+	m_instructions.setTextPosition(m_instructions.getPosition());
+	m_instructions.setText("Select a level");
+	m_instructions.setTextSize(Globals::TextSize::big);
 
 	newButton.setSize(Globals::levelSelectorButtonSize);
 	newButton.setCenterPosition(sf::Vector2f(((Globals::windowSize.x / 2) - Globals::levelSelectorButtonSize.x), (Globals::windowSize.y / 2) - 1 * Globals::levelSelectorButtonSize.y));
-	newButton.text.setCharacterSize(40);
-	newButton.text.setPosition(newButton.getPosition());
-	newButton.text.setString(" LEVEL \n 1");
+	newButton.setTextPosition(newButton.getPosition());
+	newButton.setText(" LEVEL \n 1");
+	newButton.setTextSize(Globals::TextSize::normal);
 	m_levelButtonsArray.push_back(newButton);
 
 
 	newButton.setCenterPosition(sf::Vector2f(((Globals::windowSize.x / 2) + Globals::levelSelectorButtonSize.x), (Globals::windowSize.y / 2) - 1 * Globals::levelSelectorButtonSize.y));
-	newButton.text.setPosition(newButton.getPosition());
-	newButton.text.setString(" Level \n 2");
+	newButton.setTextPosition(newButton.getPosition());
+	newButton.setText(" Level \n 2");
+	newButton.setTextSize(Globals::TextSize::normal);
 	m_levelButtonsArray.push_back(newButton);
 
 	newButton.setCenterPosition(sf::Vector2f(((Globals::windowSize.x / 2) - Globals::levelSelectorButtonSize.x), (Globals::windowSize.y / 2) + 1 * Globals::levelSelectorButtonSize.y));
-	newButton.text.setPosition(newButton.getPosition());
-	newButton.text.setString(" Level \n 3");
+	newButton.setTextPosition(newButton.getPosition());
+	newButton.setText(" Level \n 3");
+	newButton.setTextSize(Globals::TextSize::normal);
 	m_levelButtonsArray.push_back(newButton);
 
 	newButton.setCenterPosition(sf::Vector2f(((Globals::windowSize.x / 2) + Globals::levelSelectorButtonSize.x), (Globals::windowSize.y / 2) + 1 * Globals::levelSelectorButtonSize.y));
-	newButton.text.setPosition(newButton.getPosition());
-	newButton.text.setString(" Level \n 4");
+	newButton.setTextPosition(newButton.getPosition());
+	newButton.setText(" Level \n 4");
+	newButton.setTextSize(Globals::TextSize::normal);
 	m_levelButtonsArray.push_back(newButton);
-
-
-
-
-
-
 
 }
 
 
-LevelLoader::~LevelLoader()
+LevelSelector::~LevelSelector()
 {
 }
 
-void LevelLoader::choseLevel(const sf::Vector2f & mousePosition)
+void LevelSelector::choseLevel(const sf::Vector2f & mousePosition)
 {
 	for (int i = 0; i < m_levelButtonsArray.size(); i++)
 	{
@@ -58,12 +54,12 @@ void LevelLoader::choseLevel(const sf::Vector2f & mousePosition)
 	}
 }
 
-void LevelLoader::update(sf::RenderWindow & window)
+void LevelSelector::update(sf::RenderWindow & window)
 {
 	handleEvent(window);
 }
 
-void LevelLoader::draw(sf::RenderWindow & window)
+void LevelSelector::draw(sf::RenderWindow & window)
 {
 	window.draw(m_instructions);
 	for (Button &button : m_levelButtonsArray)
@@ -72,7 +68,7 @@ void LevelLoader::draw(sf::RenderWindow & window)
 	}
 }
 
-void LevelLoader::handleEvent(sf::RenderWindow & window)
+void LevelSelector::handleEvent(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		choseLevel((sf::Vector2f)sf::Mouse::getPosition(window));
