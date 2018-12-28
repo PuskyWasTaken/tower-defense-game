@@ -149,4 +149,15 @@ namespace Globals
 	/*Level selector stuff*/
 	const sf::Vector2f levelSelectorButtonSize = sf::Vector2f(400, 100);
 
+
+	/* Button Stuff */
+	namespace Fonts
+	{
+		const std::string arial = "..\\Fonts\\arial.ttf";
+		const std::string kenVector = "..\\Fonts\\kenvector_future.ttf";
+		const std::string kenVector_thin = "..\\Fonts\\kenvector_future_thin.ttf";
+
+		const std::string defaultFont = kenVector;
+	}
+
 }

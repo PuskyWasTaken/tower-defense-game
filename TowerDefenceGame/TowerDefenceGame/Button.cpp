@@ -22,7 +22,7 @@ void Button::setUpButton()
 {
 	setColour(Globals::Color::defaultButtonColor);
 
-	if (!font.loadFromFile("..\\Fonts\\arial.ttf"))
+	if (!font.loadFromFile(Globals::Fonts::defaultFont))
 	{
 		throw "Could not load font!";
 		
