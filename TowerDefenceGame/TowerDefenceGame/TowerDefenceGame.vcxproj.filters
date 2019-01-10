@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Globals">
       <UniqueIdentifier>{cf45d57a-4702-4bc1-8ff2-6d6e0c600bcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities\Unmovable\Visual">
+      <UniqueIdentifier>{6a93966c-4e05-4db0-acf5-2e88d88feb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Unmovable\Visual">
+      <UniqueIdentifier>{50bf0d6f-c26c-4ebb-9177-27767f9f188e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML_tests.cpp">
@@ -93,9 +99,6 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="LevelEditorPanel.cpp">
       <Filter>Source Files\LevelEditor</Filter>
     </ClCompile>
@@ -105,20 +108,23 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EndScreen.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
     <ClCompile Include="LevelSelector.cpp">
       <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Source Files\Entities\Unmovable\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Source Files\Entities\Unmovable\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Entities\Unmovable\Visual</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +164,6 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="LevelEditor.h">
       <Filter>Header Files\LevelEditor</Filter>
     </ClInclude>
@@ -170,23 +173,26 @@
     <ClInclude Include="LevelEditorPanel.h">
       <Filter>Header Files\LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Header Files\Globals</Filter>
     </ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EndScreen.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="LevelSelector.h">
       <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Header Files\Entities\Unmovable\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Header Files\Entities\Unmovable\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Entities\Unmovable\Visual</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
