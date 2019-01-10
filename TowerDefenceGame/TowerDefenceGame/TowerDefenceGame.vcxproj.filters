@@ -126,6 +126,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Entities\Unmovable\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="ShopPanel.cpp">
+      <Filter>Source Files\Entities\Unmovable\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -192,6 +195,9 @@
       <Filter>Header Files\Entities\Unmovable\Visual</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <Filter>Header Files\Entities\Unmovable\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopPanel.h">
       <Filter>Header Files\Entities\Unmovable\Visual</Filter>
     </ClInclude>
   </ItemGroup>

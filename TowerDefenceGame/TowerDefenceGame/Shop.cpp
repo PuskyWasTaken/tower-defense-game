@@ -2,6 +2,8 @@
 
 Shop::Shop()
 {
+	/* Player Shop specific items */
+	
 	this->m_goldItem.setPosition(sf::Vector2f(this->getPosition().x + Globals::rasterLeft , this->getPosition().y + Globals::rasterTop/6));
 	this->m_goldItem.setSize(sf::Vector2f(180, 40));
 	this->m_goldItem.setTextPosition(m_goldItem.getPosition());
@@ -10,7 +12,10 @@ Shop::Shop()
 	this->m_lifePointsItem.setSize(sf::Vector2f(180, 40));
 	this->m_lifePointsItem.setTextPosition(m_lifePointsItem.getPosition());
 
-	//default tower
+	
+	/* The shop's custom sale items (towers in this case) */
+
+	/* Default Tower */
 	newButton.setPosition(sf::Vector2f(this->getPosition().x ,this->getPosition().y + 1 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
 	newButton.setTextPosition(newButton.getPosition());
@@ -19,7 +24,7 @@ Shop::Shop()
 	"\n Fire Rate: " +std::to_string(Globals::defaultTowerFireRate));
 	m_shopItems.push_back(newButton);
 	
-	//speedy tower
+	/* Speedy Towers */
 	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 4 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
 	newButton.setTextPosition(newButton.getPosition());
@@ -28,7 +33,7 @@ Shop::Shop()
 		"\n Fire Rate: " + std::to_string(Globals::towerSpeedyFireRate));
 	m_shopItems.push_back(newButton);
 	
-	//powerfull tower
+	/* Powerfull Tower */
 	newButton.setPosition(sf::Vector2f(this->getPosition().x, this->getPosition().y + 7 * (Globals::shopItemSize.y / 2) + Globals::rasterTop));
 	newButton.setSize(Globals::shopItemSize);
 	newButton.setTextPosition(newButton.getPosition());
@@ -39,27 +44,7 @@ Shop::Shop()
 }
 
 Shop::~Shop()
-{
-}
-
-void Shop::update(const sf::Vector2f & mouseCoordinates)
-{
-	/* If the mouse button was pressed and the mouse is in bounds of the Shop */
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->isCollisonWithPoint(mouseCoordinates))
-	{
-		/* Start checking if it pressed on any shop items */	
-		for (unsigned int i = 0; i < m_shopItems.size(); ++i)
-		{
-			/*  */
-			if (m_shopItems[i].isCollisonWithPoint(mouseCoordinates))
-			{			
-				this->isSelected = true;
-				selectedItem = i;
-				return;
-			}
-		}
-	}
-}
+{}
 
 void Shop::setGold(const int newGold)
 {
@@ -73,10 +58,9 @@ void Shop::setLifePoints(const int newLifePoints)
 
 void Shop::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	Entity::draw(target, states);
-	for (const Button& shopItem : m_shopItems)
-		target.draw(shopItem);
-
+	/* Super */
+	ShopPanel::draw(target, states);
+	
 	target.draw(m_goldItem);
 	target.draw(m_lifePointsItem);
 }

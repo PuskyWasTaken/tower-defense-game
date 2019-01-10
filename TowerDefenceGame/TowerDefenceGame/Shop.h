@@ -1,24 +1,19 @@
 #pragma once
 #include "Entity.h"
 #include "Button.h"
-#include "Panel.h"
+#include "ShopPanel.h"
 
-class Shop : public Panel
+class Shop : public ShopPanel
 {
 
 public:
 	Shop();
 	~Shop();
 
-	void update(const sf::Vector2f& mouseCoordinates);
 	void setGold(const int newGold);
 	void setLifePoints(const int newLifePoints);
 
 public:
-
-	bool isSelected = false;
-	int selectedItem = -1;
-
 
 	enum item
 	{
@@ -30,11 +25,8 @@ public:
 
 private:
 
-	std::vector<Button> m_shopItems;
 	Button m_goldItem;
 	Button m_lifePointsItem;
-
-	Button newButton;
 
 
 public:
