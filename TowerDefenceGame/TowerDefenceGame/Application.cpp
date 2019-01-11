@@ -1,8 +1,5 @@
 #include "Application.h"
-#include"MainMenu.h"
-#include "LevelEditor.h"
-#include "../Logging/Logging.h"
-#include<fstream>
+
 
 /* I don't know if this is right or not - could have trouble with multiplayer later on. */
 Application *Application::instance = nullptr;
@@ -14,7 +11,7 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 	if (instance == nullptr)
 		instance = this;
 
-	/* TODO: Switch our state to the Menu instead of Game */
+	/* Switch our state to the Menu */
 	stateController = std::make_unique<MainMenu>();
 
    Logger logger(std::cout);

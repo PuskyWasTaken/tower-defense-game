@@ -49,7 +49,7 @@ void LevelSelector::choseLevel(const sf::Vector2f & mousePosition)
 	{
 		if (m_levelButtonsArray[i].isCollisonWithPoint(mousePosition))
 		{
-			Application::getInstance()->setState(std::make_unique<Game>("..\\Levels\\" + std::to_string(i + 1)));
+			Application::getInstance()->setState(std::make_unique<GameSinglePlayer>("..\\Levels\\" + std::to_string(i + 1)));
 		}
 	}
 }

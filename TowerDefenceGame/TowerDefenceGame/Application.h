@@ -1,8 +1,11 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "IStateClass.h"
-#include "Game.h"
-#include "LevelSelector.h"
+#include "MainMenu.h"
+#include "LevelEditor.h"
+#include "../Logging/Logging.h"
+#include <fstream>
+
 
 class Application
 {

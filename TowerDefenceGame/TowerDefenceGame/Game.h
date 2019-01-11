@@ -9,16 +9,20 @@
 #include "Intersection.h"
 #include "Tower.h"
 #include "Level.h"
-#include "Shop.h"
 #include "EndScreen.h"
+#include "ShopPanel.h"
+#include "Application.h"
+#include "MainMenu.h"
+#include "../Logging/Logging.h"
 
 class Game : public IStateClass
 {
+	#pragma message("Game is included")
 public:
 	Game(const std::string &path);
-	~Game();
+	virtual ~Game();
 
-private:
+protected:
 	
 	/* TODO: Implement threads */
 	//sf::Thread
@@ -27,18 +31,10 @@ private:
 	Level m_currentLevel;
 	std::vector<std::shared_ptr<Enemy>> m_enemyArray;
 	std::vector<Tower> m_towerArray;
-	Shop m_shop;
-	int32_t m_gold = Globals::startingGoldAmount;
-	int32_t m_lifePoints = Globals::startingPlayerHp;
 
-	Tower m_shadowEntity;
-	bool m_canPlaceShadowEntity;
-
-	/* Enemy Spawn Rate */
-	bool m_gameIsWon = false;
-	uint32_t m_noOfEnemiesKilled = 0;
-	sf::Time m_spawnRate = sf::seconds(Globals::defaultEnemySpawnRate);
-	sf::Clock m_updateClock;
+	std::unique_ptr<ShopPanel> m_shop;
+	int32_t m_gold;
+	int32_t m_lifePoints;
 
 public: 
 	void update(sf::RenderWindow &window) override;
@@ -47,19 +43,24 @@ public:
 
 private:
 
-	/* Enemy stuff */
-
-	void updateShadowEntity();
-	void updateTowers();
-	void updateEnemies();
 	void updateEnemiesMovements();
+	void updateTowers();
 	void updateEnemiesPositions();
-	bool checkWinLossConditions();
 	bool updateEnemyCollision(std::shared_ptr<Enemy> enemy);
+
+protected:
+
+	/* Enemy stuff */
+	virtual void enemyWasRemoved() = 0;
+	virtual void enemyArrivedToEndPoint() = 0;
+	virtual void updateEnemies() = 0;
+
+	virtual bool checkWinLossConditions() = 0;
 	sf::Vector2i getMovementDirection(const short entrance) const;
 
 	/* Shop stuff */
-	void handleShopPressed(const sf::Vector2f& mousePos);
+	virtual void handleShopPressed(const sf::Vector2f& mousePos) = 0;
+	virtual void initShop() = 0;
 	bool buyTower(const int price);
 
 	void readLevel(const std::string& level);

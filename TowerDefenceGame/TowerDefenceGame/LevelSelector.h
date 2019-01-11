@@ -1,6 +1,7 @@
 #pragma once
 #include "IStateClass.h"
 #include "Game.h"
+#include "GameSinglePlayer.h"
 #include "Button.h"
 #include "Application.h"
 class LevelSelector :

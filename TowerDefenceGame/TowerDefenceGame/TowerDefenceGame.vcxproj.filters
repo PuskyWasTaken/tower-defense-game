@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Entities\Unmovable\Visual">
       <UniqueIdentifier>{50bf0d6f-c26c-4ebb-9177-27767f9f188e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Application\Game">
+      <UniqueIdentifier>{c1bc70a4-b400-49ee-86b9-6efe427075f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application\Game">
+      <UniqueIdentifier>{d072f5d5-c317-4832-ba0a-554a096d5cbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML_tests.cpp">
@@ -82,9 +88,6 @@
       <Filter>Source Files\Entities\Unmovable</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
@@ -129,8 +132,11 @@
     <ClCompile Include="ShopPanel.cpp">
       <Filter>Source Files\Entities\Unmovable\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="MultiplayerScreen.cpp">
-      <Filter>Source Files\Application</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Application\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSinglePlayer.cpp">
+      <Filter>Source Files\Application\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +159,6 @@
       <Filter>Header Files\Entities\Unmovable</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="IStateClass.h">
@@ -203,8 +206,11 @@
     <ClInclude Include="ShopPanel.h">
       <Filter>Header Files\Entities\Unmovable\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="MultiplayerScreen.h">
-      <Filter>Header Files\Application</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSinglePlayer.h">
+      <Filter>Header Files\Application\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

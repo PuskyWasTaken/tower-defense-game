@@ -8,6 +8,8 @@ public:
 	~ShopPanel();
 
 	void update(const sf::Vector2f& mouseCoordinates);
+	void setGold(const int newGold);
+	void setLifePoints(const int newLifePoints);
 
 public:
 
@@ -18,6 +20,8 @@ protected:
 
 	std::vector<Button> m_shopItems;
 	Button newButton;
+	Button m_goldItem;
+	Button m_lifePointsItem;
 
 
 public:

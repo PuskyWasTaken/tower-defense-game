@@ -1,10 +1,12 @@
 #pragma once
-#include "IStateClass.h"
-#include"Button.h"
-#include"Enemy.h"
 #include "Application.h"
+#include "Button.h"
+#include "Enemy.h"
 #include "Game.h"
 #include "LevelEditor.h"
+#include <iostream>
+#include "../Logging/Logging.h"
+#include "LevelSelector.h"
 #include"MultiplayerScreen.h"
 
 class MainMenu : public IStateClass
