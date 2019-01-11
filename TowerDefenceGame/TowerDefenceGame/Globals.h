@@ -2,7 +2,7 @@
 
 namespace Globals
 {
-	/* Intersection Stuff*/
+	/* Intersection Stuff */
 	const int intersectionSize = 40;
 	const bool intersectionBorder = true;
 	const int intersectionOutLineThickness = 2;
@@ -64,22 +64,23 @@ namespace Globals
 		
 		struct EnemyObject
 		{
-			EnemyObject(const int hp, const float moveSpeed, const int chanceToSpawn, const sf::Color color)
-				: moveSpeed(moveSpeed), hp(hp), chanceToSpawn(chanceToSpawn), color(color)
+			EnemyObject(const int hp, const float moveSpeed, const int chanceToSpawn, const int price, const sf::Color color)
+				: moveSpeed(moveSpeed), hp(hp), chanceToSpawn(chanceToSpawn), price(price), color(color)
 			{}
 
 			const float moveSpeed;
 			const int hp;
 			const int chanceToSpawn;
+			const int price;
 			const sf::Color color;
 		};
 
 		const EnemyObject enemyObjects[noOfEnemyTypes] =
 		{
-			{100, 0.8f, 60, Color::enemyColor},
-			{80, 1.0f, 5, Color::speedyEnemyColor},
-			{200, 0.8f, 40, Color::buffEnemyColor},
-			{400, 0.6f, 10, Color::tankEnemyColor}
+			{100, 0.8f, 60, 20, Color::enemyColor},
+			{80, 1.0f, 5, 30, Color::speedyEnemyColor},
+			{200, 0.8f, 40, 40, Color::buffEnemyColor},
+			{400, 0.6f, 10, 90, Color::tankEnemyColor}
 		};
 	}
 
@@ -94,24 +95,45 @@ namespace Globals
 
 	/* Bullet Stuff */
 	const float defaultBulletSpeed = 10.0;
-	const sf::Vector2f defaultBulletSize(5, 5);
-
-
+	
 	/* Tower Stuff */
 	const sf::Vector2f towerSize(240, 240);
 	const sf::Vector2f towerMainSize(40,40);
 	const bool enableTowerRange = false;
-	const unsigned int defaultTowerPrice = 40;
-	const unsigned int speedyTowerPrice = 60;
-	const unsigned int powerfullTowerPrice = 120;
 	const sf::Vector2f powerfullTowerBulletSize(8, 8);
 	
-	const int defaultTowerDamage = 10;
-	const int powerfullTowerDamage = 20;
-	const int speedyTowerDamage = 10;
-	const float defaultTowerFireRate = 1.0f;
-	const float towerSpeedyFireRate = 0.5f;
-	const float powerfullTowerFireRate = 0.5f;
+	namespace TowerTypes
+	{
+		const int noOfTowerTypes = 3;
+
+		struct TowerObject
+		{
+			TowerObject(const int damage, const float fireRate, const unsigned int price, const sf::Vector2f size)
+				: damage(damage), fireRate(fireRate),  price(price), size(size)
+			{}
+
+			const int damage;
+			const float fireRate;
+			const unsigned int price;
+			const sf::Vector2f size;
+		};
+
+		const TowerObject towerObjects[noOfTowerTypes] =
+		{
+			{10, 1.0f, 40, {5, 5}}, // Default
+			{10, 0.5f, 60, {5, 5}}, // Speedy
+			{20, 0.5f, 120, {40,40}}, // Powerfull
+		};
+	}
+
+
+	enum towerType
+	{
+		towerItem,
+		speedyTowerItem,
+		powerfullTowerItem,
+		goldUpgradeItem
+	};
 
 	/* Shop Stuff */
 	const sf::Vector2f shopItemSize(200, 100);
@@ -120,6 +142,32 @@ namespace Globals
 	const int rasterLeft = 10;
 	const int rasterTop = 80;
 	const int itemSpacingHeight = 5;
+
+	namespace Shop
+	{
+		static const sf::Vector2f getItemPosition(const sf::Vector2f& pos, const int index)
+		{
+			return sf::Vector2f(pos.x, pos.y + ((3 * index) + 1) * (Globals::shopItemSize.y / 2) + Globals::rasterTop);
+		}
+
+		static const std::string getEnemyShopDescription(const Globals::enemyType& eType)
+		{
+			return (
+				" Price: " + std::to_string(Globals::EnemyTypes::enemyObjects[eType].price) +
+				"\n HP: " + std::to_string(Globals::EnemyTypes::enemyObjects[eType].hp) +
+				"\n Speed: " + std::to_string((Globals::EnemyTypes::enemyObjects[eType].moveSpeed * 100) / 100)
+				);
+		}
+
+		static const std::string getShopDescription(const Globals::towerType& eType)
+		{
+			return (
+				" Price: " + std::to_string(Globals::TowerTypes::towerObjects[eType].price) + "\n Damage: " + std::to_string(Globals::TowerTypes::towerObjects[eType].damage) +
+				"\n Fire Rate: " + std::to_string(Globals::TowerTypes::towerObjects[eType].fireRate)
+				);
+		}
+	}
+	
 
 	/* Shadow Stuff */
 
@@ -145,11 +193,10 @@ namespace Globals
 	const sf::Vector2f windowSize = sf::Vector2f(1200, 1000);
 
 
-	/*Main menu stuff*/
-
+	/* Main menu stuff */
 	const sf::Vector2f mainMenuButtonSize = sf::Vector2f(250, 40);
 
-	/*Level selector stuff*/
+	/* Level selector stuff */
 	const sf::Vector2f levelSelectorButtonSize = sf::Vector2f(400, 100);
 
 	/* Multiplayer Screen stuff */
@@ -168,9 +215,31 @@ namespace Globals
 	namespace TextSize
 	{
 		const uint32_t small = 16;
+		const uint32_t shop = 20;
 		const uint32_t big = 60;
 		const uint32_t normal = 24;
 		const uint32_t bigger = 38;
 	}
+
+	namespace Multiplayer
+	{
+		namespace Attacker
+		{
+			/* HP of the attacker */
+			const uint32_t hp = 100;
+			const uint32_t startingGoldAmmount = 100;
+		}
+
+		namespace Defender
+		{
+			/* HP of the defender */
+			const uint32_t hp = 10;
+			const uint32_t startingGoldAmmount = 100;
+		}
+	}
+
+
+
+
 
 }

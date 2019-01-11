@@ -138,6 +138,21 @@
     <ClCompile Include="GameSinglePlayer.cpp">
       <Filter>Source Files\Application\Game</Filter>
     </ClCompile>
+    <ClCompile Include="GameDefender.cpp">
+      <Filter>Source Files\Application\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameAttacker.cpp">
+      <Filter>Source Files\Application\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>Source Files\Entities\Unmovable</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerScreen.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShop.cpp">
+      <Filter>Source Files\Entities\Unmovable\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -211,6 +226,21 @@
     </ClInclude>
     <ClInclude Include="GameSinglePlayer.h">
       <Filter>Header Files\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefender.h">
+      <Filter>Header Files\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameAttacker.h">
+      <Filter>Header Files\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>Header Files\Entities\Unmovable</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerScreen.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShop.h">
+      <Filter>Header Files\Entities\Unmovable\Visual</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

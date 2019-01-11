@@ -2,7 +2,7 @@
 
 
 Tower::Tower()
-	: UnmovableEntity(sf::Vector2f(0,0), Globals::towerSize), m_damage(Globals::defaultTowerDamage)
+	: UnmovableEntity(sf::Vector2f(0,0), Globals::towerSize), m_damage(Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].damage)
 {
 	setFillColor();
 	m_mainTower.setSize(Globals::towerMainSize);
@@ -157,7 +157,7 @@ void Tower::update()
 			m_bulletArray.erase(m_bulletArray.begin() + i);
 
 			/* Substract the damage taken from the intruders health */
-			m_intruder->setHealth(m_intruder->getHealth() - Globals::defaultTowerDamage);
+			m_intruder->setHealth(m_intruder->getHealth() - Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].damage);
 		}
 	}
 }

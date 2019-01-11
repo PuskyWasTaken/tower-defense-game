@@ -67,7 +67,6 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 			if (startButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
 				Application::getInstance()->setState(std::make_unique<LevelSelector>());
-				
 				logger.log("Start button is pressed!", Logger::Level::Info);
 			}
 

@@ -11,7 +11,6 @@ private:
 	Button m_instructions;
 	Button m_defender;
 	Button m_attacker;
-	void chosePlayer(const sf::Vector2f& mousePosition);
 	TextBox m_textBox;
 
 public:
@@ -23,6 +22,8 @@ public:
 	void draw(sf::RenderWindow &window) override;
 	void handleEvent(sf::RenderWindow &window) override;
 
+private:
+	bool chosePlayer(const sf::Vector2f& mousePosition);
 	void updateTextBoxFocus(sf::RenderWindow &window);
 };
 

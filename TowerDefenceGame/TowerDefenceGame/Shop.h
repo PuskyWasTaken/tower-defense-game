@@ -9,17 +9,7 @@ class Shop : public ShopPanel
 public:
 	Shop();
 	~Shop();
-
+	
 public:
-
-	enum item
-	{
-		towerItem,
-		speedyTowerItem,
-		powerfullTowerItem,
-		goldUpgradeItem
-	};
-
-
 };
 

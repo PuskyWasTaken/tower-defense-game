@@ -1,5 +1,8 @@
+#pragma once
 #include "MultiplayerScreen.h"
-
+#include "Application.h"
+#include "GameAttacker.h"
+#include "GameDefender.h"
 
 
 MultiplayerScreen::MultiplayerScreen()
@@ -26,24 +29,29 @@ MultiplayerScreen::MultiplayerScreen()
 	
 }
 
-
 MultiplayerScreen::~MultiplayerScreen()
 {
 }
 
-void MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
+bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 {
 	Logger logger(std::cout);
 
 	if (m_defender.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the defender! ", Logger::Level::Info);
+		Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
+		return true;
 	}
 
 	if (m_attacker.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the attacker!", Logger::Level::Info);
+		Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
+		return true;
 	}
+
+	return false;
 }
 
 void MultiplayerScreen::update(sf::RenderWindow & window)
@@ -62,25 +70,24 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window));
-	m_textBox.handleEvent(window);
-	updateTextBoxFocus(window);
+	{
+		if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
+		{
+			updateTextBoxFocus(window);
+			
+			if ( m_textBox.getIsSelected() )
+				m_textBox.handleEvent(window);
+		}
+	}
+	
 }
 
 void MultiplayerScreen::updateTextBoxFocus(sf::RenderWindow & window) 
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		if (m_textBox.m_button.isCollisonWithPoint((sf::Vector2f)sf::Mouse::getPosition(window)))
-		{
-			m_textBox.setIsSelected(true);
-		}
-		else
-		{
-			m_textBox.setIsSelected(false);
-		}
-	}
-	
+	if (m_textBox.m_button.isCollisonWithPoint((sf::Vector2f)sf::Mouse::getPosition(window)))
+		m_textBox.setIsSelected(true);
+	else
+		m_textBox.setIsSelected(false);
 }
 
 

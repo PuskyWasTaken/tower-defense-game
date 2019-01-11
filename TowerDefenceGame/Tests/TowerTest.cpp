@@ -16,7 +16,7 @@ namespace Tests
 		{
 			Tower myTower;
 			bool checkAttack = myTower.isAttacking();
-			myTower.setFireRate(Globals::defaultTowerFireRate);
+			myTower.setFireRate(Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].fireRate);
 			checkAttack = true;
 			Assert::IsTrue(checkAttack);
 		}
@@ -33,7 +33,7 @@ namespace Tests
 			Tower myTower;
 			float damage = 20.0f;
 			myTower.setDamage(damage);
-			Assert::IsTrue(damage == Globals::powerfullTowerDamage);
+			Assert::IsTrue(damage == Globals::TowerTypes::towerObjects[Globals::towerType::powerfullTowerItem].damage);
 		}
 
 		TEST_METHOD(CheckTowerSize)
@@ -64,7 +64,7 @@ namespace Tests
 		{
 			Tower myTower;
 			myTower.setDamage(10);
-			if (myTower.getDamage() != Globals::defaultTowerDamage)
+			if (myTower.getDamage() != Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].damage)
 				Assert::Fail();
 		}
 	

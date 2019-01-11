@@ -16,7 +16,7 @@ public:
 private: 
 	
 	int16_t m_damage;
-	sf::Vector2f m_bulletSize = Globals::defaultBulletSize;
+	sf::Vector2f m_bulletSize = Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].size;
 
 	bool m_isAttacking = false;
 
@@ -30,7 +30,7 @@ private:
 	//std::shared_ptr<Enemy> m_intruder = nullptr;
 
 	/* Fire Rate */
-	sf::Time m_fireRate = sf::seconds(Globals::defaultTowerFireRate);
+	sf::Time m_fireRate = sf::seconds(Globals::TowerTypes::towerObjects[Globals::towerType::towerItem].fireRate);
 	sf::Clock m_updateClock;
 
 private:

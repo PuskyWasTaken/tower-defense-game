@@ -1,15 +1,12 @@
 #pragma once
-
 #include "Game.h"
 #include "Shop.h"
 
-class GameSinglePlayer : public Game
+class GameDefender : public Game
 {
-	#pragma message("GameSinglePlayer was included")
-
 public:
-	GameSinglePlayer(const std::string &path);
-	~GameSinglePlayer();
+	GameDefender(const std::string &path);
+	~GameDefender();
 
 	void update(sf::RenderWindow &window) override;
 	void draw(sf::RenderWindow & window) override;
@@ -25,27 +22,27 @@ private:
 	/* Enemy Spawn Rate */
 	bool m_gameIsWon = false;
 	uint32_t m_noOfEnemiesKilled = 0;
-	sf::Time m_spawnRate = sf::seconds(Globals::defaultEnemySpawnRate);
-	sf::Clock m_updateClock;
 
 private:
 
 	/* Enemy stuff */
-   	void updateEnemies() override;
-   	void enemyWasRemoved() override;
-   	void enemyArrivedToEndPoint() override;
-   
-    /* Tower stuff */
-    void updateShadowEntity();
-   
-    /* Game stuff */
-    bool checkWinLossConditions() override;
-   
-    /* Shop stuff */
+	void updateEnemies() override;
+	void enemyWasRemoved() override;
+	void enemyArrivedToEndPoint() override;
+
+	/* Tower stuff */
+	void updateShadowEntity();
+
+	/* Game stuff */
+	bool checkWinLossConditions() override;
+
+	/* Shop stuff */
 	void handleShopPressed(const sf::Vector2f& mousePos);
 	void initShop();
 	bool buyTower(const int price);
+
 	void spawnTower(const sf::Vector2f& mousePos, const int index);
+
 
 };
 
