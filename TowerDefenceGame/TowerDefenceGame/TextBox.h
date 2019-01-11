@@ -17,7 +17,7 @@ public:
 
 public:
 	Button m_button;
-	bool m_isSelected = true;
+	bool m_isSelected = false;
 
 	std::string m_text;
 
@@ -31,7 +31,7 @@ public:
 	Button getButton() const;
 	void setButton(const Button &button);
 
-	void setIsSelected(const bool &isSelected);
+	void setIsSelected(const bool isSelected);
 	bool getIsSelected() const;
 
 	void setText(const std::string &text);

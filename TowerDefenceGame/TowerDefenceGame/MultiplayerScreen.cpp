@@ -20,6 +20,9 @@ MultiplayerScreen::MultiplayerScreen()
 	m_attacker.setTextPosition(m_attacker.getPosition());
 	m_attacker.setText("Attacker");
 	m_attacker.setTextSize(Globals::TextSize::bigger);
+
+	m_textBox.setPosition(sf::Vector2f(Globals::windowSize.x/2, Globals::windowSize.y/2));
+	m_textBox.setText("ENTER TEXT HERE");
 	
 }
 
@@ -53,10 +56,31 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 	window.draw(m_instructions);
 	window.draw(m_defender);
 	window.draw(m_attacker);
+	window.draw(m_textBox);
 }
 
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window));
+	m_textBox.handleEvent(window);
+	updateTextBoxFocus(window);
 }
+
+void MultiplayerScreen::updateTextBoxFocus(sf::RenderWindow & window) 
+{
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		if (m_textBox.m_button.isCollisonWithPoint((sf::Vector2f)sf::Mouse::getPosition(window)))
+		{
+			m_textBox.setIsSelected(true);
+		}
+		else
+		{
+			m_textBox.setIsSelected(false);
+		}
+	}
+	
+}
+
+

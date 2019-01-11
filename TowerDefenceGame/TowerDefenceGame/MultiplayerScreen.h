@@ -2,6 +2,7 @@
 #include"IStateClass.h"
 #include"Button.h"
 #include"Globals.h"
+#include "TextBox.h"
 #include"..\Logging\Logging.h"
 
 class MultiplayerScreen : public IStateClass
@@ -11,6 +12,7 @@ private:
 	Button m_defender;
 	Button m_attacker;
 	void chosePlayer(const sf::Vector2f& mousePosition);
+	TextBox m_textBox;
 
 public:
 	MultiplayerScreen();
@@ -20,5 +22,7 @@ public:
 	void update(sf::RenderWindow &window) override;
 	void draw(sf::RenderWindow &window) override;
 	void handleEvent(sf::RenderWindow &window) override;
+
+	void updateTextBoxFocus(sf::RenderWindow &window);
 };
 
