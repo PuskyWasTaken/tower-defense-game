@@ -72,7 +72,9 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 
 			if (multiplayerButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
-				//Do nothing for now
+				/* entering in the multiplayer screen */
+
+				Application::getInstance()->setState(std::make_unique<MultiplayerScreen>());
 				logger.log("Multiplayer button is pressed!", Logger::Level::Info);
 			}
 			if (levelEditorButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))

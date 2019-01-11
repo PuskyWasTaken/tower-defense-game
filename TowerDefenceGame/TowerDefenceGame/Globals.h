@@ -152,6 +152,8 @@ namespace Globals
 	/*Level selector stuff*/
 	const sf::Vector2f levelSelectorButtonSize = sf::Vector2f(400, 100);
 
+	/* Multiplayer Screen stuff */
+	const sf::Vector2f chosePlayerButtonSize = sf::Vector2f(280, 100);
 
 	/* Button Stuff */
 	namespace Fonts
@@ -168,6 +170,7 @@ namespace Globals
 		const uint32_t small = 16;
 		const uint32_t big = 60;
 		const uint32_t normal = 24;
+		const uint32_t bigger = 38;
 	}
 
 }

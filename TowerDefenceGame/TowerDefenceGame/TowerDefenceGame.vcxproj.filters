@@ -129,6 +129,9 @@
     <ClCompile Include="ShopPanel.cpp">
       <Filter>Source Files\Entities\Unmovable\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="MultiplayerScreen.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFML_tests.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="ShopPanel.h">
       <Filter>Header Files\Entities\Unmovable\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerScreen.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
