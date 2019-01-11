@@ -27,6 +27,9 @@ MainMenu::MainMenu()
 	gameName.setText("TOWER DEFENCE\n			G A M E \n");
 	gameName.setTextPosition(sf::Vector2f(Globals::windowSize.x / 4, Globals::rasterTop));
 	gameName.setTextSize(Globals::TextSize::big);
+	
+	
+
 }
 
 MainMenu::~MainMenu()
