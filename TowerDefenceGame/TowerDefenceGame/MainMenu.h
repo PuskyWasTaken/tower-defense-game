@@ -12,7 +12,7 @@ public:
 	~MainMenu();
 
 private:
-	Button startButton, levelEditorButton, exitButton;
+	Button startButton, multiplayerButton, levelEditorButton, exitButton;
 	Button gameName;
 
 public:

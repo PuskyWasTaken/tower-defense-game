@@ -10,9 +10,14 @@ MainMenu::MainMenu()
 	startButton.setCenterPosition(sf::Vector2f(Globals::windowSize.x / 2, Globals::windowSize.y/2 - Globals::mainMenuButtonSize.y*4 ));
 	startButton.setTextPosition(startButton.getPosition());
 
+	multiplayerButton.setText("Multiplayer");
+	multiplayerButton.setSize(Globals::mainMenuButtonSize);
+	multiplayerButton.setCenterPosition(sf::Vector2f(startButton.getCenter().x, startButton.getCenter().y + Globals::mainMenuButtonSize.y * 1.5));
+	multiplayerButton.setTextPosition(multiplayerButton.getPosition());
+
 	levelEditorButton.setText("Level Editor");
 	levelEditorButton.setSize(Globals::mainMenuButtonSize);
-	levelEditorButton.setCenterPosition(sf::Vector2f(startButton.getCenter().x, startButton.getCenter().y + Globals::mainMenuButtonSize.y * 1.5));
+	levelEditorButton.setCenterPosition(sf::Vector2f(multiplayerButton.getCenter().x, multiplayerButton.getCenter().y + Globals::mainMenuButtonSize.y * 1.5));
 	levelEditorButton.setTextPosition(levelEditorButton.getPosition());
 
 	exitButton.setText("Exit");
@@ -38,6 +43,7 @@ void MainMenu::update(sf::RenderWindow & window)
 void MainMenu::draw(sf::RenderWindow & window)
 {
 	window.draw(startButton);
+	window.draw(multiplayerButton);
 	window.draw(levelEditorButton);
 	window.draw(exitButton);
 	window.draw(gameName);
@@ -62,6 +68,12 @@ void MainMenu::handleEvent(sf::RenderWindow & window)
 				Application::getInstance()->setState(std::make_unique<LevelSelector>());
 				
 				logger.log("Start button is pressed!", Logger::Level::Info);
+			}
+
+			if (multiplayerButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
+			{
+				//Do nothing for now
+				logger.log("Multiplayer button is pressed!", Logger::Level::Info);
 			}
 			if (levelEditorButton.isCollisonWithPoint(sf::Vector2f(sf::Mouse::getPosition(window))))
 			{
