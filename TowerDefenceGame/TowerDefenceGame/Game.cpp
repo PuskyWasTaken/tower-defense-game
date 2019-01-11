@@ -1,21 +1,11 @@
+#pragma once
 #include "Game.h"
-
-
 
 Game::Game(const std::string &path)
 {
 	/* Random seed */
 	srand(time(nullptr));
 	
-	/* Initialise our shop // Will be done in the child class */
-	initShop();
-
-	/* Set our initial gold value */
-	m_shop->setGold(m_gold);
-
-	/* Set our initial life value */
-	m_shop->setLifePoints(m_lifePoints);
-
 	m_currentLevel = Level(path);
 	Logger logger(std::cout);
 	logger.log("Started game", Logger::Level::Info);
@@ -49,9 +39,6 @@ void Game::draw(sf::RenderWindow & window)
 
 	for (Tower i : m_towerArray)
 		window.draw(i);
-
-	/* Draw our Shop overlay */
-	window.draw(*m_shop);
 
 }
 void Game::handleEvent(sf::RenderWindow &window)
@@ -142,6 +129,10 @@ bool Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 
 	return false;
 }
+bool Game::checkWinLossConditions()
+{
+	return false;
+}
 sf::Vector2i Game::getMovementDirection(const short entrance) const
 {
 	/* North */
@@ -161,20 +152,4 @@ void Game::readLevel(const std::string& level)
 {
 	//Level newLevel(level);
 	//m_currentLevel = &newLevel;
-}
-bool Game::buyTower(const int price)
-{
-	/* Make sure we can afford the item */
-	if (m_gold < price)
-	{
-		m_shop->isSelected = false;
-		Logger logger(std::cout);
-		logger.log("You can't afford to pay for that", Logger::Level::Warning);
-		return false;
-	}
-
-	m_gold -= price;
-	m_shop->setGold(m_gold);
-	return true;
-
 }

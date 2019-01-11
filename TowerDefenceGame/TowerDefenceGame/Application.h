@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "IStateClass.h"
+#include "Game.h"
 #include "MainMenu.h"
 #include "LevelEditor.h"
 #include "../Logging/Logging.h"

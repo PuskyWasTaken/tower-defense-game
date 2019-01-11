@@ -32,7 +32,6 @@ protected:
 	std::vector<std::shared_ptr<Enemy>> m_enemyArray;
 	std::vector<Tower> m_towerArray;
 
-	std::unique_ptr<ShopPanel> m_shop;
 	int32_t m_gold;
 	int32_t m_lifePoints;
 
@@ -57,11 +56,6 @@ protected:
 
 	virtual bool checkWinLossConditions() = 0;
 	sf::Vector2i getMovementDirection(const short entrance) const;
-
-	/* Shop stuff */
-	virtual void handleShopPressed(const sf::Vector2f& mousePos) = 0;
-	virtual void initShop() = 0;
-	bool buyTower(const int price);
 
 	void readLevel(const std::string& level);
 };

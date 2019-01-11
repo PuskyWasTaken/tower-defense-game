@@ -1,8 +1,8 @@
 #pragma once
+#include "Game.h"
 #include "Application.h"
 #include "Button.h"
 #include "Enemy.h"
-#include "Game.h"
 #include "LevelEditor.h"
 #include <iostream>
 #include "../Logging/Logging.h"
