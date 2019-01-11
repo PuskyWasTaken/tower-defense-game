@@ -70,15 +70,13 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
 		if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
-		{
 			updateTextBoxFocus(window);
-			
-			if ( m_textBox.getIsSelected() )
-				m_textBox.handleEvent(window);
-		}
-	}
+		else
+			m_textBox.setIsSelected(false);
+
+	if (m_textBox.getIsSelected())
+		m_textBox.handleEvent(window);
 	
 }
 
