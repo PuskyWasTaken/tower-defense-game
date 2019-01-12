@@ -107,4 +107,5 @@ bool ServerNetwork::acceptNewClient(unsigned int & id)
 
 		return true;
 	}
+	return false;
 }

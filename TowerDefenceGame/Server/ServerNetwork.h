@@ -1,4 +1,6 @@
 #pragma once
+#pragma comment(lib, "Ws2_32.lib")
+
 #include <winsock2.h>
 #include <Windows.h>
 #include "NetworkServices.h"
