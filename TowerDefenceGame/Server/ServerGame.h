@@ -20,6 +20,9 @@ private:
 	// The ServerNetwork object 
 	ServerNetwork* network;
 
+	int attackerId = -1;
+	int defenderId = -1;
+
 	void receiveFromClients();
 
 private:

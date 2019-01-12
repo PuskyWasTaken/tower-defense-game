@@ -114,11 +114,14 @@ int ServerNetwork::receiveData(unsigned int clientId, char * receiveBuffer)
 	if (sessions.find(clientId) != sessions.end())
 	{
 		SOCKET currentSocket = sessions[clientId];
-		iResult = NetworkServices::receiveMessage(currentSocket, receiveBuffer, maxPacketSize);
+		iResult = NetworkServices::receiveMessage(currentSocket, receiveBuffer, maxPacketSize );
 		if (iResult == 0)
 		{
+			//close connection to unresponsive client and remove it from our Sessions map
 			printf("Connection closed\n");
+			//sessions.erase(clientId);
 			closesocket(currentSocket);
+
 		}
 		return iResult;
 	}

@@ -23,11 +23,9 @@ void ServerGame::update()
 	// get new clients
 	if (network->acceptNewClient(client_id))
 	{
-
-		m_logger->log("Client " + std::to_string(client_id) + "has been conected to the server", Logger::Level::Info);
-		
-
 		client_id++;
+		m_logger->log("Client " + std::to_string(client_id) + " has been conected to the server", Logger::Level::Info);
+		
 	}
 	receiveFromClients();
 }
@@ -78,9 +76,38 @@ void ServerGame::receiveFromClients()
 				}
 			case ACTION_EVENT:
 			{
-				m_logger->log(" Server received some data package from client: " + std::to_string(client_id) , Logger::Level::Info);
+				m_logger->log(" Server received action package from client: " + std::to_string(client_id) , Logger::Level::Info);
 				break;
 			}
+			case ATTACKER:
+			{
+				if (attackerId != -1)
+				{
+					closesocket(closesocket(network->sessions[client_id]));
+				//	network->sessions.erase(client_id);
+					m_logger->log(std::to_string(client_id) + "Attacker role was already used, connection closed to" + 
+						std::to_string(client_id), Logger::Level::Warning);
+					break;
+				}
+				attackerId = client_id;
+				m_logger->log(std::to_string(client_id) + "Chose attacker role", Logger::Level::Info);	
+				break;
+			}
+			case DEFENDER:
+			{
+				if (defenderId != -1)
+				{
+					closesocket(closesocket(network->sessions[client_id]));
+					//network->sessions.erase(client_id);
+					m_logger->log(std::to_string(client_id) + "Defender role was already used, connection closed to" +
+						std::to_string(client_id), Logger::Level::Warning);
+					break;
+				}
+				defenderId = client_id;
+				m_logger->log(std::to_string(client_id) + "Chose defender role", Logger::Level::Info);
+				break;
+			}
+			
 			default:
 			{
 				m_logger->log("Error in packet type", Logger::Level::Warning);

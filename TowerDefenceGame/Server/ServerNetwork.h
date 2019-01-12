@@ -9,7 +9,6 @@
 #include <stdio.h> 
 
 #include "..\Logging\Logging.h"
-#include "ServeWideConstants.h"
 
 class ServerNetwork
 {
