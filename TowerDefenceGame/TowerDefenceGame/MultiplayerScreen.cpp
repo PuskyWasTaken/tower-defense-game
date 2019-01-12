@@ -37,6 +37,10 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 {
 	Logger logger(std::cout);
 
+	/* We already chose so.. */
+	if (m_selectedButton != -1)
+		return true;
+
 	if (m_defender.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the defender! ", Logger::Level::Info);
@@ -54,6 +58,9 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 	if (m_attacker.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the attacker!", Logger::Level::Info);
+
+		if (m_selectedButton == -1)
+			m_selectedButton = Client::playerTypes::Attacker;
 
 		/* Hard coded for now */
 		if (Application::getInstance()->client == nullptr)
@@ -77,34 +84,50 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 }
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
-			updateTextBoxFocus(window);
-		else
-			m_textBox.setIsSelected(false);
-
-	/* Check for the validity of our choice */
-	if (!Application::getInstance()->client->getPlayerChoiceIsValid())
+	sf::Event e;
+	window.pollEvent(e);
+	
+	if (e.type == e.KeyPressed)
 	{
-		/* If it's invalid, that means that the player we chose is already taken so expect the server to assign us to the other player slot */
-		switch (m_selectedButton)
+		/* TO DO: Handle ESC key */
+	}
+	else if (e.type == e.MouseButtonPressed)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
+					updateTextBoxFocus(window);
+				else
+					m_textBox.setIsSelected(false);
+	}
+
+	/* If our client exists */
+	if (Application::getInstance()->client != nullptr)
+	{
+		/* Check for the validity of our choice */
+		if (!Application::getInstance()->client->getPlayerChoiceIsValid())
 		{
-		case Client::playerTypes::Attacker:
+			/* If it's invalid, that means that the player we chose is already taken so expect the server to assign us to the other player slot */
+			switch (m_selectedButton)
+			{
+			case Client::playerTypes::Attacker:
 
-			m_selectedButton = Client::playerTypes::Defender;
-			break;
+				m_selectedButton = Client::playerTypes::Defender;
+				break;
 
-		case Client::playerTypes::Defender:
+			case Client::playerTypes::Defender:
 
-			m_selectedButton = Client::playerTypes::Attacker;
-			break;
+				m_selectedButton = Client::playerTypes::Attacker;
+				break;
 
-		default:
+			default:
 
-			Logger logger(std::cout);
-			logger.log("You haven't chosen your player yet but somehow managed to connect to the server. This shouldn't happen!", Logger::Level::Error);
-			exit((int)Logger::Level::Error);
-			break;
+				Logger logger(std::cout);
+				logger.log("You haven't chosen your player yet but somehow managed to connect to the server. This shouldn't happen!", Logger::Level::Error);
+				exit((int)Logger::Level::Error);
+				break;
+			}
 		}
 
 		/* Check if the game has started */
@@ -128,17 +151,17 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 
 			default:
 
-				
+
 				logger.log("Game has started without both players being ready!", Logger::Level::Error);
 				exit((int)Logger::Level::Error);
 				break;
 
 			}
 		}
-
-		if (m_textBox.getIsSelected())
-			m_textBox.handleEvent(window);
 	}
+
+	if (m_textBox.getIsSelected())
+		m_textBox.handleEvent(window);
 }
 void MultiplayerScreen::updateTextBoxFocus(sf::RenderWindow & window) 
 {
