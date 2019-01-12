@@ -71,6 +71,11 @@ bool Client::getPlayerChoiceIsValid()
 {
 	return m_playerChoiceIsValid;
 }
+void Client::setPlayerChoiceIsValid(const bool newValue)
+{
+	if (newValue != m_playerChoiceIsValid)
+		m_playerChoiceIsValid = newValue;
+}
 void Client::sendActionPackets(const unsigned int actionType)
 { 
 	/* Send action packet */
@@ -137,13 +142,23 @@ void Client::update()
 
 				if (!m_hasStarted)
 					m_hasStarted = true;
-
 				break;
 			
 			case PLAYER_ALREADY_TAKEN:
 
-				if (m_hasStarted)
+				if (m_playerChoiceIsValid)
 					m_playerChoiceIsValid = false;
+				break;
+
+			case ATTACKER:
+
+				/* We recieved data from the attacker */
+				break;
+
+
+			case DEFENDER:
+
+				/* We recieved data from the defender */
 				break;
 
 			default:

@@ -23,6 +23,8 @@ private:
 private:
 	bool m_hasStarted = false;
 	bool m_playerChoiceIsValid = true;
+	bool m_recievedFromAttacker = false;
+	bool m_recievedFromDefender = false;
 	
 private:
 
@@ -32,6 +34,8 @@ public:
 
 	bool getHasStarted();
 	bool getPlayerChoiceIsValid();
+
+	void setPlayerChoiceIsValid(const bool newValue);
 	
 	
 	void sendActionPackets(const unsigned int actionType);

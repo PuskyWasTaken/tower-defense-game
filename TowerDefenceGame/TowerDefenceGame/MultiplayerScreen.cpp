@@ -105,36 +105,38 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 	/* If our client exists */
 	if (Application::getInstance()->client != nullptr)
 	{
+		Logger logger(std::cout);
+		
 		/* Check for the validity of our choice */
 		if (!Application::getInstance()->client->getPlayerChoiceIsValid())
 		{
-			/* If it's invalid, that means that the player we chose is already taken so expect the server to assign us to the other player slot */
-			switch (m_selectedButton)
+			if (m_selectedButton != -1)
 			{
-			case Client::playerTypes::Attacker:
+				/* If it's invalid, that means that the player we chose is already taken so expect the server to assign us to the other player slot */
+				switch (m_selectedButton)
+				{
+					case Client::playerTypes::Attacker:
 
-				m_selectedButton = Client::playerTypes::Defender;
-				break;
+						m_selectedButton = Client::playerTypes::Defender;
 
-			case Client::playerTypes::Defender:
+						logger.log("Attacker was already taken, you are now Defender", Logger::Level::Info);
+						break;
 
-				m_selectedButton = Client::playerTypes::Attacker;
-				break;
+					case Client::playerTypes::Defender:
 
-			default:
+						m_selectedButton = Client::playerTypes::Attacker;
 
-				Logger logger(std::cout);
-				logger.log("You haven't chosen your player yet but somehow managed to connect to the server. This shouldn't happen!", Logger::Level::Error);
-				exit((int)Logger::Level::Error);
-				break;
+						logger.log("Defender was already taken, you are now Attacker", Logger::Level::Info);
+						break;
+				}
+
+				Application::getInstance()->client->setPlayerChoiceIsValid(true);
 			}
 		}
 
 		/* Check if the game has started */
 		if (Application::getInstance()->client->getHasStarted())
-		{
-			Logger logger(std::cout);
-
+		{	
 			switch (m_selectedButton)
 			{
 				case Client::playerTypes::Attacker:
@@ -150,7 +152,6 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 					return;
 
 				default:
-
 
 					logger.log("Game has started without both players being ready!", Logger::Level::Error);
 					exit((int)Logger::Level::Error);
