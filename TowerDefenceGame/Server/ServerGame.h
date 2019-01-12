@@ -26,6 +26,7 @@ private:
 	int defenderId = -1;
 
 	void receiveFromClients();
+	void handlePacketData(const Packet& packet);
 
 private:
 	std::unique_ptr<Logger> m_logger;

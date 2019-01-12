@@ -15,7 +15,8 @@ enum PacketTypes {
 	ACTION_EVENT,
 	ATTACKER,
 	DEFENDER,
-	START_GAME
+	START_GAME,
+	INT_EVENT
 };
 
 class Packet {
@@ -32,4 +33,5 @@ public:
 		memcpy(this, data, sizeof(Packet));
 	}
 };
+
 

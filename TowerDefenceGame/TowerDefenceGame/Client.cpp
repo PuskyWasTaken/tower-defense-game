@@ -1,5 +1,7 @@
 #include "Client.h"
 #include "..\NetworkData\NetworkData.h"
+#include <string.h>
+
 // #include "stdafx.h"
 
 Client::Client(const short playerType, const char* ip)
@@ -64,15 +66,17 @@ void Client::sendInitialPacket(const short playerType)
 void Client::sendActionPackets()
 { 
 	/* Send action packet */
-	const unsigned int size = sizeof(Packet);
-	char data[size];
+	char data[defaultBufferLength];
+
+	char* send = new char[defaultBufferLength];
+	strcpy_s(send, 5, "Test");
 
 	Packet packet;
 	packet.type = ACTION_EVENT;
 
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, data, size);
+	NetworkServices::sendMessage(network->ConnectSocket, send, defaultBufferLength);
 }
 void Client::setPlayerType(const short newType)
 {
