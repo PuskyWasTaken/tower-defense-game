@@ -29,11 +29,12 @@ void ServerGame::update()
 	}
 	receiveFromClients();
 	
-	if (hasBothPlayers())
+	if (hasBothPlayers() && !gameHasStarted)
 	{
-	
-		sendPacket(attackerId, START_GAME);
+		
 		sendPacket(defenderId, START_GAME);
+		sendPacket(attackerId, START_GAME);
+		gameHasStarted = true;
 	}
 }
 
@@ -43,7 +44,7 @@ void ServerGame::sendActionPackets()
 	char packet_data[packet_size];
 
 	Packet packet;
-	packet.type = ACTION_EVENT;
+	packet.type = START_GAME;
 
 	packet.serialize(packet_data);
 
@@ -113,31 +114,48 @@ void ServerGame::handlePacketData(const Packet & packet)
 		}
 		case ATTACKER:
 		{
-			if (attackerId != -1)
+			if (gameHasStarted)
 			{
-				closesocket(closesocket(network->sessions[client_id]));
-				//	network->sessions.erase(client_id);
-				m_logger->log(std::to_string(client_id) + "Attacker role was already used, connection closed to" +
-					std::to_string(client_id), Logger::Level::Warning);
-				break;
+				sendPacket(defenderId, (PacketTypes)packet.type);
+				return;
 			}
-			attackerId = client_id;
-			m_logger->log(std::to_string(client_id) + "Chose attacker role", Logger::Level::Info);
-			break;
+			else 
+				if (attackerId != -1)
+				{
+					defenderId = client_id;
+					m_logger->log(std::to_string(client_id) + "Attacker role was already used, switching role to defender for client: " +
+						std::to_string(client_id), Logger::Level::Warning);
+					sendPacket(defenderId, PLAYER_ALREADY_TAKEN);
+					Sleep(100);
+					return;
+				}
+				attackerId = client_id;
+				m_logger->log(std::to_string(client_id) + "Chose attacker role", Logger::Level::Info);
+
+				break;
+			
 		}
 		case DEFENDER:
 		{
-			if (defenderId != -1)
+			if (gameHasStarted)
 			{
-				closesocket(closesocket(network->sessions[client_id]));
-				//network->sessions.erase(client_id);
-				m_logger->log(std::to_string(client_id) + "Defender role was already used, connection closed to" +
-					std::to_string(client_id), Logger::Level::Warning);
-				break;
+				sendPacket(defenderId, (PacketTypes)packet.type);
+				return;
 			}
-			defenderId = client_id;
-			m_logger->log(std::to_string(client_id) + "Chose defender role", Logger::Level::Info);
-			break;
+
+				if (defenderId != -1)
+				{
+					attackerId = client_id;
+					m_logger->log(std::to_string(client_id) + "Defender role was already used, switching role to attacker for client: " +
+						std::to_string(client_id), Logger::Level::Warning);
+					sendPacket(attackerId, PLAYER_ALREADY_TAKEN);
+					Sleep(100);
+					return;
+				}
+				defenderId = client_id;
+				m_logger->log(std::to_string(client_id) + "Chose defender role", Logger::Level::Info);
+				break;
+			
 		}
 
 		default:

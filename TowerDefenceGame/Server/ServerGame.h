@@ -31,6 +31,7 @@ private:
 private:
 	std::unique_ptr<Logger> m_logger;
 	char networkData[maxPacketSize];
+	bool gameHasStarted = false;
 
 	bool hasBothPlayers();
 };

@@ -150,13 +150,23 @@ void ServerNetwork::sendToAll(char * packets, int totalSize)
 
 void ServerNetwork::sendToClient(char * packets, int totalSize, int clientId)
 {
-	SOCKET currentSocket = sessions[clientId];
+	SOCKET currentSocket;
+	std::map<unsigned int, SOCKET>::iterator iterator;
+
 	int iSendResult;
+
+	for (iterator = sessions.begin(); iterator != sessions.end(); iterator++)
+	{
+		if (clientId-1 == iterator->first)
+		{
+			currentSocket = iterator->second;
+		}
+	}
 
 	iSendResult = NetworkServices::sendMessage(currentSocket, packets, totalSize);
 	if (iSendResult == SOCKET_ERROR)
 	{
 		m_logger->log("send failed with error : " + std::to_string(WSAGetLastError()), Logger::Level::Error);
-		closesocket(currentSocket);
+		closesocket(sessions[clientId]);
 	}
 }
