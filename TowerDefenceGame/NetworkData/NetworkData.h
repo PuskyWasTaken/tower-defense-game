@@ -1,5 +1,6 @@
 #pragma once
 #include <string.h>
+#include <iostream>
 
 /* Basically our globals class for the Network stuff. */
 static const unsigned int maxPacketSize = 1000000;

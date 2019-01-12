@@ -28,6 +28,13 @@ void ServerGame::update()
 		
 	}
 	receiveFromClients();
+	
+	if (hasBothPlayers())
+	{
+	
+		sendPacket(attackerId, START_GAME);
+		sendPacket(defenderId, START_GAME);
+	}
 }
 
 void ServerGame::sendActionPackets()
@@ -41,6 +48,20 @@ void ServerGame::sendActionPackets()
 	packet.serialize(packet_data);
 
 	network->sendToAll(packet_data, packet_size);
+}
+
+void ServerGame::sendPacket(const int &clientId, PacketTypes packetType)
+{
+	const unsigned int packetSize = sizeof(Packet);
+	char packetData[packetSize];
+
+	Packet packet;
+	packet.type = packetType;
+
+	packet.serialize(packetData);
+
+	network->sendToClient(packetData, packetSize, clientId);
+	
 }
 
 void ServerGame::receiveFromClients()
@@ -119,4 +140,11 @@ void ServerGame::receiveFromClients()
 
 	}
 
+}
+
+bool ServerGame::hasBothPlayers()
+{
+	if (attackerId != -1 && defenderId != -1)
+		return true;
+	return false;
 }

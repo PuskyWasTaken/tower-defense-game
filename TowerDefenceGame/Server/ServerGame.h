@@ -12,6 +12,8 @@ public:
 
 
 	void sendActionPackets();
+	void sendPacket(const int &clientId, PacketTypes packetType);
+	
 
 private:
 	// IDs for the clients connecting for table in ServerNetwork 
@@ -28,5 +30,7 @@ private:
 private:
 	std::unique_ptr<Logger> m_logger;
 	char networkData[maxPacketSize];
+
+	bool hasBothPlayers();
 };
 

@@ -147,3 +147,16 @@ void ServerNetwork::sendToAll(char * packets, int totalSize)
 		}
 	}
 }
+
+void ServerNetwork::sendToClient(char * packets, int totalSize, int clientId)
+{
+	SOCKET currentSocket = sessions[clientId];
+	int iSendResult;
+
+	iSendResult = NetworkServices::sendMessage(currentSocket, packets, totalSize);
+	if (iSendResult == SOCKET_ERROR)
+	{
+		m_logger->log("send failed with error : " + std::to_string(WSAGetLastError()), Logger::Level::Error);
+		closesocket(currentSocket);
+	}
+}

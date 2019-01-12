@@ -27,7 +27,8 @@ public:
 
 	bool acceptNewClient(unsigned int &id);
 	int receiveData(unsigned int clientId, char * receiveBuffer);
-	void sendToAll(char * packets, int totalSize);
+	void sendToAll(char* packets, int totalSize);
+	void sendToClient(char* packets, int totalSize, int clientId);
 
 private:
 	std::unique_ptr<Logger> m_logger;
