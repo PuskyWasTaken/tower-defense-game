@@ -127,6 +127,8 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientNetwork.cpp" />
     <ClCompile Include="EndScreen.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyShop.cpp" />
@@ -145,6 +147,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="MultiplayerScreen.cpp" />
+    <ClCompile Include="NetworkServices.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="SFML_tests.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -158,6 +161,8 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientNetwork.h" />
     <ClInclude Include="EndScreen.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyShop.h" />
@@ -175,6 +180,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="MultiplayerScreen.h" />
+    <ClInclude Include="NetworkServices.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="SFML_tests.h" />
     <ClInclude Include="IStateClass.h" />

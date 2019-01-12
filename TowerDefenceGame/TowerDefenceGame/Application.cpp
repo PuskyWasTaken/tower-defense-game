@@ -14,6 +14,9 @@ Application::Application(const std::string& name, const int32_t x, const int32_t
 	/* Switch our state to the Menu */
 	stateController = std::make_unique<MainMenu>();
 
+	/* Init our client with nullptr as we do not have any connection yet.*/
+	client = nullptr;
+
    Logger logger(std::cout);
    logger.log("Started application", Logger::Level::Info);
 
@@ -52,6 +55,13 @@ void Application::gameLoop()
 		/* Fixed Update */
 		if (elapsedTime > this->frameTime)
 		{
+			/* Do we have multiplayer on? */
+			if (this->client != nullptr)
+			{
+				/* Then update the client (recieve data) */
+				//client->update();
+			}
+			
 			/* Let the state do it's updating */
 			stateController->update(window);
 
@@ -69,6 +79,7 @@ void Application::gameLoop()
 			
 			/* Display the new frame */
 			window.display();
+
 		}
 	}
 }

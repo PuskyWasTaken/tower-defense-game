@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Application\Game">
       <UniqueIdentifier>{d072f5d5-c317-4832-ba0a-554a096d5cbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MultiplayerClient">
+      <UniqueIdentifier>{4d3766eb-b5f3-4169-9756-79ea03a5e5fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MultiplayerClient">
+      <UniqueIdentifier>{712e64e2-0f82-4173-8981-159e301841f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML_tests.cpp">
@@ -152,6 +158,15 @@
     </ClCompile>
     <ClCompile Include="EnemyShop.cpp">
       <Filter>Source Files\Entities\Unmovable\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source Files\MultiplayerClient</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientNetwork.cpp">
+      <Filter>Source Files\MultiplayerClient</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkServices.cpp">
+      <Filter>Source Files\MultiplayerClient</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +256,15 @@
     </ClInclude>
     <ClInclude Include="EnemyShop.h">
       <Filter>Header Files\Entities\Unmovable\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\MultiplayerClient</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientNetwork.h">
+      <Filter>Header Files\MultiplayerClient</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkServices.h">
+      <Filter>Header Files\MultiplayerClient</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
