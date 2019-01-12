@@ -1,10 +1,10 @@
 #include "Client.h"
 // #include "stdafx.h"
 
-Client::Client()
+Client::Client(const char* ip)
 {
 	/* Init our network */
-	network = std::make_unique<ClientNetwork>();
+	network = std::make_unique<ClientNetwork>(ip);
 
 	// send init packet
 	//const unsigned int packet_size = sizeof(Packet);

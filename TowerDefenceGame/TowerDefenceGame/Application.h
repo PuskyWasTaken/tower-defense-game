@@ -25,8 +25,11 @@ private:
 
 	/* https://tinyurl.com/yapf2wpe - to understand why we use std::unique_ptr */
 	std::unique_ptr<IStateClass> stateController;
+
+public:
 	std::unique_ptr<Client> client;
 	
+private:
 	sf::RenderWindow window;
 	sf::Event event;
 

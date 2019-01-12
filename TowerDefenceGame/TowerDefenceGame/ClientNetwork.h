@@ -23,6 +23,7 @@ static const char* DEFAULT_PORT = "27015";
 class ClientNetwork
 {
 public:
+	ClientNetwork(const char* connectionIp);
 	ClientNetwork();
 	~ClientNetwork();
 
@@ -34,5 +35,7 @@ public:
 
 private: 
 	std::unique_ptr<Logger> m_log;
+
+	void init(const char* connectionIp);
 };
 

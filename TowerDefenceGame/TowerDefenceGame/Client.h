@@ -8,6 +8,7 @@
 class Client
 {
 public:
+	Client(const char* ip);
 	Client();
 	~Client();
 

@@ -180,6 +180,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="MultiplayerScreen.h" />
+    <ClInclude Include="NetworkData.h" />
     <ClInclude Include="NetworkServices.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="SFML_tests.h" />

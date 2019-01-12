@@ -2,11 +2,25 @@
 #include "ClientNetwork.h"
 
 
+ClientNetwork::ClientNetwork(const char* connectionIp)
+{
+	init(connectionIp);
+}
 ClientNetwork::ClientNetwork()
-{ 
+{
+	init("127.0.0.1");
+}
+
+ClientNetwork::~ClientNetwork()
+{
+}
+
+
+void ClientNetwork::init(const char * connectionIp)
+{
 	/* Create Logger */
 	m_log = std::make_unique<Logger>(std::cout);
-	
+
 	/* Create WSADATA object */
 	WSADATA wsaData;
 
@@ -34,7 +48,7 @@ ClientNetwork::ClientNetwork()
 	hints.ai_protocol = IPPROTO_TCP;  //TCP connection!!!
 
 	/* Resolve server address and port */
-	iResult = getaddrinfo("127.0.0.1", DEFAULT_PORT, &hints, &result);
+	iResult = getaddrinfo(connectionIp, DEFAULT_PORT, &hints, &result);
 
 	if (iResult != 0)
 	{
@@ -69,7 +83,7 @@ ClientNetwork::ClientNetwork()
 
 	/* No longer need address info for server */
 	freeaddrinfo(result);
-	   
+
 	/* If connection failed */
 	if (ConnectSocket == INVALID_SOCKET)
 	{
@@ -94,9 +108,4 @@ ClientNetwork::ClientNetwork()
 	char value = 1;
 	setsockopt(ConnectSocket, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
-}
-
-
-ClientNetwork::~ClientNetwork()
-{
 }

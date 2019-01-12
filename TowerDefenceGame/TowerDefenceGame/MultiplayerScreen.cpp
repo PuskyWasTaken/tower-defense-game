@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "GameAttacker.h"
 #include "GameDefender.h"
+#include "Client.h"
 
 
 MultiplayerScreen::MultiplayerScreen()
@@ -73,7 +74,12 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 		if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
 			updateTextBoxFocus(window);
 		else
+		{
 			m_textBox.setIsSelected(false);
+
+			/* Hard coded for now */
+			Application::getInstance()->client = std::make_unique<Client>("79.116.214.20");
+		}
 
 	if (m_textBox.getIsSelected())
 		m_textBox.handleEvent(window);
