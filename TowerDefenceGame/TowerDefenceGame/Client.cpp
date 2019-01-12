@@ -28,11 +28,38 @@ void Client::sendInitialPacket(const short playerType)
 	char data[size];
 
 	Packet packet;
-	packet.type = INIT_CONNECTION;
+	packet.type = PacketTypes::INIT_CONNECTION;
 
 	packet.serialize(data);
 
 	NetworkServices::sendMessage(network->ConnectSocket, data, size);
+
+	Packet choicePacket;
+
+	/* Send the second packet with our player choice */
+	switch (playerType)
+	{
+		case Client::playerTypes::Attacker:
+		{
+			choicePacket.type = PacketTypes::ATTACKER;
+			break;
+		}
+		case Client::playerTypes::Defender:
+		{
+			choicePacket.type = PacketTypes::DEFENDER;
+			break;
+		}
+		default:
+		{
+			logger->log("Did not recieve a valid player type!", Logger::Level::Error);
+			exit((int)Logger::Level::Error);
+		}
+	}
+
+	/* Send it already */
+	choicePacket.serialize(data);
+	NetworkServices::sendMessage(network->ConnectSocket, data, size);
+
 }
 void Client::sendActionPackets()
 { 
@@ -54,6 +81,8 @@ void Client::setPlayerType(const short newType)
 
 void Client::update()
 {
+	sendActionPackets();
+	
 	Packet packet;
 	int dataLenght = network->receivePackets(m_networkData);
 

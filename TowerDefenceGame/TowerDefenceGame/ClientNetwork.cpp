@@ -17,7 +17,7 @@ ClientNetwork::~ClientNetwork()
 
 int ClientNetwork::receivePackets(char *recvbuf)
 {
-	iResult = NetworkServices::receiveMessage(ConnectSocket, recvbuf, MAX_PACKET_SIZE);
+	iResult = NetworkServices::receiveMessage(ConnectSocket, recvbuf, maxPacketSize);
 
 	if (iResult == 0)
 	{
@@ -63,7 +63,7 @@ void ClientNetwork::init(const char * connectionIp)
 	hints.ai_protocol = IPPROTO_TCP;  //TCP connection!!!
 
 	/* Resolve server address and port */
-	iResult = getaddrinfo(connectionIp, DEFAULT_PORT, &hints, &result);
+	iResult = getaddrinfo(connectionIp, defaultServerPort, &hints, &result);
 
 	if (iResult != 0)
 	{

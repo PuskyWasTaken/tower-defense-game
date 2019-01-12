@@ -2,13 +2,19 @@
 #include <string.h>
 
 /* Basically our globals class for the Network stuff. */
+static const unsigned int maxPacketSize = 1000000;
+static const int32_t defaultBufferLength = 512;
 
-static const unsigned int MAX_PACKET_SIZE = 1000000;
+/* Port to connect sockets through */
+static const char* defaultServerPort = "27015";
 
 enum PacketTypes {
 
-	INIT_CONNECTION = 0,
-	ACTION_EVENT = 1
+	INIT_CONNECTION,
+	ACTION_EVENT,
+	ATTACKER,
+	DEFENDER,
+	START_GAME
 };
 
 class Packet {

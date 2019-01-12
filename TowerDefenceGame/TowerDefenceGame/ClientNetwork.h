@@ -9,11 +9,6 @@
 #include <iostream>
 #include "..\NetworkData\NetworkData.h"
 
-static const int32_t DEFAULT_BUFLEN = 512;
-
-/* Port to connect sockets through */
-static const char* DEFAULT_PORT = "27015";
-
 // TO DO: What?!
 /* Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib */
 #pragma comment (lib, "Ws2_32.lib")
@@ -30,7 +25,7 @@ public:
 
 	/* For error checking function calls in Winsock library */
 	int iResult;
-	int receivePackets(char *recvbuf);
+	int receivePackets(char *recievedBuffer);
 
 	/* Socket for client to connect to server */
 	SOCKET ConnectSocket;
