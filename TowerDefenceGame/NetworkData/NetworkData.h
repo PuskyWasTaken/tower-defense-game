@@ -16,7 +16,8 @@ enum PacketTypes {
 	ATTACKER,
 	DEFENDER,
 	START_GAME,
-	SPAWN_TOWER
+	SPAWN_TOWER,
+	PLAYER_ALREADY_TAKEN
 };
 
 class Packet {

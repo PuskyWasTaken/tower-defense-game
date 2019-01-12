@@ -29,7 +29,6 @@ MultiplayerScreen::MultiplayerScreen()
 	m_textBox.setText("ENTER TEXT HERE");
 	
 }
-
 MultiplayerScreen::~MultiplayerScreen()
 {
 }
@@ -41,10 +40,13 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 	if (m_defender.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the defender! ", Logger::Level::Info);
-		Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
+
+		if (m_selectedButton == -1)
+			m_selectedButton = Client::playerTypes::Defender;
 
 		/* Hard coded for now */
-		Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, "79.116.214.20");
+		if (Application::getInstance()->client == nullptr)
+			Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, "79.116.214.20");
 
 		return true;
 	}
@@ -52,22 +54,20 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 	if (m_attacker.isCollisonWithPoint(mousePosition))
 	{
 		logger.log("You've chosen to be the attacker!", Logger::Level::Info);
-		Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
 
 		/* Hard coded for now */
-		Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, "79.116.214.20");
+		if (Application::getInstance()->client == nullptr)
+			Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, "79.116.214.20");
 
 		return true;
 	}
 
 	return false;
 }
-
 void MultiplayerScreen::update(sf::RenderWindow & window)
 {
 	handleEvent(window);
 }
-
 void MultiplayerScreen::draw(sf::RenderWindow & window)
 {
 	window.draw(m_instructions);
@@ -75,7 +75,6 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 	window.draw(m_attacker);
 	window.draw(m_textBox);
 }
-
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -84,12 +83,63 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 		else
 			m_textBox.setIsSelected(false);
 
+	/* Check for the validity of our choice */
+	if (!Application::getInstance()->client->getPlayerChoiceIsValid())
+	{
+		/* If it's invalid, that means that the player we chose is already taken so expect the server to assign us to the other player slot */
+		switch (m_selectedButton)
+		{
+		case Client::playerTypes::Attacker:
 
-	if (m_textBox.getIsSelected())
-		m_textBox.handleEvent(window);
-	
+			m_selectedButton = Client::playerTypes::Defender;
+			break;
+
+		case Client::playerTypes::Defender:
+
+			m_selectedButton = Client::playerTypes::Attacker;
+			break;
+
+		default:
+
+			Logger logger(std::cout);
+			logger.log("You haven't chosen your player yet but somehow managed to connect to the server. This shouldn't happen!", Logger::Level::Error);
+			exit((int)Logger::Level::Error);
+			break;
+		}
+
+		/* Check if the game has started */
+		if (Application::getInstance()->client->getHasStarted())
+		{
+			Logger logger(std::cout);
+
+			switch (m_selectedButton)
+			{
+			case Client::playerTypes::Attacker:
+
+				logger.log("Game Started! You are attacker", Logger::Level::Info);
+				Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
+				break;
+
+			case Client::playerTypes::Defender:
+
+				logger.log("Game Started! You are defender!", Logger::Level::Info);
+				Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
+				break;
+
+			default:
+
+				
+				logger.log("Game has started without both players being ready!", Logger::Level::Error);
+				exit((int)Logger::Level::Error);
+				break;
+
+			}
+		}
+
+		if (m_textBox.getIsSelected())
+			m_textBox.handleEvent(window);
+	}
 }
-
 void MultiplayerScreen::updateTextBoxFocus(sf::RenderWindow & window) 
 {
 	if (m_textBox.m_button.isCollisonWithPoint((sf::Vector2f)sf::Mouse::getPosition(window)))

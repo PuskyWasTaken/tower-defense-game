@@ -13,6 +13,8 @@ private:
 	Button m_attacker;
 	TextBox m_textBox;
 
+	int m_selectedButton = -1;
+
 public:
 	MultiplayerScreen();
 	~MultiplayerScreen();
@@ -23,6 +25,7 @@ public:
 	void handleEvent(sf::RenderWindow &window) override;
 
 private:
+
 	bool chosePlayer(const sf::Vector2f& mousePosition);
 	void updateTextBoxFocus(sf::RenderWindow &window);
 };

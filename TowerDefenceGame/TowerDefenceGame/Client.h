@@ -19,6 +19,10 @@ private:
 	short m_playerType;
 	char m_networkData[maxPacketSize]; // RIP
 	std::unique_ptr<Logger> logger;
+
+private:
+	bool m_hasStarted = false;
+	bool m_playerChoiceIsValid = true;
 	
 private:
 
@@ -26,6 +30,10 @@ private:
 
 public:
 
+	bool getHasStarted();
+	bool getPlayerChoiceIsValid();
+	
+	
 	void sendActionPackets(const unsigned int actionType);
 	void sendActionTowerPlaced(const float x, const float y);
 	void setPlayerType(const short newType);

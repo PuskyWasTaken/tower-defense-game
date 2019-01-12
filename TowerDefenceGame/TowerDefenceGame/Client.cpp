@@ -63,6 +63,14 @@ void Client::sendInitialPacket(const short playerType)
 	NetworkServices::sendMessage(network->ConnectSocket, data, size);
 
 }
+bool Client::getHasStarted()
+{
+	return this->m_hasStarted;
+}
+bool Client::getPlayerChoiceIsValid()
+{
+	return m_playerChoiceIsValid;
+}
 void Client::sendActionPackets(const unsigned int actionType)
 { 
 	/* Send action packet */
@@ -123,6 +131,19 @@ void Client::update()
 			case ACTION_EVENT:
 
 				logger->log("Client received action event packet from server", Logger::Level::Info);
+				break;
+
+			case START_GAME:
+
+				if (!m_hasStarted)
+					m_hasStarted = true;
+
+				break;
+			
+			case PLAYER_ALREADY_TAKEN:
+
+				if (m_hasStarted)
+					m_playerChoiceIsValid = false;
 				break;
 
 			default:
