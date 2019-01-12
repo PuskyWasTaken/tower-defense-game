@@ -16,7 +16,7 @@ enum PacketTypes {
 	ATTACKER,
 	DEFENDER,
 	START_GAME,
-	INT_EVENT
+	SPAWN_TOWER
 };
 
 class Packet {
@@ -24,6 +24,7 @@ class Packet {
 public:
 
 	unsigned int type;
+	float x, y;
 
 	void serialize(char * data) {
 		memcpy(data, this, sizeof(Packet));
@@ -33,5 +34,7 @@ public:
 		memcpy(this, data, sizeof(Packet));
 	}
 };
+
+
 
 

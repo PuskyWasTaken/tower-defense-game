@@ -23,10 +23,11 @@ private:
 private:
 
 	void sendInitialPacket(const short playerType);
-	void sendActionPackets();
 
 public:
 
+	void sendActionPackets(const unsigned int actionType);
+	void sendActionTowerPlaced(const float x, const float y);
 	void setPlayerType(const short newType);
 	void update();
 

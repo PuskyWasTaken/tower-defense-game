@@ -63,20 +63,38 @@ void Client::sendInitialPacket(const short playerType)
 	NetworkServices::sendMessage(network->ConnectSocket, data, size);
 
 }
-void Client::sendActionPackets()
+void Client::sendActionPackets(const unsigned int actionType)
 { 
 	/* Send action packet */
-	char data[defaultBufferLength];
+	char data[sizeof(Packet)];
 
-	char* send = new char[defaultBufferLength];
-	strcpy_s(send, 5, "Test");
+	//std::string send = "This will be sent";
+	// char* cStr = new char[send.length() + 1];
+	// strcpy(cStr, send.c_str());
 
 	Packet packet;
-	packet.type = ACTION_EVENT;
+	packet.type = (PacketTypes)actionType;
+	packet.x = -1;
+	packet.y = -1;
+	
+	packet.serialize(data);
+
+	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
+}
+void Client::sendActionTowerPlaced(const float x, const float y)
+{
+	/* Send action */
+	char data[sizeof(Packet)];
+
+	Packet packet;
+
+	packet.type = SPAWN_TOWER;
+	packet.x = x;
+	packet.y = y;
 
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, send, defaultBufferLength);
+	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
 }
 void Client::setPlayerType(const short newType)
 {
@@ -85,8 +103,6 @@ void Client::setPlayerType(const short newType)
 
 void Client::update()
 {
-	sendActionPackets();
-	
 	Packet packet;
 	int dataLenght = network->receivePackets(m_networkData);
 
@@ -104,17 +120,15 @@ void Client::update()
 		switch (packet.type)
 		{
 
-		case ACTION_EVENT:
+			case ACTION_EVENT:
 
-			sendActionPackets();
+				logger->log("Client received action event packet from server", Logger::Level::Info);
+				break;
 
-			logger->log("Client received action event packet from server", Logger::Level::Info);
-			break;
+			default:
 
-		default:
-
-			logger->log("Error in packet types", Logger::Level::Error);
-			break;
+				logger->log("Error in packet types", Logger::Level::Error);
+				break;
 		}
 	}
 }
