@@ -27,6 +27,8 @@ public:
 	std::map<unsigned int, SOCKET> sessions;
 
 	bool acceptNewClient(unsigned int &id);
+	int receiveData(unsigned int clientId, char * receiveBuffer);
+	void sendToAll(char * packets, int totalSize);
 
 private:
 	std::unique_ptr<Logger> m_logger;

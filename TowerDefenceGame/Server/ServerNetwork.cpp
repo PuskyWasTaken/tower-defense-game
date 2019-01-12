@@ -93,7 +93,7 @@ ServerNetwork::~ServerNetwork()
 
 bool ServerNetwork::acceptNewClient(unsigned int & id)
 {
-	clientSocket = accept(listenSocket, NULL, NULL);
+	clientSocket = accept(listenSocket, nullptr, nullptr);
 
 	if (clientSocket != INVALID_SOCKET)
 	{
@@ -103,9 +103,44 @@ bool ServerNetwork::acceptNewClient(unsigned int & id)
 
 		// insert new client into session id table
 		sessions.insert(std::pair<unsigned int, SOCKET>(id, clientSocket));
-		m_logger->log("Client added to session with id: " + id, Logger::Level::Info);
 
 		return true;
 	}
 	return false;
+}
+
+int ServerNetwork::receiveData(unsigned int clientId, char * receiveBuffer)
+{
+	if (sessions.find(clientId) != sessions.end())
+	{
+		SOCKET currentSocket = sessions[clientId];
+		iResult = NetworkServices::receiveMessage(currentSocket, receiveBuffer, maxPacketSize);
+		if (iResult == 0)
+		{
+			printf("Connection closed\n");
+			closesocket(currentSocket);
+		}
+		return iResult;
+	}
+	return 0;
+}
+
+void ServerNetwork::sendToAll(char * packets, int totalSize)
+{
+	SOCKET currentSocket;
+	std::map<unsigned int, SOCKET>::iterator iterator;
+
+	int iSendResult;
+
+	for (iterator = sessions.begin(); iterator != sessions.end(); iterator++)
+	{
+		currentSocket = iterator->second;
+		iSendResult = NetworkServices::sendMessage(currentSocket, packets, totalSize);
+
+		if (iSendResult == SOCKET_ERROR)
+		{
+			m_logger->log("send failed with error : " + std::to_string(WSAGetLastError()), Logger::Level::Error);
+			closesocket(currentSocket);
+		}
+	}
 }
