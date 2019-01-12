@@ -137,24 +137,24 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 
 			switch (m_selectedButton)
 			{
-			case Client::playerTypes::Attacker:
+				case Client::playerTypes::Attacker:
 
-				logger.log("Game Started! You are attacker", Logger::Level::Info);
-				Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
-				break;
+					logger.log("Game Started! You are attacker", Logger::Level::Info);
+					Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
+					return;
 
-			case Client::playerTypes::Defender:
+				case Client::playerTypes::Defender:
 
-				logger.log("Game Started! You are defender!", Logger::Level::Info);
-				Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
-				break;
+					logger.log("Game Started! You are defender!", Logger::Level::Info);
+					Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
+					return;
 
-			default:
+				default:
 
 
-				logger.log("Game has started without both players being ready!", Logger::Level::Error);
-				exit((int)Logger::Level::Error);
-				break;
+					logger.log("Game has started without both players being ready!", Logger::Level::Error);
+					exit((int)Logger::Level::Error);
+					break;
 
 			}
 		}
