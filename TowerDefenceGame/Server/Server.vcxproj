@@ -121,7 +121,6 @@
     <ClCompile Include="ServerNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NetworkData.h" />
     <ClInclude Include="NetworkServices.h" />
     <ClInclude Include="ServerGame.h" />
     <ClInclude Include="ServerNetwork.h" />
@@ -130,6 +129,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Logging\Logging.vcxproj">
       <Project>{1d35846b-c8f9-4977-8abb-e8549cbcd793}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkData\NetworkData.vcxproj">
+      <Project>{48e4f39b-0c50-42a5-a5df-ff1abfa01e03}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

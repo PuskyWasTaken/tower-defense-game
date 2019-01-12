@@ -1,5 +1,5 @@
 #include "ServerGame.h"
-#include "NetworkData.h"
+#include "..\NetworkData\NetworkData.h"
 
 unsigned int ServerGame::client_id;
 
@@ -38,7 +38,7 @@ void ServerGame::sendActionPackets()
 	char packet_data[packet_size];
 
 	Packet packet;
-	packet.packetType = ACTION_EVENT;
+	packet.type = ACTION_EVENT;
 
 	packet.serialize(packet_data);
 
@@ -68,7 +68,7 @@ void ServerGame::receiveFromClients()
 			packet.deserialize(&(networkData[i]));
 			i += sizeof(Packet);
 
-			switch (packet.packetType)
+			switch (packet.type)
 			{
 			case INIT_CONNECTION:
 				{

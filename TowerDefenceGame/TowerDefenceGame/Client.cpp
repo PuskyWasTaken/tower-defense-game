@@ -1,5 +1,5 @@
 #include "Client.h"
-#include "NetworkData.h"
+#include "..\NetworkData\NetworkData.h"
 // #include "stdafx.h"
 
 Client::Client(const short playerType, const char* ip)

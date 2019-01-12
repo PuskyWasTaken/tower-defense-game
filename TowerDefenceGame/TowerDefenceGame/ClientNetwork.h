@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "..\Logging\Logging.h"
 #include <iostream>
-#include "NetworkData.h"
+#include "..\NetworkData\NetworkData.h"
 
 static const int32_t DEFAULT_BUFLEN = 512;
 

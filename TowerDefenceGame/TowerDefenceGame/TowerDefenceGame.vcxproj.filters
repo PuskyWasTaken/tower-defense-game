@@ -266,8 +266,5 @@
     <ClInclude Include="NetworkServices.h">
       <Filter>Header Files\MultiplayerClient</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkData.h">
-      <Filter>Header Files\MultiplayerClient</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
