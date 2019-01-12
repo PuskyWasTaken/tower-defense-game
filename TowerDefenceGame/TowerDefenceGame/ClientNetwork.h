@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "..\Logging\Logging.h"
 #include <iostream>
+#include "NetworkData.h"
 
 static const int32_t DEFAULT_BUFLEN = 512;
 
@@ -29,6 +30,7 @@ public:
 
 	/* For error checking function calls in Winsock library */
 	int iResult;
+	int receivePackets(char *recvbuf);
 
 	/* Socket for client to connect to server */
 	SOCKET ConnectSocket;

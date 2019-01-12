@@ -15,7 +15,7 @@ class Packet {
 
 public:
 
-	unsigned int packet_type;
+	unsigned int type;
 
 	void serialize(char * data) {
 		memcpy(data, this, sizeof(Packet));

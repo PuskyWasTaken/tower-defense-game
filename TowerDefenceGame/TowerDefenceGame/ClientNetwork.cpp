@@ -15,6 +15,21 @@ ClientNetwork::~ClientNetwork()
 {
 }
 
+int ClientNetwork::receivePackets(char *recvbuf)
+{
+	iResult = NetworkServices::receiveMessage(ConnectSocket, recvbuf, MAX_PACKET_SIZE);
+
+	if (iResult == 0)
+	{
+		printf("Connection closed\n");
+		closesocket(ConnectSocket);
+		WSACleanup();
+		exit(1);
+	}
+
+	return iResult;
+}
+
 
 void ClientNetwork::init(const char * connectionIp)
 {
@@ -36,7 +51,7 @@ void ClientNetwork::init(const char * connectionIp)
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	if (iResult != 0) {
-		m_log->log("WSAStartup failed with error: " + iResult, Logger::Level::Error);
+		m_log->log("WSAStartup failed with error: "  + std::to_string(iResult) , Logger::Level::Error);
 		exit((int)Logger::Level::Error);
 	}
 
@@ -52,7 +67,7 @@ void ClientNetwork::init(const char * connectionIp)
 
 	if (iResult != 0)
 	{
-		m_log->log("getaddrinfo failed with error:  " + iResult, Logger::Level::Error);
+		m_log->log("getaddrinfo failed with error:  " + std::to_string(iResult), Logger::Level::Error);
 		WSACleanup();
 		exit((int)Logger::Level::Error);
 	}

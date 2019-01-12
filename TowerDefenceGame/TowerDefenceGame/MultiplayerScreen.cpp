@@ -42,6 +42,10 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 	{
 		logger.log("You've chosen to be the defender! ", Logger::Level::Info);
 		Application::getInstance()->setState(std::make_unique<GameDefender>("..\\Levels\\1"));
+
+		/* Hard coded for now */
+		Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, "79.116.214.20");
+
 		return true;
 	}
 
@@ -49,6 +53,10 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 	{
 		logger.log("You've chosen to be the attacker!", Logger::Level::Info);
 		Application::getInstance()->setState(std::make_unique<GameAttacker>("..\\Levels\\1"));
+
+		/* Hard coded for now */
+		Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, "79.116.214.20");
+
 		return true;
 	}
 
@@ -74,12 +82,8 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 		if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
 			updateTextBoxFocus(window);
 		else
-		{
 			m_textBox.setIsSelected(false);
 
-			/* Hard coded for now */
-			Application::getInstance()->client = std::make_unique<Client>("79.116.214.20");
-		}
 
 	if (m_textBox.getIsSelected())
 		m_textBox.handleEvent(window);

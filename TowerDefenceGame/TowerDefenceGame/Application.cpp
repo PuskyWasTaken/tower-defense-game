@@ -59,7 +59,7 @@ void Application::gameLoop()
 			if (this->client != nullptr)
 			{
 				/* Then update the client (recieve data) */
-				//client->update();
+				client->update();
 			}
 			
 			/* Let the state do it's updating */
