@@ -38,6 +38,9 @@ void ServerGame::update()
 		sendPacket(attackerId, packet);
 		gameHasStarted = true;
 	}
+
+
+	Sleep(100);
 }
 
 void ServerGame::sendActionPackets()
@@ -120,6 +123,7 @@ void ServerGame::handlePacketData( Packet & packet)
 				packet.serialize(&networkData[0]);
 
 				sendPacket(defenderId, packet);
+				sendPacket(attackerId, packet);
 				return;
 			}
 			else 

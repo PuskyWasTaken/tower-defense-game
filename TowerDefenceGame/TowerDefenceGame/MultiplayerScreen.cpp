@@ -48,9 +48,13 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 		if (m_selectedButton == -1)
 			m_selectedButton = Client::playerTypes::Defender;
 
-		/* Hard coded for now */
+	
 		if (Application::getInstance()->client == nullptr)
-			Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, "79.116.214.20");
+				if(m_textBox.getText().size() < 6)
+					Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, "127.0.0.1"); //goes to localHost if ip is too short
+				else
+					Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Defender, m_textBox.getText().c_str()); // get ip address
+
 
 		return true;
 	}
@@ -62,9 +66,12 @@ bool MultiplayerScreen::chosePlayer(const sf::Vector2f & mousePosition)
 		if (m_selectedButton == -1)
 			m_selectedButton = Client::playerTypes::Attacker;
 
-		/* Hard coded for now */
+
 		if (Application::getInstance()->client == nullptr)
-			Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, "79.116.214.20");
+			if (m_textBox.getText().size() < 6)
+				Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, "127.0.0.1"); //goes to localHost if ip is too short
+			else
+				Application::getInstance()->client = std::make_unique<Client>(Client::playerTypes::Attacker, m_textBox.getText().c_str()); // get ip address
 
 		return true;
 	}
