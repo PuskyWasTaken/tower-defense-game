@@ -31,9 +31,11 @@ void ServerGame::update()
 	
 	if (hasBothPlayers() && !gameHasStarted)
 	{
+		Packet packet;
+		packet.type = START_GAME;
 		
-		sendPacket(defenderId, START_GAME);
-		sendPacket(attackerId, START_GAME);
+		sendPacket(defenderId, packet);
+		sendPacket(attackerId, packet);
 		gameHasStarted = true;
 	}
 }
@@ -51,13 +53,11 @@ void ServerGame::sendActionPackets()
 	network->sendToAll(packet_data, packet_size);
 }
 
-void ServerGame::sendPacket(const int &clientId, PacketTypes packetType)
+void ServerGame::sendPacket(const int &clientId, Packet packet)
 {
 	const unsigned int packetSize = sizeof(Packet);
 	char packetData[packetSize];
 
-	Packet packet;
-	packet.type = packetType;
 
 	packet.serialize(packetData);
 
@@ -96,7 +96,7 @@ void ServerGame::receiveFromClients()
 
 }
 
-void ServerGame::handlePacketData(const Packet & packet)
+void ServerGame::handlePacketData( Packet & packet)
 {
 	switch (packet.type)
 	{
@@ -116,7 +116,10 @@ void ServerGame::handlePacketData(const Packet & packet)
 		{
 			if (gameHasStarted)
 			{
-				sendPacket(defenderId, (PacketTypes)packet.type);
+
+				packet.serialize(&networkData[0]);
+
+				sendPacket(defenderId, packet);
 				return;
 			}
 			else 
@@ -125,7 +128,8 @@ void ServerGame::handlePacketData(const Packet & packet)
 					defenderId = client_id;
 					m_logger->log(std::to_string(client_id) + "Attacker role was already used, switching role to defender for client: " +
 						std::to_string(client_id), Logger::Level::Warning);
-					sendPacket(defenderId, PLAYER_ALREADY_TAKEN);
+					packet.type = PLAYER_ALREADY_TAKEN;
+					sendPacket(defenderId, packet);
 					Sleep(100);
 					return;
 				}
@@ -139,7 +143,7 @@ void ServerGame::handlePacketData(const Packet & packet)
 		{
 			if (gameHasStarted)
 			{
-				sendPacket(defenderId, (PacketTypes)packet.type);
+				sendPacket(attackerId, packet);
 				return;
 			}
 
@@ -148,7 +152,8 @@ void ServerGame::handlePacketData(const Packet & packet)
 					attackerId = client_id;
 					m_logger->log(std::to_string(client_id) + "Defender role was already used, switching role to attacker for client: " +
 						std::to_string(client_id), Logger::Level::Warning);
-					sendPacket(attackerId, PLAYER_ALREADY_TAKEN);
+					packet.type = PLAYER_ALREADY_TAKEN;
+					sendPacket(attackerId, packet);
 					Sleep(100);
 					return;
 				}

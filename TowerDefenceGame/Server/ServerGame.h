@@ -12,8 +12,8 @@ public:
 
 
 	void sendActionPackets();
-	void sendPacket(const int &clientId, PacketTypes packetType);
-	
+	void sendPacket(const int &clientId, Packet packet);
+
 
 private:
 	// IDs for the clients connecting for table in ServerNetwork 
@@ -26,7 +26,7 @@ private:
 	int defenderId = -1;
 
 	void receiveFromClients();
-	void handlePacketData(const Packet& packet);
+	void handlePacketData(Packet& packet);
 
 private:
 	std::unique_ptr<Logger> m_logger;
