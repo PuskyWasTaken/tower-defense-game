@@ -64,6 +64,26 @@ void GameAttacker::handleEvent(sf::RenderWindow & window)
 
 void GameAttacker::updateEnemies()
 {
+	/* If we received data from the attacker, handle it */
+	if (Application::getInstance()->client != nullptr && Application::getInstance()->client->getRecievedFromAttacker())
+	{
+		int enemyType = Application::getInstance()->client->getAttackerData();
+
+		/* Spawn the enemy and set it's starting movement direction and position, health, color */
+		Enemy newEnemy(m_currentLevel.startingPoint.getCenter(), Globals::enemySize, Globals::EnemyTypes::enemyObjects[enemyType].moveSpeed, sf::Vector2i(0, 0), Globals::EnemyTypes::enemyObjects[enemyType].hp);
+		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
+		newEnemy.setColour(Globals::EnemyTypes::enemyObjects[enemyType].color);
+
+		Logger logger(std::cout);
+		logger.log("Spawned enemy because the other player said so.", Logger::Level::Info);
+
+		/* Push our enemy into the array */
+		m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
+
+		/* Tell the client we handled it */
+		Application::getInstance()->client->setRecievedFromAttacker(false);
+	}
+	
 	/* In this case the enemies are our towers */
 	if (Application::getInstance()->client != nullptr && Application::getInstance()->client->getRecievedFromDefender())
 	{
@@ -98,12 +118,13 @@ void GameAttacker::enemyArrivedToEndPoint()
 
 void GameAttacker::spawnEnemy(const int index)
 {
+/*
 	Enemy newEnemy(m_selectedSpawn->getCenter(), Globals::enemySize, Globals::EnemyTypes::enemyObjects[m_shop.selectedItem].moveSpeed, sf::Vector2i(0, 0), Globals::EnemyTypes::enemyObjects[m_shop.selectedItem].hp);
 	newEnemy.setMovementDirection(getMovementDirection(m_selectedSpawn->getExit()));
 	newEnemy.setColour(Globals::EnemyTypes::enemyObjects[m_shop.selectedItem].color);
 
 	m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
-
+*/
 	/* Also tell our server that we spawned the enemy */
 	if (Application::getInstance()->client != nullptr)
 		Application::getInstance()->client->sendActionEnemySpawned(m_shop.selectedItem);
