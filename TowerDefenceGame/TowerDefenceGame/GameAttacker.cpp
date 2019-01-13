@@ -64,7 +64,23 @@ void GameAttacker::handleEvent(sf::RenderWindow & window)
 
 void GameAttacker::updateEnemies()
 {
-	/*  */
+	/* In this case the enemies are our towers */
+	if (Application::getInstance()->client != nullptr && Application::getInstance()->client->getRecievedFromDefender())
+	{
+		/* Get the data */
+		sf::Vector2f pos = { Application::getInstance()->client->getDefenderX(), Application::getInstance()->client->getDefenderY() };
+		int index = { Application::getInstance()->client->getDefenderData() };
+
+		/* Spawn the tower */
+		Tower newTower(pos, Globals::towerSize, Globals::TowerTypes::towerObjects[index].damage);
+		m_towerArray.push_back(newTower);
+
+		Logger logger(std::cout);
+		logger.log("Spawned tower because the other player hates you!", Logger::Level::Info);
+
+		/* Tell the client we handled it */
+		Application::getInstance()->client->setRecievedFromDefender(false);
+	}
 }
 void GameAttacker::enemyWasRemoved()
 {
@@ -87,8 +103,11 @@ void GameAttacker::spawnEnemy(const int index)
 	newEnemy.setColour(Globals::EnemyTypes::enemyObjects[m_shop.selectedItem].color);
 
 	m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
-}
 
+	/* Also tell our server that we spawned the enemy */
+	if (Application::getInstance()->client != nullptr)
+		Application::getInstance()->client->sendActionEnemySpawned(m_shop.selectedItem);
+}
 bool GameAttacker::checkWinLossConditions()
 {
 	if (m_gameIsWon)

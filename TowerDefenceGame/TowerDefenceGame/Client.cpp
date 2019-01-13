@@ -2,8 +2,6 @@
 #include "..\NetworkData\NetworkData.h"
 #include <string.h>
 
-// #include "stdafx.h"
-
 Client::Client(const short playerType, const char* ip)
 	: m_playerType(playerType), network(std::make_unique<ClientNetwork>(ip)), logger(std::make_unique<Logger>(std::cout))
 {
@@ -63,19 +61,6 @@ void Client::sendInitialPacket(const short playerType)
 	NetworkServices::sendMessage(network->ConnectSocket, data, size);
 
 }
-bool Client::getHasStarted()
-{
-	return this->m_hasStarted;
-}
-bool Client::getPlayerChoiceIsValid()
-{
-	return m_playerChoiceIsValid;
-}
-void Client::setPlayerChoiceIsValid(const bool newValue)
-{
-	if (newValue != m_playerChoiceIsValid)
-		m_playerChoiceIsValid = newValue;
-}
 void Client::sendActionPackets(const unsigned int actionType)
 { 
 	/* Send action packet */
@@ -94,24 +79,39 @@ void Client::sendActionPackets(const unsigned int actionType)
 
 	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
 }
-void Client::sendActionTowerPlaced(const float x, const float y)
+void Client::sendActionTowerPlaced(const float x, const float y, const int type)
 {
 	/* Send action */
 	char data[sizeof(Packet)];
 
 	Packet packet;
 
-	packet.type = SPAWN_TOWER;
+	packet.type = PacketTypes::DEFENDER;
 	packet.x = x;
 	packet.y = y;
+	packet.recievedType = type;
 
 	packet.serialize(data);
 
 	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
 }
-void Client::setPlayerType(const short newType)
+
+void Client::sendActionEnemySpawned(const int enemyType)
 {
-	m_playerType = newType;
+	/* Send action */
+	char data[sizeof(Packet)];
+
+	Packet packet;
+
+	packet.type = PacketTypes::ATTACKER;
+	packet.x = -1;
+	packet.y = -1;
+	packet.type = enemyType;
+
+
+	packet.serialize(data);
+
+	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
 }
 
 void Client::update()
@@ -153,12 +153,23 @@ void Client::update()
 			case ATTACKER:
 
 				/* We recieved data from the attacker */
+				if (!m_recievedFromAttacker)
+				{
+					m_recievedFromAttacker = true;
+					attackerPacket = packet;
+				}
+
 				break;
 
 
 			case DEFENDER:
 
 				/* We recieved data from the defender */
+				if (!m_recievedFromDefender)
+				{
+					m_recievedFromDefender = true;
+					defenderPacket = packet;
+				}
 				break;
 
 			default:
@@ -167,4 +178,57 @@ void Client::update()
 				break;
 		}
 	}
+}
+
+void Client::setPlayerType(const short newType)
+{
+	m_playerType = newType;
+}
+bool Client::getHasStarted()
+{
+	return this->m_hasStarted;
+}
+bool Client::getPlayerChoiceIsValid()
+{
+	return m_playerChoiceIsValid;
+}
+bool Client::getRecievedFromAttacker()
+{
+	return m_recievedFromAttacker;
+}
+bool Client::getRecievedFromDefender()
+{
+	return m_recievedFromDefender;
+}
+void Client::setRecievedFromAttacker(const bool newValue)
+{
+	if (newValue != m_recievedFromAttacker)
+		m_recievedFromAttacker = newValue;
+}
+void Client::setRecievedFromDefender(const bool newValue)
+{
+	if (newValue != m_recievedFromDefender)
+		m_recievedFromDefender = newValue;
+}
+void Client::setPlayerChoiceIsValid(const bool newValue)
+{
+	if (newValue != m_playerChoiceIsValid)
+		m_playerChoiceIsValid = newValue;
+}
+
+int Client::getAttackerData()
+{
+	return attackerPacket.recievedType;
+}
+float Client::getDefenderX()
+{
+	return defenderPacket.x;
+}
+float Client::getDefenderY()
+{
+	return defenderPacket.y;
+}
+int Client::getDefenderData()
+{
+	return defenderPacket.recievedType;
 }

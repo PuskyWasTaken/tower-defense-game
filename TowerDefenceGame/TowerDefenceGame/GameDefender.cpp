@@ -87,7 +87,25 @@ void GameDefender::handleEvent(sf::RenderWindow & window)
 
 void GameDefender::updateEnemies()
 {
-	/* Will have to implement multiplayer first, then enemies can be spawned */
+	/* If we received data from the attacker, handle it */
+	if (Application::getInstance()->client != nullptr && Application::getInstance()->client->getRecievedFromAttacker())
+	{
+		int enemyType = Application::getInstance()->client->getAttackerData();
+
+		/* Spawn the enemy and set it's starting movement direction and position, health, color */
+		Enemy newEnemy(m_currentLevel.startingPoint.getCenter(), Globals::enemySize, Globals::EnemyTypes::enemyObjects[enemyType].moveSpeed, sf::Vector2i(0, 0), Globals::EnemyTypes::enemyObjects[enemyType].hp);
+		newEnemy.setMovementDirection(getMovementDirection(m_currentLevel.startingPoint.getExit()));
+		newEnemy.setColour(Globals::EnemyTypes::enemyObjects[enemyType].color);
+
+		Logger logger(std::cout);
+		logger.log("Spawned enemy because the other player said so.", Logger::Level::Info);
+
+		/* Push our enemy into the array */
+		m_enemyArray.push_back(std::make_shared<Enemy>(newEnemy));
+
+		/* Tell the client we handled it */
+		Application::getInstance()->client->setRecievedFromAttacker(false);
+	}
 }
 void GameDefender::enemyWasRemoved()
 {
@@ -198,9 +216,13 @@ bool GameDefender::buyTower(const int price)
 	m_shop.setGold(m_gold);
 	return true;
 }
-
 void GameDefender::spawnTower(const sf::Vector2f & mousePos, const int index)
 {
 	Tower newTower(mousePos, Globals::towerSize, Globals::TowerTypes::towerObjects[index].damage);
 	m_towerArray.push_back(newTower);
+
+
+	/* Notify the server we spawned a tower */
+	if (Application::getInstance()->client != nullptr)
+		Application::getInstance()->client->sendActionTowerPlaced(mousePos.x, mousePos.y, m_shop.selectedItem);
 }

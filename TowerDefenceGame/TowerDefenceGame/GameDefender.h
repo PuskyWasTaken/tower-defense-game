@@ -43,6 +43,5 @@ private:
 
 	void spawnTower(const sf::Vector2f& mousePos, const int index);
 
-
 };
 

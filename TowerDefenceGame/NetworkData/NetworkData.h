@@ -26,6 +26,7 @@ public:
 
 	unsigned int type;
 	float x, y;
+	int recievedType;
 
 	void serialize(char * data) {
 		memcpy(data, this, sizeof(Packet));
