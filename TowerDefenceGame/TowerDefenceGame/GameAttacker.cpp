@@ -131,18 +131,25 @@ void GameAttacker::spawnEnemy(const int index)
 }
 bool GameAttacker::checkWinLossConditions()
 {
-	if (m_gameIsWon)
+	/* Check with the server if the Enemy won or lost */
+	if (Application::getInstance()->client != nullptr)
 	{
-		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
-		return true;
-	}
-	else if (m_lifePoints <= 0)
-	{
-		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
-		return true;
+		/* If the enemy won, that means we lose :( */
+		if (Application::getInstance()->client->getEnemyWon() == Client::enemyState::EnemyWon)
+		{
+			/* We lost */
+			m_lifePoints = 0;
+		}
+		/* Enemy lost, so we won :) */
+		else if (Application::getInstance()->client->getEnemyWon() == Client::enemyState::EnemyLost)
+		{
+			/* We won */
+			m_gameIsWon = true;
+		}
 	}
 
-	return false;
+	/* Do the super later because it returns */
+	return Game::checkWinLossConditions();
 }
 void GameAttacker::handleShopPressed(const sf::Vector2f & mousePos)
 {

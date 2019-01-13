@@ -14,22 +14,25 @@ public:
 
 private:
 
-	std::unique_ptr<ClientNetwork> network;
+	std::unique_ptr<ClientNetwork> m_network;
 	
 	short m_playerType;
 	char m_networkData[maxPacketSize]; // RIP
-	std::unique_ptr<Logger> logger;
+	std::unique_ptr<Logger> m_logger;
 
 private:
+
 	bool m_hasStarted = false;
 	bool m_playerChoiceIsValid = true;
 
 	bool m_recievedFromAttacker = false;
 	bool m_recievedFromDefender = false;
 
+	int m_enemyWon = Uninitialized;
 
-	Packet attackerPacket;
-	Packet defenderPacket;
+
+	Packet m_attackerPacket;
+	Packet m_defenderPacket;
 
 private:
 
@@ -43,10 +46,12 @@ public:
 	bool getPlayerChoiceIsValid();
 	bool getRecievedFromAttacker();
 	bool getRecievedFromDefender();
+	int getEnemyWon();
 
 	void setRecievedFromAttacker(const bool newValue);
 	void setRecievedFromDefender(const bool newValue);
 	void setPlayerChoiceIsValid(const bool newValue);
+	void setEnemyWon(const int newValue);
 
 	int getAttackerData();
 	float getDefenderX();
@@ -63,6 +68,13 @@ public:
 	{
 		Defender,
 		Attacker
+	};
+
+	enum enemyState
+	{
+		Uninitialized = -1,
+		EnemyLost,
+		EnemyWon,
 	};
 
 };

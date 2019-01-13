@@ -19,7 +19,6 @@ private:
 	EnemyShop m_shop;
 	Intersection* m_selectedSpawn;
 
-	bool m_gameIsWon = false;
 	uint32_t m_noOfEnemiesArrived = 0;
 
 private:

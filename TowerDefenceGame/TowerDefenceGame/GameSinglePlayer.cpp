@@ -19,7 +19,6 @@ void GameSinglePlayer::update(sf::RenderWindow & window)
 
 	updateShadowEntity();
 }
-
 void GameSinglePlayer::draw(sf::RenderWindow & window)
 {
 	Game::draw(window);
@@ -30,7 +29,6 @@ void GameSinglePlayer::draw(sf::RenderWindow & window)
 	/* Draw the Shadow Entity */
 	window.draw(m_shadowEntity);
 }
-
 void GameSinglePlayer::handleEvent(sf::RenderWindow & window)
 {
 	/* Super */
@@ -191,18 +189,8 @@ void GameSinglePlayer::updateShadowEntity()
 }
 bool GameSinglePlayer::checkWinLossConditions()
 {
-	if (m_gameIsWon)
-	{
-		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
-		return true;
-	}
-	else if (m_lifePoints <= 0)
-	{
-		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
-		return true;
-	}
-
-	return false;
+	/* Super */
+	return Game::checkWinLossConditions();
 }
 void GameSinglePlayer::handleShopPressed(const sf::Vector2f & mousePos)
 {

@@ -7,7 +7,7 @@ static const unsigned int maxPacketSize = 1000000;
 static const int32_t defaultBufferLength = 512;
 
 /* Port to connect sockets through */
-static const char* defaultServerPort = "27015";
+static const char* defaultServerPort = "27011";
 
 enum PacketTypes {
 
@@ -16,7 +16,8 @@ enum PacketTypes {
 	ATTACKER,
 	DEFENDER,
 	START_GAME,
-	SPAWN_TOWER,
+	LOST_GAME,
+	WON_GAME,
 	PLAYER_ALREADY_TAKEN
 };
 

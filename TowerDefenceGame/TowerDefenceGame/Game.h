@@ -34,6 +34,7 @@ protected:
 
 	int32_t m_gold;
 	int32_t m_lifePoints;
+	bool m_gameIsWon = false;
 
 public: 
 	void update(sf::RenderWindow &window) override;
@@ -54,7 +55,7 @@ protected:
 	virtual void enemyArrivedToEndPoint() = 0;
 	virtual void updateEnemies() = 0;
 
-	virtual bool checkWinLossConditions() = 0;
+	virtual bool checkWinLossConditions();
 	sf::Vector2i getMovementDirection(const short entrance) const;
 
 	void readLevel(const std::string& level);

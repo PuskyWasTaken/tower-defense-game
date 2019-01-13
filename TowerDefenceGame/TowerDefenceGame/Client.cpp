@@ -3,14 +3,14 @@
 #include <string.h>
 
 Client::Client(const short playerType, const char* ip)
-	: m_playerType(playerType), network(std::make_unique<ClientNetwork>(ip)), logger(std::make_unique<Logger>(std::cout))
+	: m_playerType(playerType), m_network(std::make_unique<ClientNetwork>(ip)), m_logger(std::make_unique<Logger>(std::cout))
 {
 	/* First Packet */
 	sendInitialPacket(playerType);
 
 }
 Client::Client(const short playerType)
-	: m_playerType(playerType), network(std::make_unique<ClientNetwork>()), logger(std::make_unique<Logger>(std::cout))
+	: m_playerType(playerType), m_network(std::make_unique<ClientNetwork>()), m_logger(std::make_unique<Logger>(std::cout))
 {
 	/* First Packet */
 	sendInitialPacket(playerType);
@@ -32,7 +32,9 @@ void Client::sendInitialPacket(const short playerType)
 
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, data, size);
+	NetworkServices::sendMessage(m_network->ConnectSocket, data, size);
+	m_logger->log("Client just sent the INIT_CONNECTION packet to the server", Logger::Level::Info);
+
 
 	Packet choicePacket;
 
@@ -42,23 +44,29 @@ void Client::sendInitialPacket(const short playerType)
 		case Client::playerTypes::Attacker:
 		{
 			choicePacket.type = PacketTypes::ATTACKER;
+			m_logger->log("Client just sent the ATTACKER packet to the server", Logger::Level::Info);
+
 			break;
 		}
 		case Client::playerTypes::Defender:
 		{
 			choicePacket.type = PacketTypes::DEFENDER;
+			m_logger->log("Client just sent the DEFENDER packet to the server", Logger::Level::Info);
+
 			break;
 		}
 		default:
 		{
-			logger->log("Did not recieve a valid player type!", Logger::Level::Error);
+			m_logger->log("Did not recieve a valid player type!", Logger::Level::Error);
+			Sleep(5000);
 			exit((int)Logger::Level::Error);
 		}
 	}
 
 	/* Send it already */
 	choicePacket.serialize(data);
-	NetworkServices::sendMessage(network->ConnectSocket, data, size);
+	NetworkServices::sendMessage(m_network->ConnectSocket, data, size);
+
 
 }
 void Client::sendActionPackets(const unsigned int actionType)
@@ -77,7 +85,9 @@ void Client::sendActionPackets(const unsigned int actionType)
 	
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
+	NetworkServices::sendMessage(m_network->ConnectSocket, data, sizeof(Packet));
+	m_logger->log("Client just sent a packet to the server", Logger::Level::Info);
+
 }
 void Client::sendActionTowerPlaced(const float x, const float y, const int type)
 {
@@ -93,7 +103,8 @@ void Client::sendActionTowerPlaced(const float x, const float y, const int type)
 
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
+	NetworkServices::sendMessage(m_network->ConnectSocket, data, sizeof(Packet));
+	m_logger->log("Client just sent a DEFENDER packet to the server(placing a tower)", Logger::Level::Info);
 }
 
 void Client::sendActionEnemySpawned(const int enemyType)
@@ -111,13 +122,14 @@ void Client::sendActionEnemySpawned(const int enemyType)
 
 	packet.serialize(data);
 
-	NetworkServices::sendMessage(network->ConnectSocket, data, sizeof(Packet));
+	NetworkServices::sendMessage(m_network->ConnectSocket, data, sizeof(Packet));
+	m_logger->log("Client just sent a ATTACKER packet to the server(spawning enemy)", Logger::Level::Info);
 }
 
 void Client::update()
 {
 	Packet packet;
-	int dataLenght = network->receivePackets(m_networkData);
+	int dataLenght = m_network->receivePackets(m_networkData);
 
 	if (dataLenght <= 0)
 	{
@@ -133,48 +145,71 @@ void Client::update()
 		switch (packet.type)
 		{
 
-			case ACTION_EVENT:
+			case PacketTypes::ACTION_EVENT:
 
-				logger->log("Client received action event packet from server", Logger::Level::Info);
+				m_logger->log("Client received ACTION_EVENT packet from server", Logger::Level::Info);
 				break;
 
-			case START_GAME:
+			case PacketTypes::START_GAME:
 
 				if (!m_hasStarted)
 					m_hasStarted = true;
+
+				m_logger->log("Client received START_GAME packet from server", Logger::Level::Info);
 				break;
 			
-			case PLAYER_ALREADY_TAKEN:
+			case PacketTypes::PLAYER_ALREADY_TAKEN:
 
 				if (m_playerChoiceIsValid)
 					m_playerChoiceIsValid = false;
+
+				m_logger->log("Client received PLAYER_ALREADY_TAKEN packet from server", Logger::Level::Info);
 				break;
 
-			case ATTACKER:
+			case PacketTypes::ATTACKER:
 
 				/* We recieved data from the attacker */
 				if (!m_recievedFromAttacker)
 				{
 					m_recievedFromAttacker = true;
-					attackerPacket = packet;
+					m_attackerPacket = packet;
 				}
 
+				m_logger->log("Client received ATTACKER packet from server", Logger::Level::Info);
 				break;
 
 
-			case DEFENDER:
+			case PacketTypes::DEFENDER:
 
 				/* We recieved data from the defender */
 				if (!m_recievedFromDefender)
 				{
 					m_recievedFromDefender = true;
-					defenderPacket = packet;
+					m_defenderPacket = packet;
 				}
+
+				m_logger->log("Client received DEFENDER packet from server", Logger::Level::Info);
+				break;
+
+			case PacketTypes::WON_GAME:
+
+				if (m_enemyWon == enemyState::Uninitialized)
+					m_enemyWon = enemyState::EnemyWon;
+
+				m_logger->log("Client received WON_GAME packet from server", Logger::Level::Info);
+				break;
+
+			case PacketTypes::LOST_GAME:
+
+				if (m_enemyWon == enemyState::Uninitialized)
+					m_enemyWon = enemyState::EnemyLost;
+
+				m_logger->log("Client received LOST_GAME packet from server", Logger::Level::Info);
 				break;
 
 			default:
 
-				logger->log("Error in packet types", Logger::Level::Error);
+				m_logger->log("Error in packet types", Logger::Level::Error);
 				break;
 		}
 	}
@@ -215,20 +250,29 @@ void Client::setPlayerChoiceIsValid(const bool newValue)
 	if (newValue != m_playerChoiceIsValid)
 		m_playerChoiceIsValid = newValue;
 }
+void Client::setEnemyWon(const int newValue)
+{
+	m_enemyWon = newValue;
+}
 
+
+int Client::getEnemyWon()
+{
+	return m_enemyWon;
+}
 int Client::getAttackerData()
 {
-	return attackerPacket.recievedType;
+	return m_attackerPacket.recievedType;
 }
 float Client::getDefenderX()
 {
-	return defenderPacket.x;
+	return m_defenderPacket.x;
 }
 float Client::getDefenderY()
 {
-	return defenderPacket.y;
+	return m_defenderPacket.y;
 }
 int Client::getDefenderData()
 {
-	return defenderPacket.recievedType;
+	return m_defenderPacket.recievedType;
 }

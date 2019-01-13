@@ -21,9 +21,11 @@ int ClientNetwork::receivePackets(char *recvbuf)
 
 	if (iResult == 0)
 	{
-		printf("Connection closed\n");
+		m_log->log("Connection closed", Logger::Level::Info);
 		closesocket(ConnectSocket);
 		WSACleanup();
+
+		Sleep(10000);
 		exit(1);
 	}
 
@@ -52,6 +54,7 @@ void ClientNetwork::init(const char * connectionIp)
 
 	if (iResult != 0) {
 		m_log->log("WSAStartup failed with error: "  + std::to_string(iResult) , Logger::Level::Error);
+		Sleep(5000);
 		exit((int)Logger::Level::Error);
 	}
 
@@ -69,6 +72,7 @@ void ClientNetwork::init(const char * connectionIp)
 	{
 		m_log->log("getaddrinfo failed with error:  " + std::to_string(iResult), Logger::Level::Error);
 		WSACleanup();
+		Sleep(5000);
 		exit((int)Logger::Level::Error);
 	}
 
@@ -82,6 +86,7 @@ void ClientNetwork::init(const char * connectionIp)
 		if (ConnectSocket == INVALID_SOCKET) {
 			m_log->log("socket failed with error : " + WSAGetLastError(), Logger::Level::Error);
 			WSACleanup();
+			Sleep(5000);
 			exit((int)Logger::Level::Error);
 		}
 
@@ -104,6 +109,7 @@ void ClientNetwork::init(const char * connectionIp)
 	{
 		m_log->log("Unable to connect to server!", Logger::Level::Error);
 		WSACleanup();
+		Sleep(5000);
 		exit((int)Logger::Level::Error);
 	}
 
@@ -116,6 +122,7 @@ void ClientNetwork::init(const char * connectionIp)
 		m_log->log("ioctlsocket failed with error: " + WSAGetLastError(), Logger::Level::Error);
 		closesocket(ConnectSocket);
 		WSACleanup();
+		Sleep(5000);
 		exit((int)Logger::Level::Error);
 	}
 

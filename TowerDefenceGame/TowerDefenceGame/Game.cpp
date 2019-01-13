@@ -131,6 +131,17 @@ bool Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 }
 bool Game::checkWinLossConditions()
 {
+	if (m_gameIsWon)
+	{
+		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
+		return true;
+	}
+	else if (m_lifePoints <= 0)
+	{
+		Application::getInstance()->setState(std::make_unique<EndScreen>(m_gameIsWon));
+		return true;
+	}
+
 	return false;
 }
 sf::Vector2i Game::getMovementDirection(const short entrance) const

@@ -152,6 +152,7 @@ void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 				default:
 
 					logger.log("Game has started without both players being ready!", Logger::Level::Error);
+					Sleep(5000);
 					exit((int)Logger::Level::Error);
 					break;
 
