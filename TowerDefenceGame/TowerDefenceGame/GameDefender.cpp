@@ -111,6 +111,7 @@ void GameDefender::enemyWasRemoved()
 {
 	/* Give a small reward to the defender */
 	Game::enemyWasRemoved();
+	m_shop.setGold(m_gold);
 
 	m_noOfEnemiesKilled++;
 
