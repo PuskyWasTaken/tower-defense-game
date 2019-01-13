@@ -117,9 +117,9 @@ int ServerNetwork::receiveData(unsigned int clientId, char * receiveBuffer)
 		iResult = NetworkServices::receiveMessage(currentSocket, receiveBuffer, maxPacketSize );
 		if (iResult == 0)
 		{
-			//close connection to unresponsive client and remove it from our Sessions map
-			printf("Connection closed\n");
-			//sessions.erase(clientId);
+
+			m_logger->log("Connection closed ", Logger::Level::Warning);
+
 			closesocket(currentSocket);
 
 		}

@@ -166,6 +166,32 @@ void ServerGame::handlePacketData( Packet & packet)
 				break;
 			
 		}
+		case WON_GAME:
+		{
+				m_logger->log(std::to_string(client_id) + "Has won the game", Logger::Level::Info);
+			if (client_id == attackerId)
+			{
+				sendPacket(defenderId, packet);		
+			}
+			if (client_id == defenderId)
+			{
+				sendPacket(attackerId, packet);
+			}
+			break;
+		}
+		case LOST_GAME:
+		{
+			m_logger->log(std::to_string(client_id) + "Has won the game", Logger::Level::Info);
+			if (client_id == attackerId)
+			{
+				sendPacket(defenderId, packet);
+			}
+			if (client_id == defenderId)
+			{
+				sendPacket(attackerId, packet);
+			}
+			break;
+		}
 
 		default:
 		{
