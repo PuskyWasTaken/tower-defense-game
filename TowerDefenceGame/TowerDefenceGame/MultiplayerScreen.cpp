@@ -84,23 +84,14 @@ void MultiplayerScreen::draw(sf::RenderWindow & window)
 }
 void MultiplayerScreen::handleEvent(sf::RenderWindow & window)
 {
-	sf::Event e;
-	window.pollEvent(e);
-	
-	if (e.type == e.KeyPressed)
-	{
-		/* TO DO: Handle ESC key */
-	}
-	else if (e.type == e.MouseButtonPressed)
-	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
-					updateTextBoxFocus(window);
-				else
-					m_textBox.setIsSelected(false);
-	}
+
+
+	 if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		 if (!chosePlayer((sf::Vector2f)sf::Mouse::getPosition(window)))
+			 updateTextBoxFocus(window);
+		 else
+			 m_textBox.setIsSelected(false);
 
 	/* If our client exists */
 	if (Application::getInstance()->client != nullptr)

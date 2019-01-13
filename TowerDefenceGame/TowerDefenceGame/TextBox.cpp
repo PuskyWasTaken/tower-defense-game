@@ -121,6 +121,11 @@ void TextBox::handleEvent(sf::RenderWindow & window)
 
 			default: break;
 			}
+			if (m_text.size() > 20)
+			{
+				m_text.pop_back();
+				m_button.setText(m_text);
+			}
 		}
 
 		
