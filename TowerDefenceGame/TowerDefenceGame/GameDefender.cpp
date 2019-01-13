@@ -182,6 +182,13 @@ bool GameDefender::checkWinLossConditions()
 		}
 	}
 
+	/* Send the packet to the server */
+
+	if (m_gameIsWon)
+		Application::getInstance()->client->sendActionPackets(PacketTypes::WON_GAME);
+	else if (m_lifePoints <= 0)
+		Application::getInstance()->client->sendActionPackets(PacketTypes::LOST_GAME);
+
 	/* Do the super later because it returns */
 	return Game::checkWinLossConditions();
 
@@ -199,8 +206,8 @@ void GameDefender::handleShopPressed(const sf::Vector2f & mousePos)
 }
 void GameDefender::initShop()
 {
-	m_gold = Globals::startingGoldAmount;
-	m_lifePoints = Globals::startingPlayerHp;
+	m_gold = Globals::Multiplayer::Defender::startingGoldAmmount;
+	m_lifePoints = Globals::Multiplayer::Defender::hp;
 
 	/* Set our initial gold value */
 	m_shop.setGold(m_gold);

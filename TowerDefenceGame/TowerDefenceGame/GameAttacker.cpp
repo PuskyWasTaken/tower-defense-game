@@ -148,6 +148,13 @@ bool GameAttacker::checkWinLossConditions()
 		}
 	}
 
+	/* Send the packet to the server */
+	
+	if (m_gameIsWon)
+		Application::getInstance()->client->sendActionPackets(PacketTypes::WON_GAME);
+	else if (m_lifePoints <= 0)
+		Application::getInstance()->client->sendActionPackets(PacketTypes::LOST_GAME);
+
 	/* Do the super later because it returns */
 	return Game::checkWinLossConditions();
 }
