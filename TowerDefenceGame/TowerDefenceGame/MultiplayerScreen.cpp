@@ -26,7 +26,7 @@ MultiplayerScreen::MultiplayerScreen()
 	m_attacker.setTextSize(Globals::TextSize::bigger);
 
 	m_textBox.setPosition(sf::Vector2f(Globals::windowSize.x/2, Globals::windowSize.y/2));
-	m_textBox.setText("ENTER TEXT HERE");
+	m_textBox.setText("Enter ip");
 	
 }
 MultiplayerScreen::~MultiplayerScreen()
