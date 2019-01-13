@@ -106,7 +106,7 @@ void Client::sendActionEnemySpawned(const int enemyType)
 	packet.type = PacketTypes::ATTACKER;
 	packet.x = -1;
 	packet.y = -1;
-	packet.type = enemyType;
+	packet.recievedType = enemyType;
 
 
 	packet.serialize(data);
