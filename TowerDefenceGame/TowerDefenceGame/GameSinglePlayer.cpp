@@ -133,6 +133,9 @@ void GameSinglePlayer::updateEnemies()
 }
 void GameSinglePlayer::enemyWasRemoved()
 {
+	Game::enemyWasRemoved();
+	m_shop.setGold(m_gold);
+
 	m_noOfEnemiesKilled++;
 
 	if (m_noOfEnemiesKilled >= Globals::winConditionEnemyKillCount)

@@ -21,6 +21,10 @@ private:
 
 	uint32_t m_noOfEnemiesArrived = 0;
 
+	sf::Clock m_updateClock;
+	sf::Time m_rewardRate = sf::seconds(Globals::Multiplayer::Attacker::rewardRate);
+	uint32_t m_rewardTimes = Globals::Multiplayer::Attacker::maxChainedRewardTimes;
+
 private:
 
 	/* Enemy stuff */

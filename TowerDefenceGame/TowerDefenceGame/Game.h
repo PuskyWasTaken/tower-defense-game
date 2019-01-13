@@ -51,7 +51,7 @@ private:
 protected:
 
 	/* Enemy stuff */
-	virtual void enemyWasRemoved() = 0;
+	virtual void enemyWasRemoved();
 	virtual void enemyArrivedToEndPoint() = 0;
 	virtual void updateEnemies() = 0;
 

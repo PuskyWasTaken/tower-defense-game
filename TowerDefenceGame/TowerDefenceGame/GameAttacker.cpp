@@ -18,6 +18,26 @@ void GameAttacker::update(sf::RenderWindow & window)
 	/* Super */
 	Game::update(window);
 
+	/* Give a small reward to the attacker */
+	if (m_rewardTimes < Globals::Multiplayer::Attacker::maxChainedRewardTimes)
+	{
+		sf::Time elapsedTime = m_updateClock.getElapsedTime();
+
+		/* Check if we should spawn 1 more enemy */
+		if (elapsedTime > m_rewardRate)
+		{
+			/* Reward the player */
+			m_gold += Globals::defaultGoldRewardAmount;
+			m_shop.setGold(m_gold);
+
+			/* Reset our timer */
+			m_updateClock.restart();
+
+			/* Show that we rewarded the player */
+			m_rewardTimes++;
+		}
+	}
+
 }
 void GameAttacker::draw(sf::RenderWindow & window)
 {
@@ -106,6 +126,9 @@ void GameAttacker::enemyWasRemoved()
 {
 	m_lifePoints -= Globals::enemyDamage;
 	m_shop.setLifePoints(m_lifePoints);
+
+	/* Reset the counter for the reward system */
+	m_rewardTimes = 0;
 }
 void GameAttacker::enemyArrivedToEndPoint()
 {

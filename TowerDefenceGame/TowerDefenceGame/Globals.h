@@ -228,6 +228,8 @@ namespace Globals
 			/* HP of the attacker */
 			const uint32_t hp = 100;
 			const uint32_t startingGoldAmmount = 100;
+			const uint32_t rewardRate = 2;
+			const uint32_t maxChainedRewardTimes = 5;
 		}
 
 		namespace Defender

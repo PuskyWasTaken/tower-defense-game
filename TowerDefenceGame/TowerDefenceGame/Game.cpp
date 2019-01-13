@@ -129,6 +129,12 @@ bool Game::updateEnemyCollision(std::shared_ptr<Enemy> enemy)
 
 	return false;
 }
+void Game::enemyWasRemoved()
+{
+	/* Give a small reward to the defender */
+	m_gold += Globals::defaultGoldRewardAmount;
+
+}
 bool Game::checkWinLossConditions()
 {
 	if (m_gameIsWon)

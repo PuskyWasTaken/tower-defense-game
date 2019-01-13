@@ -109,6 +109,9 @@ void GameDefender::updateEnemies()
 }
 void GameDefender::enemyWasRemoved()
 {
+	/* Give a small reward to the defender */
+	Game::enemyWasRemoved();
+
 	m_noOfEnemiesKilled++;
 
 	if (m_noOfEnemiesKilled >= Globals::winConditionEnemyKillCount)
